@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Web Skimmer</title>
+	<link rel="stylesheet" href="style.css">
+
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
+	<script src="http://code.jquery.com/jquery-3.3.1.min.js"
+	integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+	crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"
+	integrity="sha256-WPeFPWD3PZQUDrpFnDM1N2KadNVwCfNS4cCZ78b76T8="
+	crossorigin="anonymous"></script>
+</head>
+<body>
+	<div id="vue-region">
+		<h1>Web Skimmer</h1>
+		<br>
+		<div class="input-region">
+			<div class="test">
+				<label>Max number of bots at a time: </label>
+				<input class="input" id="n-limit" type="text" placeholder="Ex: 5">
+				<br>
+				<label>Wait time between each page: </label>
+				<input class="input" id="wait-time" type="text" placeholder="Ex: 5000">
+			</div>
+			<br>
+			<label>Show bot: </label>
+			<input class="input" id="headless" type="checkbox">
+			<br>
+			<div class="input" id="proxy" contenteditable="true" data-text="Ex: 12.345.67.89:1234;134.53.12.38:8080;..."></div>
+			<div class="input" id="url" contenteditable="true" data-text="Ex: http://abc.com;http://abc.com/xyz;http://tata.net/;..."></div>
+			<br>
+			<input id="go" type="button" value="GO!" onclick="main_vue.go()">
+		</div>
+		<br>
+		<div id="console">
+			<div>
+				<p><strong>CONSOLE MONITOR</strong></p>
+			</div>
+			<hr/>
+			<div id="log-contain">
+				<ul id="logs">
+					<li v-for="log in logs">{{ log }}</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		let main_vue = new Vue({
+			el : '#vue-region',
+
+			data : {
+				logs : ['abc', 'xyz']
+			},
+
+			methods : {
+				go : function() {
+					socket.emit('start', {
+						n_limit : $('#n-limit').val(),
+						wait_time : $('#wait-time').val(),
+						headless : !$('#headless').is(':checked'),
+						proxy : $('#proxy').text().split(';'),
+						url : $('#url').text().split(';')
+					}, (res) => { console.log(res); });
+					$('#go').prop('onclick', null).off('click');
+					console.log('click!');
+				}
+			}
+
+		});
+
+
+		var socket = io('http://localhost:1234/lala');
+		socket.on('connect', function () {
+			socket.emit('message', 'hihihi');
+
+			socket.on('message', function (msg) {
+				console.log(msg);
+			});
+		});
+		$(document).ready(function() { });
+	</script>
+</body>
+</html>
