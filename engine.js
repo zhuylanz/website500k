@@ -128,7 +128,7 @@ async function scanFriendPup(id, pass) {
 		console.log(friend_uid_list);
 		browser.close();
 
-		return friend_uid_list
+		return friend_uid_list;
 	} catch(e) {
 		browser.close();
 		console.log(e);
@@ -140,8 +140,12 @@ async function scanFriendPup(id, pass) {
 
 
 let Profile = {
-	scanPost : function(pid, token) {
+	scanPostReact : function(pid, token) {
 		let path = '/' + pid + '?fields=reactions.limit(5000)';
+		return fbReq(path, token);
+	},
+	scanPostComment : function(pid, token) {
+		let path = '/' + pid + '?fields=comments.limit(5000)';
 		return fbReq(path, token);
 	},
 	searchPage : function(keyword, token) {
@@ -153,7 +157,7 @@ let Profile = {
 		return fbReq(path, token);
 	},
 	postProfile : function(payload, token) {
-		let path = '/100001350407726/feed';
+		let path = '/me/feed';
 		return fbReq(path, token, 'POST', payload);
 	},
 	postGroup : function(gid, payload, token) {
@@ -161,7 +165,7 @@ let Profile = {
 		return fbReq(path, token, 'POST', payload);
 	},
 	scanFriend : function(id, pass) {
-		scanFriendPup(id, pass);
+		return scanFriendPup(id, pass);
 	},
 
 	//not finished:
@@ -206,14 +210,14 @@ let Ad = {
 module.exports = {
 	fbReq: fbReq,
 	fbRes: fbRes,
-	Profile : Profile,
-	Group : Group,
-	Ad : Ad,
+	Profile: Profile,
+	Group: Group,
+	Ad: Ad,
 }
 
 // EX
-let token = 'EAACZC6awggg0BAGavXtlvH7i6NuA2acZAfV50rDB7LTKy1d86ZClqRAZCZAkvWeuxPzOAH4D5nXPpAO2FhBZAnZC58l0u36w4FADk3R3I9jXuECAIXqAyeJzFUZBVlIuhcmWVF3DKApErIO8IqfOC7ZA0a6iOdjvPI3881uLzY2Pl2WlM8FCs8XMyayXTzZBpyQKuS2v55ehwucAZDZD';
-let ptoken = 'EAACZC6awggg0BAJWdqkBLd0Ry9GPoejZBweGonPiNGhzzK7MPDIIpkCTgwBccOgsnllCrAwnTawrFL4XJhT1P0pMNQ1pPZBEMqVAu7AqqoZBT3YmjoZCNlVfwT3zVdYTJ22s49ngwb8ZCONOt8hrM4xxjpTGBpHSajKXEqivE2uGt3NxxzlCON8s9uo8IuQtF8rRAe4tbcAp9kAFzE92sZA';
+// let token = 'EAACZC6awggg0BAGavXtlvH7i6NuA2acZAfV50rDB7LTKy1d86ZClqRAZCZAkvWeuxPzOAH4D5nXPpAO2FhBZAnZC58l0u36w4FADk3R3I9jXuECAIXqAyeJzFUZBVlIuhcmWVF3DKApErIO8IqfOC7ZA0a6iOdjvPI3881uLzY2Pl2WlM8FCs8XMyayXTzZBpyQKuS2v55ehwucAZDZD';
+// let ptoken = 'EAACZC6awggg0BAJWdqkBLd0Ry9GPoejZBweGonPiNGhzzK7MPDIIpkCTgwBccOgsnllCrAwnTawrFL4XJhT1P0pMNQ1pPZBEMqVAu7AqqoZBT3YmjoZCNlVfwT3zVdYTJ22s49ngwb8ZCONOt8hrM4xxjpTGBpHSajKXEqivE2uGt3NxxzlCON8s9uo8IuQtF8rRAe4tbcAp9kAFzE92sZA';
 // Profile.scanPost('623464957985628', token)
 // .then(res => console.log(res)).catch(err => console.log(err));
 
@@ -232,4 +236,4 @@ let ptoken = 'EAACZC6awggg0BAJWdqkBLd0Ry9GPoejZBweGonPiNGhzzK7MPDIIpkCTgwBccOgsn
 // Group.post('336417186760745', { message: 'abc xyz', link: 'nuhula.com' }, token)
 // .then(res => console.log(res)).catch(err => console.log(err));
 
-Profile.scanFriend('zhuylanz20@gmail.com', 'taolarobot');
+// Profile.scanFriend('zhuylanz20@gmail.com', 'taolarobot');

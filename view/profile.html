@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Web Skimmer</title>
-	<link rel="stylesheet" href="style.css">
+	<title>Facebook Profile Tools</title>
+	<link rel="stylesheet" href="/view/profile.css">
 
 	<script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
 	<script src="http://code.jquery.com/jquery-3.3.1.min.js"
@@ -14,37 +14,63 @@
 </head>
 <body>
 	<div id="vue-region">
-		<h1>Web Skimmer</h1>
-		<br>
-		<div class="input-region">
-			<div class="test">
-				<label>Max number of bots at a time: </label>
-				<input class="input" id="n-limit" type="text" placeholder="Ex: 5">
-				<br>
-				<label>Wait time between each page: </label>
-				<input class="input" id="wait-time" type="text" placeholder="Ex: 5000">
-			</div>
-			<br>
-			<label>Show bot: </label>
-			<input class="input" id="headless" type="checkbox">
-			<br>
-			<div class="input" id="proxy" contenteditable="true" data-text="Ex: 12.345.67.89:1234;134.53.12.38:8080;..."></div>
-			<div class="input" id="url" contenteditable="true" data-text="Ex: http://abc.com;http://abc.com/xyz;http://tata.net/;..."></div>
-			<br>
-			<input id="go" type="button" value="GO!" onclick="main_vue.go()">
-		</div>
-		<br>
-		<div id="console">
-			<div>
-				<p><strong>CONSOLE MONITOR</strong></p>
-			</div>
-			<hr/>
-			<div id="log-contain">
-				<ul id="logs">
-					<li v-for="log in logs">{{ log }}</li>
+		<h1>Facebook Profile Tools</h1>
+		<hr>
+		<div id="scan-post">
+			<label>ID</label>
+			<input type="text" class="text">
+			<input type="button" class="trigger" value="Scan Post" onclick="main_vue.scanPost()">
+			<div class="output">
+				<ul>
+					<li v-for="log in log_scanPost"> {{log}} </li>
 				</ul>
 			</div>
 		</div>
+
+		<hr>
+		<div id="search">
+			<label>Keyword</label>
+			<input type="text" class="text">
+			<input type="radio" class="radio" name="search-type" value="Page">Page
+			<input type="radio" class="radio" name="search-type" value="Group">Group
+			<input type="button" class="trigger" value="Search" onclick="main_vue.search()">
+			<div class="output">
+				<ul>
+					<li v-for="log in log_search"> {{log}} </li>
+				</ul>
+			</div>
+		</div>
+
+		<hr>
+		<div id="post">
+			<label>Message</label>
+			<input type="text" class="text">
+			<label>Link</label>
+			<input type="text" class="text">
+			<input type="radio" class="radio" name="post-type" value="Profile">Profile
+			<input type="radio" class="radio" name="post-type" value="Group">Group<input type="text" class="text"/>
+			<input type="button" class="trigger" value="Post" onclick="main_vue.post()">
+			<div class="output">
+				<ul>
+					<li v-for="log in log_post"> {{log}} </li>
+				</ul>
+			</div>
+		</div>
+
+		<hr>
+		<div id="scan-friend">
+			<label>Email</label>
+			<input type="text" class="text">
+			<label>Pass</label>
+			<input type="password" class="text">
+			<input type="button" class="trigger" value="Post" onclick="main_vue.scanFriend()">
+			<div class="output">
+				<ul>
+					<li v-for="log in log_scanFriend"> {{log}} </li>
+				</ul>
+			</div>
+		</div>
+
 	</div>
 
 	<script>
@@ -52,35 +78,79 @@
 			el : '#vue-region',
 
 			data : {
-				logs : ['abc', 'xyz']
+				log_scanPost : [],
+				log_search : [],
+				log_post : [],
+				log_scanFriend : [],
 			},
 
 			methods : {
-				go : function() {
-					socket.emit('start', {
-						n_limit : $('#n-limit').val(),
-						wait_time : $('#wait-time').val(),
-						headless : !$('#headless').is(':checked'),
-						proxy : $('#proxy').text().split(';'),
-						url : $('#url').text().split(';')
-					}, (res) => { console.log(res); });
-					$('#go').prop('onclick', null).off('click');
-					console.log('click!');
+				scanPost : function() {
+					socket.emit('ngin-scanPost', $('#scan-post input.text').val(), res => {
+						this.log_scanPost = res;
+						console.log('scan post OK');
+					});
+					// $('#scan-post input.trigger').prop('onclick', null).off('click');
+				},
+				search : function() {
+					if ($('#search input.radio').eq(1).is(':checked')) {
+						socket.emit('ngin-searchGroup', $('#search input.text').val(), res => {
+							this.log_search = res;
+							console.log('search group OK');
+						});
+					} else {
+						socket.emit('ngin-searchPage', $('#search input.text').val(), res => {
+							this.log_search = res;
+							console.log('search page OK');
+						});
+					}
+					// $('#search input.trigger').prop('onclick', null).off('click');
+				},
+				post : function() {
+					if ($('#post input.radio').eq(1).is(':checked')) {
+						socket.emit('ngin-postGroup', {
+							message: $('#post input.text').eq(0).val(),
+							link: $('#post input.text').eq(1).val(),
+							gid: $('#post input.text').eq(2).val()
+						}, res => {
+							this.log_post = res;
+							console.log('post group OK');
+						});
+					} else {
+						socket.emit('ngin-postProfile', {
+							message: $('#post input.text').eq(0).val(),
+							link: $('#post input.text').eq(1).val()
+						}, res => {
+							this.log_post = res;
+							console.log('post profile OK');
+						});
+					}
+					// $('#search input.trigger').prop('onclick', null).off('click');
+				},
+				scanFriend : function() {
+					socket.emit('ngin-scanFriend', {
+						id: $('#scan-friend input.text').eq(0).val(),
+						pass: $('#scan-friend input.text').eq(1).val()
+					},
+					res => {
+						this.log_scanFriend = res;
+						console.log('scan friend OK');
+					});
 				}
 			}
 
 		});
 
 
-		var socket = io('http://localhost:1234/lala');
-		socket.on('connect', function () {
-			socket.emit('message', 'hihihi');
+		let token = 'EAACZC6awggg0BABtM9fZCD0ChegRl4hQKsqeJyGD3wLJcIrVVBhHmDuNQj0qiyBNCHppFZBC7TeWZCw6Rn0ZBmP3CVc9lqFiO5dkEZAMIrDtOhmi2QsjV0pfECLRjASgSJE6bvoXCZAtWBC2UVhp65oySsdZAB9rIjEZD';
 
-			socket.on('message', function (msg) {
-				console.log(msg);
-			});
+		let socket = io('http://localhost:1234/profile');
+		socket.on('connect', function () {
+			socket.emit('init', token, (res) => { console.log(res); });
 		});
-		$(document).ready(function() { });
+
+
+		// $(document).ready(function() { });
 	</script>
 </body>
 </html>

@@ -1,0 +1,11 @@
+div.output {
+	width: 700px;
+	height: 300px;
+	overflow: auto;
+	border: 2px solid black;
+	margin: auto;
+}
+
+ul {
+	list-style: none;
+}

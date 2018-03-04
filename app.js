@@ -4,17 +4,107 @@ const fs = require('fs');
 const io = require('socket.io')(1234);
 const io_profile = io.of('/profile');
 
+const ngin = require('./engine.js')
+
 
 //-----socketIO-----//
-io.on('connection', function (socket) {
+io_profile.on('connection', function(socket) {
 	let session_id = socket.id;
+	let session_token = '';
 	console.log('>new user: ' + socket.id);
 
 
-	socket.on('message', function (msg) {
-		console.log(msg);
-		socket.emit('message', 'hola')
+	socket.on('init', function(msg, fn) {
+		session_token = msg;
+		// console.log(session_token);
+		fn('>>token received!');
 	});
-	socket.on('disconnect', function () { });
+
+	socket.on('ngin-scanPost', function(msg, fn) {
+		console.log('>>ngin-scanPost event');
+		let response = [];
+
+		ngin.Profile.scanPostReact(msg, session_token)
+		.then(res => {
+			response.push(res);
+
+			ngin.Profile.scanPostComment(msg, session_token)
+			.then(res => {
+				response.push(res);
+				fn(response);
+			}).catch(err => {
+				console.log('scanPostComment Err: ' + err);
+			});
+
+		}).catch(err => {
+			console.log('scanPostReact Err: ' + err);
+		});
+
+	});
+
+	socket.on('ngin-searchPage', function(msg, fn) {
+		console.log('>>ngin-searchPage event');
+		ngin.Profile.searchPage(msg, session_token)
+		.then(res => {
+			fn(res);
+		}).catch(err => {
+			console.log('searchPage Err: ' + err);
+		});
+
+	});
+
+	socket.on('ngin-searchGroup', function(msg, fn) {
+		console.log('>>ngin-searchGroup event');
+		ngin.Profile.searchGroup(msg, session_token)
+		.then(res => {
+			fn(res);
+		}).catch(err => {
+			console.log('searchGroup Err: ' + err);
+		});
+
+	});
+
+	socket.on('ngin-postProfile', function(msg, fn) {
+		console.log('>>ngin-postProfile event');
+		ngin.Profile.postProfile(msg, session_token)
+		.then(res => {
+			fn(res);
+		}).catch(err => {
+			console.log('postProfile Err: ' + err);
+		});
+
+	});
+
+	socket.on('ngin-postGroup', async function(msg, fn) {//! Inspect Try-Catch causing sudden stop
+		console.log('>>ngin-postGroup event');
+		let response = [];
+		let gid_list = msg.gid.split(';');
+		delete msg.gid;
+
+		try {
+			for (var i in gid_list) {
+				let gid = gid_list[i];
+				let res = await ngin.Profile.postGroup(gid, msg, session_token);
+				response.push(res);
+			}
+			fn(response);
+		} catch(err) {
+			console.log(typeof(err));
+			console.log('postGroup Err: ' + err);
+		}
+	});
+
+	socket.on('ngin-scanFriend', function(msg, fn) {
+		console.log('>>ngin-scanFriend event');
+		ngin.Profile.scanFriend(msg.id, msg.pass)
+		.then(res => {
+			fn(res);
+		}).catch(err => {
+			console.log('scanFriend Err: ' + err);
+		});
+	});
+
+
+	socket.on('disconnect', function() { console.log('<user disconnected: ' + session_id); });
 });
 

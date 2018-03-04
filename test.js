@@ -44,7 +44,7 @@ async function loginFb(id, pass) {
 	// }
 	console.log('--stop scrolling--');
 	page.waitFor(10000);
-	page.hover('a[aria-pressed="false"]');
+	await page.hover('a[aria-pressed="false"]');
 	await page.evaluate(() => {
 	});
 	
