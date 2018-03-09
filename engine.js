@@ -17,6 +17,12 @@ Object.defineProperty(Array.prototype, 'to1D', {
 
 
 //1ST FUNCTIONS//
+function wait(time) {
+	return new Promise(resolve => {
+		setTimeout(resolve, time);
+	});
+}
+
 function fbReq(path, token, method, payload) {
 	let options = {
 		method: method,
@@ -32,7 +38,7 @@ function fbReq(path, token, method, payload) {
 
 function fbRes(response_arr, field_arr, field_arr2, field_arr3) {
 	let data = [];
-	for (let i in response_arr) {
+	for (var i in response_arr) {
 		let haveData;
 		response_arr[i]['data'] ? haveData = true : haveData = false;
 		switch (haveData) {
@@ -42,7 +48,7 @@ function fbRes(response_arr, field_arr, field_arr2, field_arr3) {
 				let fielddata = [''];
 				data.push(fielddata);
 			}
-			for (let j in res_data) {
+			for (var j in res_data) {
 				let fielddata = [];
 				for (let k in field_arr) {
 					let field = field_arr[k];
@@ -118,7 +124,9 @@ async function scanFriendPup(id, pass) {
 			$('div.fsl>a').each((i, ele) => {
 				let data = $(ele);
 				if (data.attr('data-gt')) {
-					userdata += data.text() + ':' + JSON.parse(data.attr('data-gt')).engagement.eng_tid + ';';
+					let uid = JSON.parse(data.attr('data-gt')).engagement.eng_tid;
+					let uname = data.text();
+					userdata += uid + ':' + uname + ':' + 'facebook.com/' + uid + ';';
 				}
 
 			});
@@ -140,12 +148,8 @@ async function scanFriendPup(id, pass) {
 
 
 let Profile = {
-	scanPostReact : function(pid, token) {
-		let path = '/' + pid + '?fields=reactions.limit(5000)';
-		return fbReq(path, token);
-	},
-	scanPostComment : function(pid, token) {
-		let path = '/' + pid + '?fields=comments.limit(5000)';
+	scanPost : function(pid, token) {
+		let path = '/' + pid + '?fields=reactions.limit(5000),comments.limit(5000),sharedposts.limit(5000)';
 		return fbReq(path, token);
 	},
 	searchPage : function(keyword, token) {
@@ -208,6 +212,7 @@ let Ad = {
 //2ND FUNCTIONS//
 
 module.exports = {
+	wait: wait,
 	fbReq: fbReq,
 	fbRes: fbRes,
 	Profile: Profile,
@@ -216,10 +221,14 @@ module.exports = {
 }
 
 // EX
-// let token = 'EAACZC6awggg0BAGavXtlvH7i6NuA2acZAfV50rDB7LTKy1d86ZClqRAZCZAkvWeuxPzOAH4D5nXPpAO2FhBZAnZC58l0u36w4FADk3R3I9jXuECAIXqAyeJzFUZBVlIuhcmWVF3DKApErIO8IqfOC7ZA0a6iOdjvPI3881uLzY2Pl2WlM8FCs8XMyayXTzZBpyQKuS2v55ehwucAZDZD';
-// let ptoken = 'EAACZC6awggg0BAJWdqkBLd0Ry9GPoejZBweGonPiNGhzzK7MPDIIpkCTgwBccOgsnllCrAwnTawrFL4XJhT1P0pMNQ1pPZBEMqVAu7AqqoZBT3YmjoZCNlVfwT3zVdYTJ22s49ngwb8ZCONOt8hrM4xxjpTGBpHSajKXEqivE2uGt3NxxzlCON8s9uo8IuQtF8rRAe4tbcAp9kAFzE92sZA';
-// Profile.scanPost('623464957985628', token)
-// .then(res => console.log(res)).catch(err => console.log(err));
+// let token = 'EAACZC6awggg0BABtM9fZCD0ChegRl4hQKsqeJyGD3wLJcIrVVBhHmDuNQj0qiyBNCHppFZBC7TeWZCw6Rn0ZBmP3CVc9lqFiO5dkEZAMIrDtOhmi2QsjV0pfECLRjASgSJE6bvoXCZAtWBC2UVhp65oySsdZAB9rIjEZD';
+// // let ptoken = 'EAACZC6awggg0BAJWdqkBLd0Ry9GPoejZBweGonPiNGhzzK7MPDIIpkCTgwBccOgsnllCrAwnTawrFL4XJhT1P0pMNQ1pPZBEMqVAu7AqqoZBT3YmjoZCNlVfwT3zVdYTJ22s49ngwb8ZCONOt8hrM4xxjpTGBpHSajKXEqivE2uGt3NxxzlCON8s9uo8IuQtF8rRAe4tbcAp9kAFzE92sZA';
+// Profile.scanPost('657565297908927', token)
+// .then(res => {
+// 	console.log(res);
+// }).catch(err => {
+// 	console.log(err);
+// });
 
 // Profile.searchPage('linh kiện', 'EAAXFr34COrQBAKzhYAdFbKEG5CFiyblEoxgqFXgdKmto7ZCqV0M62uh5u0Or3EdwZC3lQqgi8e0FxcXTeD0DStLap2cedhEBEoP5ZBiiDoabXdgr2thbYyiFo9Ybyx382gzmO1kMIqbA0ZAI2JMSXWkR7klsRzMThIqH9DUyZCQZDZD')
 // .then(res => console.log(res)).catch(err => console.log(err));
@@ -237,3 +246,4 @@ module.exports = {
 // .then(res => console.log(res)).catch(err => console.log(err));
 
 // Profile.scanFriend('zhuylanz20@gmail.com', 'taolarobot');
+

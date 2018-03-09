@@ -22,22 +22,13 @@ io_profile.on('connection', function(socket) {
 
 	socket.on('ngin-scanPost', function(msg, fn) {
 		console.log('>>ngin-scanPost event');
-		let response = [];
 
-		ngin.Profile.scanPostReact(msg, session_token)
+		ngin.Profile.scanPost(msg, session_token)
 		.then(res => {
-			response.push(res);
-
-			ngin.Profile.scanPostComment(msg, session_token)
-			.then(res => {
-				response.push(res);
-				fn(response);
-			}).catch(err => {
-				console.log('scanPostComment Err: ' + err);
-			});
-
+			fn(res);
 		}).catch(err => {
-			console.log('scanPostReact Err: ' + err);
+			fn(err);
+			console.log('scanPost Err: ' + err);
 		});
 
 	});
@@ -79,13 +70,17 @@ io_profile.on('connection', function(socket) {
 		console.log('>>ngin-postGroup event');
 		let response = [];
 		let gid_list = msg.gid.split(';');
+		let wait_time = parseInt(msg.wait_time) * 1000;
 		delete msg.gid;
+		delete msg.wait_time;
 
 		try {
 			for (var i in gid_list) {
 				let gid = gid_list[i];
 				let res = await ngin.Profile.postGroup(gid, msg, session_token);
 				response.push(res);
+				socket.emit('logging', response);
+				await ngin.wait(wait_time);
 			}
 			fn(response);
 		} catch(err) {
