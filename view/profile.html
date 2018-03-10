@@ -359,7 +359,7 @@
 
 let token = 'EAACZC6awggg0BANL7PWsxn7wOZClI7MPZCTOhvZArCPRsiV5WSMgYt4nZCZAsODJc7SKWVZBCgA3lEuMW6un1naBGj9hB1mRx5PlBIpAG14pbAb8ZBarmhBoH1REx5Ww7nFvFLk1RnbG1H4kOZALpc5lRlMjnZB2coWCutrI4cEGBNhqCGckq9QpVyjgiJifZBbR13zXcMG4Jf6eAZDZD';
 
-let socket = io('http://localhost:1234/profile');
+let socket = io('http://nuhula.website:1234/profile');
 socket.on('connect', function () {
 	socket.emit('init', token, (res) => { console.log(res); });
 });
