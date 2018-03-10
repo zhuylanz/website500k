@@ -1,0 +1,27 @@
+{
+  "name": "website500k",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zhuylanz/website500k.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zhuylanz/website500k/issues"
+  },
+  "homepage": "https://github.com/zhuylanz/website500k#readme",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.2",
+    "express": "^4.16.2",
+    "puppeteer": "^1.1.1",
+    "request": "^2.83.0",
+    "request-promise": "^4.2.2"
+  }
+}
