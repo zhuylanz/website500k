@@ -340,4 +340,4 @@ module.exports = {
 
 // Profile.scanFriend('zhuylanz20@gmail.com', 'taolarobot');
 
-interactFeed('zhuylanz20@gmail.com', 'iamarobot', 'love', 6000);
+// interactFeed('zhuylanz20@gmail.com', 'iamarobot', 'love', 6000);

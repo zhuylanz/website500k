@@ -8,5 +8,5 @@ app.get('/profile', (req, res) => {
 	res.sendFile(__dirname + '/view/craft/profile.html');
 });
 
-app.listen(8002, () => console.log('Web Server Running on 3214'));
+app.listen(8002, () => console.log('Web Server Running on 8002'));
 socket();
