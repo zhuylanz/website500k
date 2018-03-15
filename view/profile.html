@@ -104,18 +104,6 @@
 												<label>ID</label>
 												<input type="text" class="text">
 												<input type="button" class="trigger" value="Scan Post" onclick="main_vue.scanPost()">
-
-												<div class="download">
-													<select class="list-type">
-														<option>Reaction</option>
-														<option>Comment</option>
-													</select>
-													<select class="file-type">
-														<option>CSV</option>
-														<option>XLS</option>
-													</select>
-													<input type="button" class="download" value="Download" onclick="main_vue.downloadFile('scan-post')">
-												</div>
 											</div>
 
 											<div class="output">
@@ -123,7 +111,7 @@
 												<h6 class="card-subtitle">Bạn có thể lọc, sắp xếp, tìm kiếm và download file CSV, Excel, PDF & In ấn...</h6>
 												<div class="table-responsive m-t-40 container">
 													<div id="example23_wrapper" class="dataTables_wrapper row">
-														<div class="dt-buttons col-md-6"><a class="dt-button buttons-copy buttons-html5" tabindex="0" aria-controls="example23" href="#"><span>Copy</span></a><a class="dt-button buttons-csv buttons-html5" tabindex="0" aria-controls="example23" href="#"><span>CSV</span></a><a class="dt-button buttons-excel buttons-html5" tabindex="0" aria-controls="example23" href="#"><span>Excel</span></a><a class="dt-button buttons-pdf buttons-html5" tabindex="0" aria-controls="example23" href="#"><span>PDF</span></a><a class="dt-button buttons-print" tabindex="0" aria-controls="example23" href="#"><span>Print</span></a></div>
+														<div class="dt-buttons col-md-6"><a class="dt-button buttons-copy buttons-html5" tabindex="0" aria-controls="example23" href="#"><span>Copy</span></a><a onclick="main_vue.downloadFile('scan-post', 'CSV')" class="dt-button buttons-csv buttons-html5" tabindex="0" aria-controls="example23" href="#"><span>CSV</span></a><a onclick="main_vue.downloadFile('scan-post', 'XLS')" class="dt-button buttons-excel buttons-html5" tabindex="0" aria-controls="example23" href="#"><span>Excel</span></a><a class="dt-button buttons-pdf buttons-html5" tabindex="0" aria-controls="example23" href="#"><span>PDF</span></a><a class="dt-button buttons-print" tabindex="0" aria-controls="example23" href="#"><span>Print</span></a></div>
 
 														<div id="example23_filter" class="dataTables_filter col-md-6 align-right"><label>Search:<input class="" placeholder="" aria-controls="example23" type="search"></label></div>
 													</div>
@@ -281,17 +269,18 @@
 											<h2>Scan Friend List</h2>
 											<div class="input">
 												<input type="button" class="trigger" value="Scan" onclick="main_vue.scanFriend()">
-
-												<div class="download">
-													<select class="file-type">
-														<option>CSV</option>
-														<option>XLS</option>
-													</select>
-													<input type="button" class="download" value="Download" onclick="main_vue.downloadFile('scan-friend')">
-												</div>
 											</div>
 
 											<div class="output">
+												<h4 class="card-title">Kết quả tìm được</h4>
+												<h6 class="card-subtitle">Bạn có thể lọc, sắp xếp, tìm kiếm và download file CSV, Excel, PDF & In ấn...</h6>
+												<div class="table-responsive m-t-40 container">
+													<div id="example23_wrapper" class="dataTables_wrapper row">
+														<div class="dt-buttons col-md-6"><a class="dt-button buttons-copy buttons-html5" tabindex="0" aria-controls="example23" href="#"><span>Copy</span></a><a onclick="main_vue.downloadFile('scan-friend', 'CSV')" class="dt-button buttons-csv buttons-html5" tabindex="0" aria-controls="example23" href="#"><span>CSV</span></a><a onclick="main_vue.downloadFile('scan-friend', 'XLS')" class="dt-button buttons-excel buttons-html5" tabindex="0" aria-controls="example23" href="#"><span>Excel</span></a><a class="dt-button buttons-pdf buttons-html5" tabindex="0" aria-controls="example23" href="#"><span>PDF</span></a><a class="dt-button buttons-print" tabindex="0" aria-controls="example23" href="#"><span>Print</span></a></div>
+
+														<div id="example23_filter" class="dataTables_filter col-md-6 align-right"><label>Search:<input class="" placeholder="" aria-controls="example23" type="search"></label></div>
+													</div>
+												</div>
 												<table id="friend-tbl">
 													<thead>
 														<tr>
@@ -323,7 +312,6 @@
 														</tr>
 													</tbody>
 												</table>
-												<div class="dataTables_paginate paging_simple_numbers col-sm-12" id="example23_paginate"><a class="paginate_button previous disabled" aria-controls="example23" data-dt-idx="0" tabindex="0" id="example23_previous">Previous</a><span><a class="paginate_button current" aria-controls="example23" data-dt-idx="1" tabindex="0">1</a><a class="paginate_button " aria-controls="example23" data-dt-idx="2" tabindex="0">2</a><a class="paginate_button " aria-controls="example23" data-dt-idx="3" tabindex="0">3</a><a class="paginate_button " aria-controls="example23" data-dt-idx="4" tabindex="0">4</a><a class="paginate_button " aria-controls="example23" data-dt-idx="5" tabindex="0">5</a><a class="paginate_button " aria-controls="example23" data-dt-idx="6" tabindex="0">6</a></span><a class="paginate_button next" aria-controls="example23" data-dt-idx="7" tabindex="0" id="example23_next">Next</a></div>
 											</div>
 										</div>
 
@@ -336,17 +324,17 @@
 												<input type="radio" class="radio" name="search-type" value="Page">Page
 												<input type="radio" class="radio" name="search-type" value="Group">Group
 												<input type="button" class="trigger" value="Search" onclick="main_vue.search()">
-
-												<div class="download">
-													<select class="file-type">
-														<option>CSV</option>
-														<option>XLS</option>
-													</select>
-													<input type="button" class="download" value="Download" onclick="main_vue.downloadFile('search')">
-												</div>
 											</div>
-
 											<div class="output">
+												<h4 class="card-title">Kết quả tìm được</h4>
+												<h6 class="card-subtitle">Bạn có thể lọc, sắp xếp, tìm kiếm và download file CSV, Excel, PDF & In ấn...</h6>
+												<div class="table-responsive m-t-40 container">
+													<div id="example23_wrapper" class="dataTables_wrapper row">
+														<div class="dt-buttons col-md-6"><a class="dt-button buttons-copy buttons-html5" tabindex="0" aria-controls="example23" href="#"><span>Copy</span></a><a onclick="main_vue.downloadFile('search-page', 'CSV')" class="dt-button buttons-csv buttons-html5" tabindex="0" aria-controls="example23" href="#"><span>CSV</span></a><a onclick="main_vue.downloadFile('search-page', 'XLS')" class="dt-button buttons-excel buttons-html5" tabindex="0" aria-controls="example23" href="#"><span>Excel</span></a><a class="dt-button buttons-pdf buttons-html5" tabindex="0" aria-controls="example23" href="#"><span>PDF</span></a><a class="dt-button buttons-print" tabindex="0" aria-controls="example23" href="#"><span>Print</span></a></div>
+
+														<div id="example23_filter" class="dataTables_filter col-md-6 align-right"><label>Search:<input class="" placeholder="" aria-controls="example23" type="search"></label></div>
+													</div>
+												</div>
 												<table id="search-tbl">
 													<thead>
 														<tr>
@@ -406,17 +394,18 @@
 												<label>Wait Time (group only)</label>
 												<input type="text" class="text">
 												<input type="button" class="trigger" value="Post" onclick="main_vue.post()">
-
-												<div class="download">
-													<select class="file-type">
-														<option>CSV</option>
-														<option>XLS</option>
-													</select>
-													<input type="button" class="download" value="Download" onclick="main_vue.downloadFile('post')">
-												</div>
 											</div>
 
 											<div class="output">
+												<h4 class="card-title">Kết quả tìm được</h4>
+												<h6 class="card-subtitle">Bạn có thể lọc, sắp xếp, tìm kiếm và download file CSV, Excel, PDF & In ấn...</h6>
+												<div class="table-responsive m-t-40 container">
+													<div id="example23_wrapper" class="dataTables_wrapper row">
+														<div class="dt-buttons col-md-6"><a class="dt-button buttons-copy buttons-html5" tabindex="0" aria-controls="example23" href="#"><span>Copy</span></a><a onclick="main_vue.downloadFile('post', 'CSV')" class="dt-button buttons-csv buttons-html5" tabindex="0" aria-controls="example23" href="#"><span>CSV</span></a><a onclick="main_vue.downloadFile('post', 'XLS')" class="dt-button buttons-excel buttons-html5" tabindex="0" aria-controls="example23" href="#"><span>Excel</span></a><a class="dt-button buttons-pdf buttons-html5" tabindex="0" aria-controls="example23" href="#"><span>PDF</span></a><a class="dt-button buttons-print" tabindex="0" aria-controls="example23" href="#"><span>Print</span></a></div>
+
+														<div id="example23_filter" class="dataTables_filter col-md-6 align-right"><label>Search:<input class="" placeholder="" aria-controls="example23" type="search"></label></div>
+													</div>
+												</div>
 												<table id="post-tbl">
 													<thead>
 														<tr>
@@ -703,31 +692,40 @@
 						});
 					}
 				},
-				downloadFile : function(ngin) {
+				downloadFile : function(ngin, type) {
 					switch (ngin) {
 						case 'scan-post':
-						var list_type = $('#scan-post select.list-type').val();
-						var file_type = $('#scan-post select.file-type').val();
-						if (list_type == 'Reaction') {
-							file_type == 'CSV' ? xport.toCSV('reaction-tbl') : xport.toXLS('reaction-tbl');
-						} else {
-							file_type == 'CSV' ? xport.toCSV('comment-tbl') : xport.toXLS('comment-tbl');							
+						if (type == 'CSV') {
+							xport.toCSV('reaction-tbl');
+							xport.toCSV('comment-tbl');
+						} else if (type == 'XLS') {
+							xport.toXLS('reaction-tbl');
+							xport.toXLS('reaction-tbl');
 						}
 						break;
 
 						case 'scan-friend':
-						var file_type = $('#scan-post select.file-type').val();
-						file_type == 'CSV' ? xport.toCSV('friend-tbl') : xport.toXLS('friend-tbl');
+						if (type == 'CSV') {
+							xport.toCSV('friend-tbl');
+						} else if (type == 'XLS') {
+							xport.toXLS('friend-tbl');
+						}
 						break;
 
-						case 'search':
-						var file_type = $('#search select.file-type').val();
-						file_type == 'CSV' ? xport.toCSV('search-tbl') : xport.toXLS('search-tbl');
+						case 'search-page':
+						if (type == 'CSV') {
+							xport.toCSV('search-tbl');
+						} else if (type == 'XLS') {
+							xport.toXLS('search-tbl');
+						}
 						break;
 
 						case 'post':
-						var file_type = $('#post select.file-type').val();
-						file_type == 'CSV' ? xport.toCSV('post-tbl') : xport.toXLS('post-tbl');
+						if (type == 'CSV') {
+							xport.toCSV('post-tbl');
+						} else if (type == 'XLS') {
+							xport.toXLS('post-tbl');
+						}
 						break;
 					}
 				}
