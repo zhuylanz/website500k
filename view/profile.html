@@ -4,6 +4,7 @@
 	<meta charset="utf-8">
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i,800,800i" rel="stylesheet">
 	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link id="stylesheet-bootstrap.min" href="css/bootstrap.min.css" rel="stylesheet">
 	<link id="stylesheet-style" href="css/style.css" rel="stylesheet">
 	<script src="js/jquery.min.js"></script>
@@ -98,20 +99,20 @@
 										<div class="output">
 											<h4 class="card-title">Kết quả tìm được</h4>
 											<h6 class="card-subtitle">Bạn có thể lọc, sắp xếp, tìm kiếm và download file CSV, Excel, PDF & In ấn...</h6>
-											<div class="table-responsive m-t-40 container">
-												<div id="example23_wrapper" class="dataTables_wrapper row">
+											<div class="table-responsive m-t-40">
+												<div id="example23_wrapper" class="dataTables_wrapper">
 													<div class="dt-buttons col-md-6"><a class="dt-button buttons-copy buttons-html5" tabindex="0" aria-controls="example23" href="#"><span>Copy</span></a><a onclick="main_vue.downloadFile('scan-post', 'CSV')" class="dt-button buttons-csv buttons-html5" tabindex="0" aria-controls="example23" href="#"><span>CSV</span></a><a onclick="main_vue.downloadFile('scan-post', 'XLS')" class="dt-button buttons-excel buttons-html5" tabindex="0" aria-controls="example23" href="#"><span>Excel</span></a><a class="dt-button buttons-pdf buttons-html5" tabindex="0" aria-controls="example23" href="#"><span>PDF</span></a><a class="dt-button buttons-print" tabindex="0" aria-controls="example23" href="#"><span>Print</span></a></div>
 
 													<div id="example23_filter" class="dataTables_filter col-md-6 align-right"><label>Search:<input class="" placeholder="" aria-controls="example23" type="search"></label></div>
 												</div>
 											</div>
 											<div class="table">										
-												<table id="reaction-tbl">
+												<table id="reaction-tbl" >
 													<thead>
 														<tr>
-															<th>ID</th>
-															<th>Name</th>
-															<th>Type</th>
+															<th class="sorting">ID<i></i></th>
+															<th class="sorting_asc">Name</th>
+															<th class="sorting_desc">Type</th>
 														</tr>
 													</thead>
 													<tbody>
@@ -143,9 +144,9 @@
 												<table id="comment-tbl">
 													<thead>
 														<tr>
-															<th>ID</th>
-															<th>Name</th>
-															<th>Comment</th>
+															<th class="sorting">ID<i></i></th>
+															<th class="sorting_asc">Name</th>
+															<th class="sorting_desc">Type</th>
 														</tr>
 													</thead>
 													<tbody>
@@ -272,37 +273,39 @@
 													<div id="example23_filter" class="dataTables_filter col-md-6 align-right"><label>Search:<input class="" placeholder="" aria-controls="example23" type="search"></label></div>
 												</div>
 											</div>
-											<table id="friend-tbl">
-												<thead>
-													<tr>
-														<th>ID</th>
-														<th>Name</th>
-														<th>Link</th>
-													</tr>
-												</thead>
-												<tbody>
-													<tr>
-														<td>ID1</td>
-														<td>Name 1</td>
-														<td>Type 2</td>
-													</tr>
-													<tr>
-														<td>ID1</td>
-														<td>Name 1</td>
-														<td>Type 2</td>
-													</tr>
-													<tr>
-														<td>ID1</td>
-														<td>Name 1</td>
-														<td>Type 2</td>
-													</tr>
-													<tr>
-														<td>ID1</td>
-														<td>Name 1</td>
-														<td>Type 2</td>
-													</tr>
-												</tbody>
-											</table>
+											<div class="table">			
+												<table id="friend-tbl">
+													<thead>
+														<tr>
+															<th class="sorting">ID<i></i></th>
+															<th class="sorting_asc">Name</th>
+															<th class="sorting_desc">Link</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr>
+															<td>ID1</td>
+															<td>Name 1</td>
+															<td>Type 2</td>
+														</tr>
+														<tr>
+															<td>ID1</td>
+															<td>Name 1</td>
+															<td>Type 2</td>
+														</tr>
+														<tr>
+															<td>ID1</td>
+															<td>Name 1</td>
+															<td>Type 2</td>
+														</tr>
+														<tr>
+															<td>ID1</td>
+															<td>Name 1</td>
+															<td>Type 2</td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
 										</div>
 									</div>
 
@@ -326,42 +329,44 @@
 													<div id="example23_filter" class="dataTables_filter col-md-6 align-right"><label>Search:<input class="" placeholder="" aria-controls="example23" type="search"></label></div>
 												</div>
 											</div>
-											<table id="search-tbl">
-												<thead>
-													<tr>
-														<th>ID</th>
-														<th>Name</th>
-														<th>Link</th>
-														<th>Like</th>
-													</tr>
-												</thead>
-												<tbody>
-													<tr>
-														<td>ID1</td>
-														<td>Name </td>
-														<td>Link</td>
-														<td>Like</td>
-													</tr>
-													<tr>
-														<td>ID1</td>
-														<td>Name </td>
-														<td>Link</td>
-														<td>Like</td>
-													</tr>
-													<tr>
-														<td>ID1</td>
-														<td>Name </td>
-														<td>Link</td>
-														<td>Like</td>
-													</tr>
-													<tr>
-														<td>ID1</td>
-														<td>Name </td>
-														<td>Link</td>
-														<td>Like</td>
-													</tr>
-												</tbody>
-											</table>
+											<div class="table">			
+												<table id="search-tbl">
+													<thead>
+														<tr>
+															<th class="sorting">ID<i></i></th>
+															<th class="sorting_asc">Name</th>
+															<th class="sorting_desc">Link</th>
+															<th class="sorting">Link</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr>
+															<td>ID1</td>
+															<td>Name </td>
+															<td>Link</td>
+															<td>Like</td>
+														</tr>
+														<tr>
+															<td>ID1</td>
+															<td>Name </td>
+															<td>Link</td>
+															<td>Like</td>
+														</tr>
+														<tr>
+															<td>ID1</td>
+															<td>Name </td>
+															<td>Link</td>
+															<td>Like</td>
+														</tr>
+														<tr>
+															<td>ID1</td>
+															<td>Name </td>
+															<td>Link</td>
+															<td>Like</td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
 										</div>
 									</div>
 
@@ -397,14 +402,16 @@
 													<div id="example23_filter" class="dataTables_filter col-md-6 align-right"><label>Search:<input class="" placeholder="" aria-controls="example23" type="search"></label></div>
 												</div>
 											</div>
-											<table id="post-tbl">
-												<thead>
-													<tr>
-														<th>ID</th>
-													</tr>
-												</thead>
-												<tbody></tbody>
-											</table>
+											<div class="table">			
+												<table id="post-tbl">
+													<thead>
+														<tr>
+															<th class="sorting">ID</th>
+														</tr>
+													</thead>
+													<tbody></tbody>
+												</table>
+											</div>
 										</div>
 									</div>
 
@@ -439,8 +446,8 @@
 											<table id="newsfeed-tbl">
 												<thead>
 													<tr>
-														<th>ID</th>
-														<th>Link</th>
+														<th  class="sorting">ID</th>
+														<th  class="sorting">Link</th>
 													</tr>
 												</thead>
 												<tbody></tbody>
@@ -472,15 +479,17 @@
 													<div id="example23_filter" class="dataTables_filter col-md-6 align-right"><label>Search:<input class="" placeholder="" aria-controls="example23" type="search"></label></div>
 												</div>
 											</div>
-											<table id="post-friend-tbl">
-												<thead>
-													<tr>
-														<th>ID</th>
-														<th>Link</th>
-													</tr>
-												</thead>
-												<tbody></tbody>
-											</table>
+											<div class="table">			
+												<table id="post-friend-tbl">
+													<thead>
+														<tr>
+															<th  class="sorting">ID</th>
+															<th  class="sorting">Link</th>
+														</tr>
+													</thead>
+													<tbody></tbody>
+												</table>
+											</div>
 										</div>
 
 									</div>
@@ -507,15 +516,17 @@
 													<div id="example23_filter" class="dataTables_filter col-md-6 align-right"><label>Search:<input class="" placeholder="" aria-controls="example23" type="search"></label></div>
 												</div>
 											</div>
-											<table id="edit-friend-tbl">
-												<thead>
-													<tr>
-														<th>ID</th>
-														<th>Link</th>
-													</tr>
-												</thead>
-												<tbody></tbody>
-											</table>
+											<div class="table">	
+												<table id="edit-friend-tbl">
+													<thead>
+														<tr>
+															<th class="sorting">ID</th>
+															<th class="sorting">Link</th>
+														</tr>
+													</thead>
+													<tbody></tbody>
+												</table>
+											</div>
 										</div>
 
 									</div>
