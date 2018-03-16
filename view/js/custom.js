@@ -39,8 +39,8 @@ $(document).ready(function(){
 			$('.section-chat-left-body ul.list1').hide();
 		});		
 		jQuery(".has-submenu").click(function(){
-			$(this).next().toggle("slow");
-			$(this).toggleClass("submenu-hide");
+			$(this).parent().next().toggle("slow");
+			$(this).parent().toggleClass("submenu-hide");
 		});
 
 });	

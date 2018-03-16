@@ -415,11 +415,11 @@ form.wfte-form  .wfte-button{
 }
 
 .dashboard-full ul li ul li a:hover{ color: #e53935;}
-.openmenu .dashboard-full ul li.submenu a span{ background:url(../images/arrow3.png) right no-repeat;}
+.openmenu .dashboard-full ul li.submenu a i{ background:url(../images/arrow3.png) right no-repeat; width:30px; height:9px; display:inline-block;}
 
 .product-manage-button a.button{margin-right:8px;}
 .section-product-manage{background:#fff; padding-bottom:60px;}
- .dashboard-full ul li.submenu a.submenu-hide span{background:url(../images/arrow4.png) right no-repeat;}
+.openmenu .dashboard-full ul li.submenu a.submenu-hide  i{background:url(../images/arrow4.png) right no-repeat;}
 
 .sidenav {
     height: 100%;
@@ -669,22 +669,13 @@ textarea{margin-top: 5px;}
 
 .dataTables_filter input {
     border: 0;
-    background-image: -webkit-gradient(linear, left top, left bottom, from(#20aee3), to(#20aee3)), -webkit-gradient(linear, left top, left bottom, from(#b1b8bb), to(#b1b8bb));
-    background-image: -webkit-linear-gradient(#20aee3, #20aee3), -webkit-linear-gradient(#b1b8bb, #b1b8bb);
-    background-image: -o-linear-gradient(#20aee3, #20aee3), -o-linear-gradient(#b1b8bb, #b1b8bb);
-    background-image: linear-gradient(#20aee3, #20aee3), linear-gradient(#b1b8bb, #b1b8bb);
-    background-size: 0 2px, 100% 1px;
-    background-repeat: no-repeat;
-    background-position: center bottom, center calc(100% - 1px);
-    background-color: transparent;
-    -webkit-transition: background 0s ease-out;
-    -o-transition: background 0s ease-out;
-    transition: background 0s ease-out;
+
     float: none;
     -webkit-box-shadow: none;
     box-shadow: none;
     border-radius: 0;
     margin-left: 10px;
+	border-bottom:2px solid #20aee3;
 }
 .main-content{}
 
@@ -736,15 +727,45 @@ body.page-profile{background:#fff;}
 }
 .content-bar{min-height:700px;}
 .output .table{max-height:600px;      overflow-y: auto;}
+.content-bar input[type="text"],
+.content-bar input[type="search"]
+{padding-left:10px;}
+
+.content-bar input[type="search"] {
+    background: url(../images/icon35.png) right no-repeat;
+	    background-size: 17px;
+}
+.content-bar .output .col-md-6{    padding-right: 0px;    padding-left: 0px;}
+.table-responsive {    border: none;}
+.content-bar .card-subtitle{line-height:24px;}
+
+table thead .sorting::after {
+    content: "\f0dc";
+    margin-left: 10px;
+   font: normal normal normal 14px/1 FontAwesome;
+    cursor: pointer;
+    color: rgba(50, 50, 50, 0.5);
+}
+
+table thead .sorting_desc::after {
+    content: "\f0dd";
+    margin-left: 10px;
+    font: normal normal normal 14px/1 FontAwesome;
+    cursor: pointer;
+}
+table thead .sorting_asc::after {
+    content: "\f0de";
+    margin-left: 10px;
+    font: normal normal normal 14px/1 FontAwesome;
+    cursor: pointer;
+}
+
 
 @media screen and (min-width: 1200px) {
 	.page-profile .left-sidebar-content{min-height:1450px;}
 }
 
 /*--End style  for profile--*/
-.dashboard-full ul li {
-  
-}
 
 @media screen and (max-width: 1400px) {
 	.main-content{max-width:960px;}
@@ -862,7 +883,7 @@ body.page-profile{background:#fff;}
 		width: 100% !important;
 	}
 	.openbtn {
-		    background: #144eec url(../images/menu-left.png) center no-repeat;
+		    background: #144eec url(../images/menu-left.png) 5px no-repeat;
 	}
 	.dashboard-full ul li a {
 		height: 50px;
@@ -878,6 +899,7 @@ body.page-profile{background:#fff;}
 	 .dashboard-full ul li a,
 	.dashboard-full ul li:hover a	{background-position:25px center !important ;}
 	.dashboard-full ul li a span {    text-indent:0px;}
+	 .openbtn{ z-index:3 !important;} 
 	
 }
 
