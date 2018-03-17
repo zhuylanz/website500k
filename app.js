@@ -1,7 +1,7 @@
 const path = require('path');
 const fs = require('fs');
 
-const io = require('socket.io')(7002);
+const io = require('socket.io')(7000);
 const io_profile = io.of('/profile');
 
 const ngin = require('./engine.js')
