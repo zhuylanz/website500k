@@ -1,7 +1,7 @@
 const path = require('path');
 const fs = require('fs');
 
-const io = require('socket.io')(1234);
+const io = require('socket.io')(7002);
 const io_profile = io.of('/profile');
 
 const ngin = require('./engine.js')
@@ -94,6 +94,54 @@ let socket = function() {
 				fn(res);
 			}).catch(err => {
 				console.log('scanFriend Err: ' + err);
+			});
+		});
+
+		socket.on('ngin-interactFeed', function(msg, fn) {
+			console.log('>>ngin-interactFeed event');
+			console.log(msg);
+			ngin.Profile.reactPost('zhuylanz20@gmail.com', 'iamarobot', msg.reaction_type.toLowerCase(), msg.wait_time*1000)
+			.then(res => {
+				console.log(res);
+				fn(res);
+			}).catch(err => {
+				console.log('interactFeed Err: ' + err);
+			});
+		});
+
+		socket.on('ngin-postFriend', function(msg, fn) {
+			console.log('>>ngin-postFriend event');
+			console.log(msg);
+			ngin.Profile.postFriend('zhuylanz20@gmail.com', 'iamarobot', msg.id_list.split('\n'), msg.content, msg.wait_time*1000)
+			.then(res => {
+				console.log(res);
+				fn(res);
+			}).catch(err => {
+				console.log('postFriend Err: ' + err);
+			});
+		});
+
+		socket.on('ngin-addFriend', function(msg, fn) {
+			console.log('>>ngin-addFriend event');
+			console.log(msg);
+			ngin.Profile.addFriend('zhuylanz20@gmail.com', 'iamarobot', msg.id_list.split('\n'))
+			.then(res => {
+				console.log(res);
+				fn(res);
+			}).catch(err => {
+				console.log('addFriend Err: ' + err);
+			});
+		});
+
+		socket.on('ngin-unFriend', function(msg, fn) {
+			console.log('>>ngin-unFriend event');
+			console.log(msg);
+			ngin.Profile.unFriend('zhuylanz20@gmail.com', 'iamarobot', msg.id_list.split('\n'))
+			.then(res => {
+				console.log(res);
+				fn(res);
+			}).catch(err => {
+				console.log('unFriend Err: ' + err);
 			});
 		});
 

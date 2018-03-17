@@ -1,0 +1,725 @@
+<!DOCTYPE html><html>
+<head>	
+	<script src="http://www.w3schools.com/lib/w3data.js"></script>
+	<meta charset="utf-8">
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i,800,800i" rel="stylesheet">
+	 <meta name="viewport" content="width=device-width,initial-scale=1.0">
+	 <link id="stylesheet-bootstrap.min" href="css/bootstrap.min.css" rel="stylesheet">
+	 <link id="stylesheet-style" href="css/style.css" rel="stylesheet">
+	 <script src="js/jquery.min.js"></script>
+	<script src="js/custom.js"></script>
+	<script src="js/js.js"></script>
+	 <script src="js/bootstrap.min.js"></script>							
+	<meta name="keywords" content="">
+	<meta name="description" content="">
+</head>
+<body class="body-chatbox"> 
+	<div id="mySidenav" class="left-sidebar">
+
+	    <span style="font-size:30px;cursor:pointer" class="openbtn" onclick="openNav()">&#9776; open</span>
+		 <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+		<div class="left-sidebar-content">
+			<div class="dashboard-full">	
+				<div w3-include-html="include/left-menu.html"></div> 
+				<script>w3IncludeHTML();</script>	
+			</div>	
+		</div>	
+		
+	</div>
+	
+	<div   id="main" class="facebook-wrap"> 
+		<section class="section-header"> 
+			<div class="container"> 
+				<div class="row"> 
+					<div class="col-md-9 col-sm-12 "> 
+						<div class=" title center"> 
+							<span><img alt="" src="images/title-facebook.png" />FACEBOOK STORE MANAGER</span>
+						</div> 
+					</div> 
+					<div class="col-md-3 col-sm-12  align-right"> 
+						<div class="select-system"> 		
+							<span class="click-submenu1">Apple</span>
+								<div class="list-system">
+									<ul class="">
+										<li class="item1"><a href=""><img alt="" src="images/icon29.png" /> Tài khoản của bạn</a></li>
+										<li class="item2"><a href=""><img alt="" src="images/icon30.png" />Hướng dẫn</a></li>
+										<li class="item3"><a href=""><img alt="" src="images/icon31.png" />Điều khoản dịch vụ</a></li>
+										<li class="item4"><a href=""><img alt="" src="images/icon32.png" />Chính sách bảo mật</a></li>
+										<li class="item5"><a href=""><img alt="" src="images/icon33.png" />Thoát tài khoản</a></li>
+									</ul>	
+								</div>	
+							<img alt="" src="images/icon-apple.png" />	
+						</div>	 
+						
+					</div> 
+				</div> 
+			</div> 
+		</section> 
+		<section class="section section-chat">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-3 section-chat-left">
+							<div class="section-chat-left-header">
+								<div class="left">
+									<span class="icon-inbox click-submenu">Hộp thư</span>
+									<div class="inbox-list submenu-dropdown">
+										<ul class="">
+											<li class="icon1"><a href="">Hộp thư đến</a></li>
+											<li class="icon2"><a href="">Chưa trả lời</a></li>
+											<li class="icon3"><a href="">Đã trả lời</a></li>
+											<li class="icon4"><a href="">Có đơn hàng</a></li>
+											<li class="icon5"><a href="">Đánh dấu</a></li>
+											<li class="icon6"><a href="">Spam</a></li>
+										</ul>	
+									</div>	
+								
+								</div>	
+								<div class="right">
+									<a class="icon-message popover-tooltip" href="#" data-toggle="tooltip" data-placement="bottom" title="Tin nhắn">Tin nhắn</a>
+									<a class="icon-note popover-tooltip" href="#" data-toggle="tooltip" data-placement="bottom" title="Note">Note</a>
+									<a class="icon-search popover-tooltip click-submenu3" href="#" data-toggle="tooltip" data-placement="bottom" title="Search">search</a>
+
+
+									<div class=" box-search submenu-dropdown">
+
+										<input type="text"  placeholder="Tìm kiếm"/>
+
+									</div>	
+								</div>	
+								
+								<div class="clear"></div>
+							</div>
+							<div class="section-chat-left-body">
+								<ul class="list1">
+									<li onclick="scrollFunction()">
+										<div class="left">
+											<img class="avatar" alt="" src="images/avatar1.png" />	 
+											<a class="name" href="#">Eddy</a><br />
+											<span class="last-chat" >Thanks again you have been...</span>
+										</div>
+										<div class="right align-right">
+											<strong>....</strong><br />
+											<span class="date" >24/12/2017</span>
+										</div>
+										<div class="clear"></div>	
+									</li>
+									<li onclick="scrollFunction()">
+										<div class="left">
+											<img class="avatar" alt="" src="images/avatar9.png" />	 
+											<a class="name" href="#">Max</a><br />
+											<span class="last-chat" >My selfie game is lacking can...</span>
+										</div>
+										<div class="right align-right">
+											<strong>....</strong><br />
+											<span class="date" >24/12/2017</span>
+										</div>
+										<div class="clear"></div>	
+									</li>
+									<li onclick="scrollFunction()">
+										<div class="left">
+											<img class="avatar" alt="" src="images/avatar3.png" />	 
+											<a class="name" href="#">Pororo Pororo </a><br />
+											<span class="last-chat" >Where is the nearest...</span>
+										</div>
+										<div class="right align-right">
+											<strong>....</strong><br />
+											<span class="date" >24/12/2017</span>
+										</div>
+										<div class="clear"></div>	
+									</li>
+									<li onclick="scrollFunction()">
+										<div class="left">
+											<img class="avatar" alt="" src="images/avatar4.png" />	 
+											<a class="name" href="#">Petty</a><br />
+											<span class="last-chat" >Ok that sounds perfect...</span>
+										</div>
+										<div class="right align-right">
+											<strong>....</strong><br />
+											<span class="date" >24/12/2017</span>
+										</div>
+										<div class="clear"></div>	
+									</li>
+									<li onclick="scrollFunction()">
+										<div class="left">
+											<img class="avatar" alt="" src="images/avatar5.png" />	 
+											<a class="name" href="#">Harry</a><br />
+											<span class="last-chat" >Protect the senator at...</span>
+										</div>
+										<div class="right align-right">
+											<strong>....</strong><br />
+											<span class="date" >24/12/2017</span>
+										</div>
+										<div class="clear"></div>	
+									</li>
+									<li onclick="scrollFunction()">
+										<div class="left">
+											<img class="avatar" alt="" src="images/avatar6.png" />	 
+											<a class="name" href="#">Eddy</a><br />
+											<span class="last-chat" >Thanks again you have been...</span>
+										</div>
+										<div class="right align-right">
+											<strong>....</strong><br />
+											<span class="date" >24/12/2017</span>
+										</div>
+										<div class="clear"></div>	
+									</li>
+									<li onclick="scrollFunction()">
+										<div class="left">
+											<img class="avatar" alt="" src="images/avatar7.png" />	 
+											<a class="name" href="#">Poby</a><br />
+											<span class="last-chat" >So tell the voice inside your...</span>
+										</div>
+										<div class="right align-right">
+											<strong>....</strong><br />
+											<span class="date" >24/12/2017</span>
+										</div>
+										<div class="clear"></div>	
+									</li>
+									<li onclick="scrollFunction()">
+										<div class="left">
+											<img class="avatar" alt="" src="images/avatar8.png" />	 
+											<a class="name" href="#">Eddy</a><br />
+											<span class="last-chat" >Thanks again you have been...</span>
+										</div>
+										<div class="right align-right">
+											<strong>....</strong><br />
+											<span class="date" >24/12/2017</span>
+										</div>
+										<div class="clear"></div>	
+									</li>
+									<li onclick="scrollFunction()">
+										<div class="left">
+											<img class="avatar" alt="" src="images/avatar8.png" />	 
+											<a class="name" href="#">Eddy</a><br />
+											<span class="last-chat" >Thanks again you have been...</span>
+										</div>
+										<div class="right align-right">
+											<strong>....</strong><br />
+											<span class="date" >24/12/2017</span>
+										</div>
+										<div class="clear"></div>	
+									</li>
+									<li onclick="scrollFunction()">
+										<div class="left">
+											<img class="avatar" alt="" src="images/avatar8.png" />	 
+											<a class="name" href="#">Eddy</a><br />
+											<span class="last-chat" >Thanks again you have been...</span>
+										</div>
+										<div class="right align-right">
+											<strong>....</strong><br />
+											<span class="date" >24/12/2017</span>
+										</div>
+										<div class="clear"></div>	
+									</li>
+									<li onclick="scrollFunction()">
+										<div class="left">
+											<img class="avatar" alt="" src="images/avatar8.png" />	 
+											<a class="name" href="#">Eddy</a><br />
+											<span class="last-chat" >Thanks again you have been...</span>
+										</div>
+										<div class="right align-right">
+											<strong>....</strong><br />
+											<span class="date" >24/12/2017</span>
+										</div>
+										<div class="clear"></div>	
+									</li>
+
+								</ul>	
+								<ul class="list2">
+									<li onclick="scrollFunction()">
+										<div class="left">
+											<img class="avatar" alt="" src="images/avatar3.png" />	 
+											<a class="name" href="#">Pororo Pororo </a><br />
+											<span class="last-chat" >Where is the nearest...</span>
+										</div>
+										<div class="right align-right">
+											<strong>....</strong><br />
+											<span class="date" >24/12/2017</span>
+										</div>
+										<div class="clear"></div>	
+									</li>
+									<li onclick="scrollFunction()">
+										<div class="left">
+											<img class="avatar" alt="" src="images/avatar4.png" />	 
+											<a class="name" href="#">Petty</a><br />
+											<span class="last-chat" >Ok that sounds perfect...</span>
+										</div>
+										<div class="right align-right">
+											<strong>....</strong><br />
+											<span class="date" >24/12/2017</span>
+										</div>
+										<div class="clear"></div>	
+									</li>
+									<li onclick="scrollFunction()">
+										<div class="left">
+											<img class="avatar" alt="" src="images/avatar5.png" />	 
+											<a class="name" href="#">Harry</a><br />
+											<span class="last-chat" >Protect the senator at...</span>
+										</div>
+										<div class="right align-right">
+											<strong>....</strong><br />
+											<span class="date" >24/12/2017</span>
+										</div>
+										<div class="clear"></div>	
+									</li>
+									<li onclick="scrollFunction()">
+										<div class="left">
+											<img class="avatar" alt="" src="images/avatar1.png" />	 
+											<a class="name" href="#">Eddy</a><br />
+											<span class="last-chat" >Thanks again you have been...</span>
+										</div>
+										<div class="right align-right">
+											<strong>....</strong><br />
+											<span class="date" >24/12/2017</span>
+										</div>
+										<div class="clear"></div>	
+									</li>
+									<li onclick="scrollFunction()">
+										<div class="left">
+											<img class="avatar" alt="" src="images/avatar9.png" />	 
+											<a class="name" href="#">Max</a><br />
+											<span class="last-chat" >My selfie game is lacking can...</span>
+										</div>
+										<div class="right align-right">
+											<strong>....</strong><br />
+											<span class="date" >24/12/2017</span>
+										</div>
+										<div class="clear"></div>	
+									</li>
+									
+									<li onclick="scrollFunction()">
+										<div class="left">
+											<img class="avatar" alt="" src="images/avatar6.png" />	 
+											<a class="name" href="#">Eddy</a><br />
+											<span class="last-chat" >Thanks again you have been...</span>
+										</div>
+										<div class="right align-right">
+											<strong>....</strong><br />
+											<span class="date" >24/12/2017</span>
+										</div>
+										<div class="clear"></div>	
+									</li>
+									<li onclick="scrollFunction()">
+										<div class="left">
+											<img class="avatar" alt="" src="images/avatar7.png" />	 
+											<a class="name" href="#">Poby</a><br />
+											<span class="last-chat" >So tell the voice inside your...</span>
+										</div>
+										<div class="right align-right">
+											<strong>....</strong><br />
+											<span class="date" >24/12/2017</span>
+										</div>
+										<div class="clear"></div>	
+									</li>
+									<li onclick="scrollFunction()">
+										<div class="left">
+											<img class="avatar" alt="" src="images/avatar8.png" />	 
+											<a class="name" href="#">Eddy</a><br />
+											<span class="last-chat" >Thanks again you have been...</span>
+										</div>
+										<div class="right align-right">
+											<strong>....</strong><br />
+											<span class="date" >24/12/2017</span>
+										</div>
+										<div class="clear"></div>	
+									</li>
+									<li onclick="scrollFunction()">
+										<div class="left">
+											<img class="avatar" alt="" src="images/avatar8.png" />	 
+											<a class="name" href="#">Eddy</a><br />
+											<span class="last-chat" >Thanks again you have been...</span>
+										</div>
+										<div class="right align-right">
+											<strong>....</strong><br />
+											<span class="date" >24/12/2017</span>
+										</div>
+										<div class="clear"></div>	
+									</li>
+									<li onclick="scrollFunction()">
+										<div class="left">
+											<img class="avatar" alt="" src="images/avatar8.png" />	 
+											<a class="name" href="#">Eddy</a><br />
+											<span class="last-chat" >Thanks again you have been...</span>
+										</div>
+										<div class="right align-right">
+											<strong>....</strong><br />
+											<span class="date" >24/12/2017</span>
+										</div>
+										<div class="clear"></div>	
+									</li>
+									<li onclick="scrollFunction()">
+										<div class="left">
+											<img class="avatar" alt="" src="images/avatar8.png" />	 
+											<a class="name" href="#">Eddy</a><br />
+											<span class="last-chat" >Thanks again you have been...</span>
+										</div>
+										<div class="right align-right">
+											<strong>....</strong><br />
+											<span class="date" >24/12/2017</span>
+										</div>
+										<div class="clear"></div>	
+									</li>
+								</ul>	
+								<ul class="list3">
+									<li onclick="scrollFunction()">
+										<div class="left">
+											<img class="avatar" alt="" src="images/avatar7.png" />	 
+											<a class="name" href="#">Poby</a><br />
+											<span class="last-chat" >So tell the voice inside your...</span>
+										</div>
+										<div class="right align-right">
+											<strong>....</strong><br />
+											<span class="date" >24/12/2017</span>
+										</div>
+										<div class="clear"></div>	
+									</li>
+									<li onclick="scrollFunction()">
+										<div class="left">
+											<img class="avatar" alt="" src="images/avatar8.png" />	 
+											<a class="name" href="#">Eddy</a><br />
+											<span class="last-chat" >Thanks again you have been...</span>
+										</div>
+										<div class="right align-right">
+											<strong>....</strong><br />
+											<span class="date" >24/12/2017</span>
+										</div>
+										<div class="clear"></div>	
+									</li>
+									<li onclick="scrollFunction()">
+										<div class="left">
+											<img class="avatar" alt="" src="images/avatar1.png" />	 
+											<a class="name" href="#">Eddy</a><br />
+											<span class="last-chat" >Thanks again you have been...</span>
+										</div>
+										<div class="right align-right">
+											<strong>....</strong><br />
+											<span class="date" >24/12/2017</span>
+										</div>
+										<div class="clear"></div>	
+									</li>
+									<li onclick="scrollFunction()">
+										<div class="left">
+											<img class="avatar" alt="" src="images/avatar9.png" />	 
+											<a class="name" href="#">Max</a><br />
+											<span class="last-chat" >My selfie game is lacking can...</span>
+										</div>
+										<div class="right align-right">
+											<strong>....</strong><br />
+											<span class="date" >24/12/2017</span>
+										</div>
+										<div class="clear"></div>	
+									</li>
+									<li onclick="scrollFunction()">
+										<div class="left">
+											<img class="avatar" alt="" src="images/avatar3.png" />	 
+											<a class="name" href="#">Pororo Pororo </a><br />
+											<span class="last-chat" >Where is the nearest...</span>
+										</div>
+										<div class="right align-right">
+											<strong>....</strong><br />
+											<span class="date" >24/12/2017</span>
+										</div>
+										<div class="clear"></div>	
+									</li>
+									<li onclick="scrollFunction()">
+										<div class="left">
+											<img class="avatar" alt="" src="images/avatar4.png" />	 
+											<a class="name" href="#">Petty</a><br />
+											<span class="last-chat" >Ok that sounds perfect...</span>
+										</div>
+										<div class="right align-right">
+											<strong>....</strong><br />
+											<span class="date" >24/12/2017</span>
+										</div>
+										<div class="clear"></div>	
+									</li>
+									<li onclick="scrollFunction()">
+										<div class="left">
+											<img class="avatar" alt="" src="images/avatar5.png" />	 
+											<a class="name" href="#">Harry</a><br />
+											<span class="last-chat" >Protect the senator at...</span>
+										</div>
+										<div class="right align-right">
+											<strong>....</strong><br />
+											<span class="date" >24/12/2017</span>
+										</div>
+										<div class="clear"></div>	
+									</li>
+									<li onclick="scrollFunction()">
+										<div class="left">
+											<img class="avatar" alt="" src="images/avatar6.png" />	 
+											<a class="name" href="#">Eddy</a><br />
+											<span class="last-chat" >Thanks again you have been...</span>
+										</div>
+										<div class="right align-right">
+											<strong>....</strong><br />
+											<span class="date" >24/12/2017</span>
+										</div>
+										<div class="clear"></div>	
+									</li>
+									<li onclick="scrollFunction()">
+										<div class="left">
+											<img class="avatar" alt="" src="images/avatar8.png" />	 
+											<a class="name" href="#">Eddy</a><br />
+											<span class="last-chat" >Thanks again you have been...</span>
+										</div>
+										<div class="right align-right">
+											<strong>....</strong><br />
+											<span class="date" >24/12/2017</span>
+										</div>
+										<div class="clear"></div>	
+									</li>
+									<li onclick="scrollFunction()">
+										<div class="left">
+											<img class="avatar" alt="" src="images/avatar8.png" />	 
+											<a class="name" href="#">Eddy</a><br />
+											<span class="last-chat" >Thanks again you have been...</span>
+										</div>
+										<div class="right align-right">
+											<strong>....</strong><br />
+											<span class="date" >24/12/2017</span>
+										</div>
+										<div class="clear"></div>	
+									</li>
+									<li onclick="scrollFunction()">
+										<div class="left">
+											<img class="avatar" alt="" src="images/avatar8.png" />	 
+											<a class="name" href="#">Eddy</a><br />
+											<span class="last-chat" >Thanks again you have been...</span>
+										</div>
+										<div class="right align-right">
+											<strong>....</strong><br />
+											<span class="date" >24/12/2017</span>
+										</div>
+										<div class="clear"></div>	
+									</li>
+
+								</ul>	
+							</div>
+					 </div>
+					 <div class="col-sm-6 section-chat-center">		
+					 		<div class="chat-center-header">										
+								 <div class="left">
+								 	<img class="avatar" alt="" src="images/avatar2.png" />	
+									 <strong>Pororo Pororo</strong><br />
+									
+									 <span class="click-submenu2">Đánh dấu<img alt="" src="images/select2.png" /></span>
+									<div class="clear"></div>	 
+									<div class="list-system2">
+										<ul class="">
+											<li class="tick1"><a href="">KHÁCH LẺ</a></li>
+											<li class="tick2"><a href="">CẦN TƯ VẤN</a></li>
+											<li class="tick3"><a href="">VIP</a></li>
+											<li class="tick4"><a href="">LABEL</a></li>
+											<li class="tick5"><a href="">LABEL</a></li>
+											<li class="tick6"><a href="">LABEL</a></li>
+										</ul>	
+									</div>	
+
+								 </div>	
+								 <div class="right ">
+									<a class="icon1 popover-tooltip" href="#" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Tất cả hội thoại của người này">
+									</a>
+									<a class=" icon2 popover-tooltip" href="#" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Cảnh báo">
+									</a>
+									<a class="icon3 popover-tooltip" href="#" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Xem trên facebook">
+									</a>
+									<a><img alt="" src="images/separator2.png" /></a>
+									<a class="icon4 popover-tooltip" href="#" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Trạng thái">
+									</a>
+								 	Đã trả lời		
+								 </div>			
+								 <div class="clear"></div>					
+						    </div>								
+							<div class="chat-center-content">										
+								 <div class="client-chat">										
+									<div class="client-avatar">										
+										<img alt="" src="images/avatar-client.png" />
+										<div class="chat-time">12:39</div>	
+									</div>	
+
+									<div class="client-chatbox"><div class="arrow"></div>labore et dolore magna aliqua nulla pariatur eu fugiat nulla pariatur.</div>		
+									<div class="clear"></div>	
+								 </div>	
+								 <div class="client-chat">										
+									<div class="client-avatar">										
+										<img alt="" src="images/avatar-client.png" />
+										<div class="chat-time">2:39</div>	
+									</div>	
+
+									<div class="client-chatbox"><div class="arrow"></div>labore et dolore magna aliqua nulla pariatur eu fugiat nulla pariatur.</div>		
+									<div class="clear"></div>	
+								 </div>	
+								 <div class="client-chat">										
+									<div class="client-avatar">										
+										<img alt="" src="images/avatar-client.png" />
+										<div class="chat-time">12:39</div>	
+									</div>	
+
+									<div class="client-chatbox"><div class="arrow"></div>labore et dolore magna aliqua nulla pariatur eu fugiat nulla pariatur.</div>		
+									<div class="clear"></div>	
+								 </div>	
+								 <div class="client-chat">										
+									<div class="client-avatar">										
+										<img alt="" src="images/avatar-client.png" />
+										<div class="chat-time">3:39</div>	
+									</div>	
+
+									<div class="client-chatbox"><div class="arrow"></div>labore et dolore magna aliqua nulla pariatur eu fugiat nulla pariatur.</div>		
+									<div class="clear"></div>	
+								 </div>	
+								 <div class="client-chat">										
+									<div class="client-avatar">										
+										<img alt="" src="images/avatar-client.png" />
+										<div class="chat-time">12:39</div>	
+									</div>	
+									
+									<div class="client-chatbox"><div class="arrow"></div>pariatur eu fugiat nulla pariatur.</div>		
+									<div class="clear"></div>	
+								 </div>	
+								 <div class="manager-chat">		
+									<div class="manager-avatar">										
+										<img alt="" src="images/avatar-manager.png" />
+										<div class="chat-time">12:39</div>	
+									</div>	
+									<div class="manager-chatbox">
+										<div class="arrow"></div>dolore magna aliqua nulla pariatur eu fugiat nulla pariatur.
+									</div>		
+									<div class="clear"></div>	
+								 </div>
+								 <div class="client-chat">										
+									<div class="client-avatar">										
+										<img alt="" src="images/avatar-client.png" />
+										<div class="chat-time">12:39</div>	
+									</div>	
+									<div class="client-chatbox"><div class="arrow"></div>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua nulla pariatur eu fugiat nulla pariatur.</div>		
+									<div class="clear"></div>	
+								 </div>	
+								 <div class="client-chat">										
+									<div class="client-avatar">										
+										<img alt="" src="images/avatar-client.png" />
+										<div class="chat-time">12:39</div>	
+									</div>	
+									<div class="client-chatbox"><div class="arrow"></div>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua nulla pariatur eu fugiat nulla pariatur.</div>		
+									<div class="clear"></div>	
+								 </div>	
+								 <div class="client-chat">										
+									<div class="client-avatar">										
+										<img alt="" src="images/avatar-client.png" />
+										<div class="chat-time">12:39</div>	
+									</div>	
+									<div class="client-chatbox"><div class="arrow"></div>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua nulla pariatur eu fugiat nulla pariatur.</div>		
+									<div class="clear"></div>	
+								 </div>	
+								 <div class="manager-chat">		
+									<div class="manager-avatar">										
+										<img alt="" src="images/avatar-manager.png" />
+										<div class="chat-time">12:39</div>	
+									</div>	
+									<div class="manager-chatbox"><div class="arrow"></div>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua nulla pariatur eu fugiat nulla pariatur.</div>		
+									<div class="clear"></div>	
+								 </div>
+								 <div class="manager-chat">		
+									<div class="manager-avatar">										
+										<img alt="" src="images/avatar-manager.png" />
+										<div class="chat-time">12:39</div>	
+									</div>	
+									<div class="manager-chatbox">
+										<div class="arrow"></div>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua nulla pariatur eu fugiat nulla pariatur.
+									</div>		
+									<div class="clear"></div>	
+								 </div>
+								  <div class="manager-chat" id="section-chat-center-last">		
+									<div class="manager-avatar">										
+										<img alt="" src="images/avatar-manager.png" />
+										<div class="chat-time">12:39</div>	
+									</div>	
+									<div class="manager-chatbox">
+										<div class="arrow"></div><img alt="" src="images/chat-img1.jpg" />
+									</div>		
+									<div class="clear"></div>	
+								 </div>															 
+						    </div>						
+							<div class="chat-center-bottom">										
+								 <div class="box-chat">
+									<div class="box-chat-content">
+										<textarea rows="3"  placeholder="Type your message..."></textarea>
+									</div>
+								 </div>
+								
+								 <div class="icon-chat">
+								 	<a class="atachment popover-tooltip" href="#" data-toggle="tooltip" data-placement="bottom" title="File Đính kèm"></a>
+								 	<a class="message popover-tooltip" href="#" data-toggle="tooltip" data-placement="bottom" title="Message"></a>
+								 	<a class="emotion popover-tooltip" href="#" data-toggle="tooltip" data-placement="bottom" title="Emotion"></a>
+								 	<a class="send popover-tooltip" href="#" data-toggle="tooltip" data-placement="bottom" title="Send"></a>		
+								 </div>
+								 <div class="clear"></div>	
+						    </div>			
+					 </div>
+					 <div class="col-sm-3 section-chat-right">	
+					 	 <div class="section-chat-right-top">			
+							<h3 class="title-make-order">Tạo đơn hàng mới</h3>
+							 <ul class="list-info">
+								<li class="name">Pororo Pororo</li>
+								<li class="phone">099 999 9999</li>
+								<li class="enmail"><a href="maril:top:pororo@facebook.com">pororo@facebook.com</a></li>
+								<li class="address">123 Nguyen Hue, Phường Bến Nghé</li>
+								<li class="address-city">
+									<select class="left">
+									    <option value="" selected>Tỉnh/Thành Phố</option>
+									  <option value="">Hà Nội</option>
+									  <option value="">TP Hồ Chí Minh</option>
+									  <option value="">Đà Nẵng</option>
+									  <option value="">Hải PHòng</option>
+									</select>
+									<select class="right">
+									  <option value="" selected>Quận/Huyện</option>
+									  <option value="">Quận1</option>
+									  <option value="">Quận2</option>
+									  <option value="">Quận3</option>
+									  <option value="">Quận4</option>
+									</select>
+									<div class="clear"></div>	
+								</li>
+							</ul>	
+						 </div>	
+						 <hr />
+						 <div class="section-chat-right-bottom">		
+							 <p>
+							 	<span class="left back">Ghi chú</span>
+							 	<a class="right  button-add-note" href="#">Thêm ghi chú</a>
+							 	<div class="add-note align-center">
+							 		<textarea rows="3" class="order-note"  placeholder="Tìm kiếm sản phẩm"></textarea>
+							 		<a class="button-cancel" href="">Huỷ</a>
+							 		<a class="button" href="">Lưu</a>
+							 	</div>
+							 	<div class="clear"></div>	
+							 </p>
+							 <p>
+								 Việc ghi chú giúp bạn lưu lại các chú ý trong quá trình tư vấn khách hàng.
+							 </p>	 
+						 </div>	
+					 </div>
+				</div>
+			</div>
+		 </section>
+		 <script>
+
+				$(".button-add-note").click(function(){
+				    $(".add-note").toggle(300);
+				});
+
+			 </script>
+		 <script>
+	        $(document).ready(function (){
+	            $(".section-chat-left-body ul li").click(function (){
+	                $('html, body').animate({
+	                    scrollTop: $(".chat-center-bottom").offset().top
+	                }, 300);
+	            });
+	        });
+	    </script>
+
+	</div>
+</body>
+</html>
