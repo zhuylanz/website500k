@@ -144,7 +144,7 @@ async function scanFriendPup(username, pass) {
 	}
 }
 
-async function interactFeed(username, pass, react_type, wait_time) {
+async function interactFeedPup(username, pass, react_type, wait_time) {
 	let Passed = await loginFb(username, pass);
 	let browser = Passed.browser;
 	let page = Passed.page;
@@ -157,7 +157,7 @@ async function interactFeed(username, pass, react_type, wait_time) {
 	await page.waitFor(4000);
 	await page.addScriptTag({content : jquery});
 	try {
-		let total_time = await page.evaluate(({react_type: react_type, wait_time: wait_time}) => {
+		let reacting = await page.evaluate(({react_type: react_type, wait_time: wait_time}) => {
 			function react(post_id, type) {
 				fb_dtsg_list = document.getElementsByName('fb_dtsg');
 				if (fb_dtsg_list.length > 0) {
@@ -204,7 +204,6 @@ async function interactFeed(username, pass, react_type, wait_time) {
 
 				console.log('done ' + post_id);
 				console.log('https://www.facebook.com/'+post_id);
-
 			}
 
 			window.scrollBy(0, document.documentElement.scrollHeight);
@@ -221,19 +220,236 @@ async function interactFeed(username, pass, react_type, wait_time) {
 				setTimeout(react, i*wait_time, post_id_list[i], react_type);
 			}
 
-			return i*wait_time;
+			return {
+				post_list: post_id_list,
+				wait_time: i*wait_time
+			};
 		}, {react_type: react_type, wait_time: wait_time} );
 
-		console.log(total_time);
-		await page.waitFor(total_time + 2000);
+		await page.waitFor(reacting.wait_time + 2000);
 		browser.close();
+		return reacting.post_list;
 	} catch(e) {
 		browser.close();
 		console.log(e);
 		throw new Error(e);
 	}
+}
 
+async function postFriendPup(username, pass, id_list, content, wait_time) {
+	let Passed = await loginFb(username, pass);
+	let browser = Passed.browser;
+	let page = Passed.page;
+	let jquery = Passed.jquery;
 
+	await page.waitFor(2000);
+	await page.addScriptTag({content : jquery});
+	try {
+		let posting = await page.evaluate(({id_list: id_list, content: content, wait_time: wait_time}) => {
+			function post(uid, content) {
+				fb_dtsg_list = document.getElementsByName('fb_dtsg');
+				if (fb_dtsg_list.length > 0) {
+					profile_id = document.cookie.match(/c_user=(\d+)/)[1];
+					fb_dtsg = fb_dtsg_list[0].value;
+					__dyn = '';
+					if (document.head.innerHTML.split('"client_revision":')[1]) {
+						__rev = document.head.innerHTML.split('"client_revision":')[1].split(",")[0];
+					} else {
+						__rev = rand(1111111, 9999999);
+					}
+					jazoest = '';
+					for (var x = 0; x < fb_dtsg.length; x++) {
+						jazoest += fb_dtsg.charCodeAt(x);
+					}
+					jazoest = '2' + jazoest;
+					__spin_r = __rev;
+					__spin_t = Math.floor(Date.now() / 1000);
+				}
+
+				$.post('https://www.facebook.com/webgraphql/mutation/?doc_id=1931212663571278&dpr=1', {
+					variables: '{"client_mutation_id":"ec4cf7c9-9cd2-404f-a6d2-75bf36de75cc","actor_id":"'+profile_id+'","input":{"actor_id":"'+profile_id+'","client_mutation_id":"df783954-dc35-4a0e-a85b-514e9bd5d714","source":"WWW","audience":{"to_id":"'+uid+'"},"message":{"text":"'+content+'","ranges":[]},"logging":{"composer_session_id":"ec8570e5-d00d-492a-b4ee-b75cf9127ce5","ref":"timeline"},"with_tags_ids":[],"multilingual_translations":[],"composer_source_surface":"timeline","composer_entry_time":-1,"composer_session_events_log":{"composition_duration":57,"number_of_keystrokes":62},"direct_share_status":"NOT_SHARED","sponsor_relationship":"WITH","web_graphml_migration_params":{"target_type":"wall","xhpc_composerid":"rc.u_ps_fetchstream_1_2_1","xhpc_context":"profile","xhpc_publish_type":"FEED_INSERT","xhpc_timeline":true},"extensible_sprouts_ranker_request":{"RequestID":"ZvBXCwABAAAAJDYxMGUyYjZhLWQ3ZTUtNDIzOC1lMmE3LTRjNzIxNjY2ZjdjNwoAAgAAAABantyLCwADAAAABFNFTEwGAAQADgsABQAAABhVTkRJUkVDVEVEX0ZFRURfQ09NUE9TRVIA"},"place_attachment_setting":"HIDE_ATTACHMENT"}}',
+					__user: profile_id,
+					__a: '1',
+					__dyn: __dyn,
+					__req: '42',
+					__be: '1',
+					__pc: 'PHASED:DEFAULT',
+					__rev: __rev,
+					fb_dtsg: fb_dtsg,
+					jazoest: jazoest,
+					__spin_r: __spin_r,
+					__spin_b: 'trunk',
+					__spin_t: __spin_t
+				});
+
+				console.log('done ' + uid);
+				console.log('https://www.facebook.com/'+uid);
+			}
+
+			for (var i in id_list) {
+				setTimeout(post, i*wait_time, id_list[i], content);
+			}
+
+			return {id_list: id_list, wait_time: i*wait_time};
+		}, {id_list: id_list, content: content, wait_time: wait_time} );
+
+		await page.waitFor(posting.wait_time + 2000);
+		browser.close();
+		return posting;
+	} catch(e) {
+		browser.close();
+		console.log(e);
+		throw new Error(e);
+	}
+}
+
+async function addFriendPup(username, pass, id_list) {
+	let Passed = await loginFb(username, pass);
+	let browser = Passed.browser;
+	let page = Passed.page;
+	let jquery = Passed.jquery;
+
+	await page.waitFor(2000);
+	await page.addScriptTag({content : jquery});
+	try {
+		let adding = await page.evaluate((id_list) => {
+			function addFriend(uid) {
+				fb_dtsg_list = document.getElementsByName('fb_dtsg');
+				if (fb_dtsg_list.length > 0) {
+					profile_id = document.cookie.match(/c_user=(\d+)/)[1];
+					fb_dtsg = fb_dtsg_list[0].value;
+					__dyn = '';
+					if (document.head.innerHTML.split('"client_revision":')[1]) {
+						__rev = document.head.innerHTML.split('"client_revision":')[1].split(",")[0];
+					} else {
+						__rev = rand(1111111, 9999999);
+					}
+					jazoest = '';
+					for (var x = 0; x < fb_dtsg.length; x++) {
+						jazoest += fb_dtsg.charCodeAt(x);
+					}
+					jazoest = '2' + jazoest;
+					__spin_r = __rev;
+					__spin_t = Math.floor(Date.now() / 1000);
+				}
+
+				$.post('https://www.facebook.com/ajax/add_friend/action.php?dpr=1', {
+					to_friend: uid,
+					action: 'add_friend',
+					how_found: 'profile_button',
+					ref_param: 'none',
+					'link_data[gt][type]': 'xtracking',
+					'link_data[gt][xt]': '48.{"event":"add_friend","intent_status":null,"intent_type":null,"profile_id":'+uid+',"ref":1}',
+					'link_data[gt][profile_owner]': uid,
+					'link_data[gt][ref]': 'timeline:about',
+					outgoing_id: 'js_2q',
+					logging_location: '',
+					no_flyout_on_click: 'true',
+					ego_log_data: '',
+					floc: 'profile_button',
+					'frefs[0]': 'none',
+					__user: profile_id,
+					__a: '1',
+					__dyn: __dyn,
+					__req: '3e',
+					__be: '1',
+					__pc: 'PHASED:DEFAULT',
+					__rev: __rev,
+					fb_dtsg: fb_dtsg,
+					jazoest: jazoest,
+					__spin_r: __spin_r,
+					__spin_b: 'trunk',
+					__spin_t: __spin_t
+				});
+
+				console.log('done ' + uid);
+				console.log('https://www.facebook.com/'+uid);
+			}
+			let wait_time = 5000;
+			for (var i in id_list) {
+				setTimeout(addFriend, i*wait_time, id_list[i]);
+			}
+
+			return {id_list: id_list, wait_time: i*wait_time};
+		}, id_list);
+
+		await page.waitFor(adding.wait_time + 2000);
+		browser.close();
+		return adding;
+	} catch(e) {
+		browser.close();
+		console.log(e);
+		throw new Error(e);
+	}
+}
+
+async function unFriendPup(username, pass, id_list) {
+	let Passed = await loginFb(username, pass);
+	let browser = Passed.browser;
+	let page = Passed.page;
+	let jquery = Passed.jquery;
+
+	await page.waitFor(2000);
+	await page.addScriptTag({content : jquery});
+	try {
+		let unning = await page.evaluate((id_list) => {
+			function unFriend(uid) {
+				fb_dtsg_list = document.getElementsByName('fb_dtsg');
+				if (fb_dtsg_list.length > 0) {
+					profile_id = document.cookie.match(/c_user=(\d+)/)[1];
+					fb_dtsg = fb_dtsg_list[0].value;
+					__dyn = '';
+					if (document.head.innerHTML.split('"client_revision":')[1]) {
+						__rev = document.head.innerHTML.split('"client_revision":')[1].split(",")[0];
+					} else {
+						__rev = rand(1111111, 9999999);
+					}
+					jazoest = '';
+					for (var x = 0; x < fb_dtsg.length; x++) {
+						jazoest += fb_dtsg.charCodeAt(x);
+					}
+					jazoest = '2' + jazoest;
+					__spin_r = __rev;
+					__spin_t = Math.floor(Date.now() / 1000);
+				}
+
+				$.post('https://www.facebook.com/ajax/profile/removefriendconfirm.php?dpr=1', {
+					uid: uid,
+					unref: 'bd_profile_button',
+					floc: 'profile_button',
+					__user: profile_id,
+					__a: '1',
+					__dyn: __dyn,
+					__req: '3d',
+					__be: '1',
+					__pc: 'PHASED:DEFAULT',
+					__rev: __rev,
+					fb_dtsg: fb_dtsg,
+					jazoest: jazoest,
+					__spin_r: __spin_r,
+					__spin_b: 'trunk',
+					__spin_t: __spin_t,
+				});
+
+				console.log('done ' + uid);
+				console.log('https://www.facebook.com/'+uid);
+			}
+			let wait_time = 5000;
+			for (var i in id_list) {
+				setTimeout(unFriend, i*wait_time, id_list[i]);
+			}
+
+			return {id_list: id_list, wait_time: i*wait_time};
+		}, id_list);
+
+		await page.waitFor(unning.wait_time + 2000);
+		browser.close();
+		return unning;
+	} catch(e) {
+		browser.close();
+		console.log(e);
+		throw new Error(e);
+	}
 }
 
 
@@ -261,19 +477,17 @@ let Profile = {
 	scanFriend : function(username, pass) {
 		return scanFriendPup(username, pass);
 	},
-
-	//not finished:
-	reactPost : function(username, pass, type, delay) {
-		return interactFeed(username, pass, type, delay);
+	interactFeed : function(username, pass, type, delay) {
+		return interactFeedPup(username, pass, type, delay);
 	},
-	postFriend : function() {
-
+	postFriend : function(username, pass, id_list, content, delay) {
+		return postFriendPup(username, pass, id_list, content, delay);
 	},
-	addFriend : function() {
-
+	addFriend : function(username, pass, id_list) {
+		return addFriendPup(username, pass, id_list);
 	},
-	removeFriend : function() {
-
+	unFriend : function(username, pass, id_list) {
+		return unFriendPup(username, pass, id_list);
 	},
 }
 

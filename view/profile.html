@@ -40,7 +40,7 @@
 								<li><a class="post" href="#" v-on:click="fnSelect">Post to Newsfeed/Group</a></li>
 								<li><a class="newsfeed" href="#" v-on:click="fnSelect">Interact Newsfeed</a></li>
 								<li><a class="post-friend" href="#" v-on:click="fnSelect">Post to Friend Wall</a></li>
-								<li><a class="friend-edit" href="#" v-on:click="fnSelect">Add/Remove Friend</a></li>
+								<li><a class="edit-friend" href="#" v-on:click="fnSelect">Add/Remove Friend</a></li>
 							</ul>
 						</li>
 						<li class="menu-page ">
@@ -495,14 +495,14 @@
 									</div>
 
 
-									<div id="friend-edit" class="fn">
+									<div id="edit-friend" class="fn">
 										<h2>Add or Remove Friend</h2>
 
 										<div class="input">
 											<label>ID List</label>
 											<textarea type="text" class="text" style="width: 200px; height: 300px; overflow: auto"></textarea>
-											<input type="radio" name="edit-type" value="AddFriend">AddFriend
-											<input type="radio" name="edit-type" value="Unfriend">Unfriend
+											<input class="radio" type="radio" name="edit-type" value="AddFriend">AddFriend
+											<input class="radio" type="radio" name="edit-type" value="Unfriend">Unfriend
 											<input type="button" class="trigger" value="Start" onclick="main_vue.editFriend()">
 										</div>
 
@@ -558,6 +558,7 @@
 
 	<script>
 		let main_vue = new Vue({
+
 			el : '#vue-region',
 
 			data : {
@@ -672,6 +673,72 @@
 						});
 					}
 				},
+				interactFeed : function() {
+					socket.emit('ngin-interactFeed', {
+						uid: 'xxxxx',
+						reaction_type: $('#newsfeed select').val(),
+						wait_time: $('#newsfeed input.text').val()
+					}, res => {
+						console.log(res);
+						let tbody = '';
+						for (var i in res) {
+							let link = 'https://facebook.com/' + res[i];
+							tbody += '<tr><td>' + res[i] + '</td><td><a target="_blank" href="'+ link +'">' + link + '</a></td></tr>';
+						}
+						$('#newsfeed tbody').html(tbody);
+						console.log('interact feed OK');
+					});
+				},
+				postFriend : function() {
+					socket.emit('ngin-postFriend', {
+						uid: 'xxxxx',
+						id_list: $('#post-friend textarea').eq(0).val(),
+						content: $('#post-friend textarea').eq(1).val(),
+						wait_time: $('#post-friend input.text').val()
+					}, res => {
+						console.log(res);
+						res = res.id_list;
+						let tbody = '';
+						for (var i in res) {
+							let link = 'https://facebook.com/' + res[i];
+							tbody += '<tr><td>' + res[i] + '</td><td><a target="_blank" href="'+ link +'">' + link + '</a></td></tr>';
+						}
+						$('#post-friend tbody').html(tbody);
+						console.log('post friend OK');
+					});
+				},
+				editFriend : function() {
+					if ($('#edit-friend input.radio').eq(1).is(':checked')) {
+						socket.emit('ngin-unFriend', {
+							id_list: $('#edit-friend textarea').eq(0).val()
+						}, res => {
+							console.log(res);
+							res = res.id_list;
+							let tbody = '';
+							for (var i in res) {
+								let link = 'https://facebook.com/' + res[i];
+								tbody += '<tr><td>' + res[i] + '</td><td><a target="_blank" href="'+ link +'">' + link + '</a></td></tr>';
+							}
+							$('#edit-friend tbody').html(tbody);
+							console.log('unfriend OK');
+						});
+						
+					} else {
+						socket.emit('ngin-addFriend', {
+							id_list: $('#edit-friend textarea').eq(0).val()
+						}, res => {
+							console.log(res);
+							res = res.id_list;
+							let tbody = '';
+							for (var i in res) {
+								let link = 'https://facebook.com/' + res[i];
+								tbody += '<tr><td>' + res[i] + '</td><td><a target="_blank" href="'+ link +'">' + link + '</a></td></tr>';
+							}
+							$('#edit-friend tbody').html(tbody);
+							console.log('addfriend OK');
+						});
+					}
+				},
 				downloadFile : function(ngin, type) {
 					switch (ngin) {
 						case 'scan-post':
@@ -715,7 +782,7 @@
 
 let token = 'EAACZC6awggg0BAKGtQskNHlVqViZAgGcMSJ9ZAn7Ds4OKzA8EIdZBzmUgWaP2rFuFqTED9r3ZCt6Sxx3TN753SE8rTZAzVDkfmYbqaTyCc0iIZA71qUCahOYWukUVN9wMreZBtvZCcZBOqGKqfRoTTWYHfqheZCm9CEjkUZD';
 
-let socket = io('http://nuhula.website:1234/profile');
+let socket = io('localhost:7002/profile');
 socket.on('connect', function () {
 	socket.emit('init', token, (res) => { console.log(res); });
 });
