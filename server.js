@@ -8,5 +8,9 @@ app.get('/profile', (req, res) => {
 	res.sendFile(__dirname + '/view/profile.html');
 });
 
+app.get('/group', (req, res) => {
+	res.sendFile(__dirname + '/view/group.html');
+});
+
 app.listen(8002, () => console.log('Web Server Running on 8002'));
 socket();
