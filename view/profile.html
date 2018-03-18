@@ -26,7 +26,7 @@
 	<div id="vue-region">
 		<div id="mySidenav" class="left-sidebar">
 
-			<span style="font-size:30px;cursor:pointer" class="openbtn" onclick="openNav()">&#9776; open</span>
+			<span style="font-size:30px; cursor:pointer" class="openbtn" onclick="openNav()">&#9776; open</span>
 			<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
 			<div class="left-sidebar-content">
 				<div class="dashboard-full">	
@@ -44,7 +44,7 @@
 							</ul>
 						</li>
 						<li class="menu-page ">
-							<a   href="#"><span>Page Module</span></a>
+							<a href="#"><span>Page Module</span></a>
 						</li>
 						<li class="menu-group"><a href="#"><span>Group Module</span></a></li>
 						<li class="menu-ads"><a href="#"><span>Ad Module</span></a></li>
@@ -93,7 +93,7 @@
 										<div class="input">
 											<label>ID</label>
 											<input type="text" class="text">
-											<input type="button" class="trigger" value="Scan Post" onclick="main_vue.scanPost()">
+											<input type="button" class="trigger" value="Scan Post" onclick="Main_vue.scanPost()">
 										</div>
 
 										<div class="output">
@@ -101,57 +101,57 @@
 											<h6 class="card-subtitle">Bạn có thể lọc, sắp xếp, tìm kiếm và download file CSV, Excel, PDF & In ấn...</h6>
 											<div class="table-responsive m-t-40">
 												<div id="example23_wrapper" class="dataTables_wrapper">
-													<div class="dt-buttons col-md-6"><a onclick="xport.copyTable('reaction-tbl')" class="dt-button buttons-copy buttons-html5" tabindex="0" aria-controls="example23" href="#"><span>Copy</span></a><a onclick="main_vue.downloadFile('scan-post-react', 'CSV')" class="dt-button buttons-csv buttons-html5" tabindex="0" aria-controls="example23" href="#"><span>CSV</span></a><a onclick="main_vue.downloadFile('scan-post-react', 'XLS')" class="dt-button buttons-excel buttons-html5" tabindex="0" aria-controls="example23" href="#"><span>Excel</span></a><a onclick="xport.printTable('reaction-tbl')" class="dt-button buttons-print" tabindex="0" aria-controls="example23" href="#"><span>Print</span></a></div>
+													<div class="dt-buttons col-md-6"><a onclick="Util.copyTable('reaction-tbl')" class="dt-button buttons-copy buttons-html5" tabindex="0" aria-controls="example23" href="#"><span>Copy</span></a><a onclick="Util.downloadTable('scan-post-react', 'CSV')" class="dt-button buttons-csv buttons-html5" tabindex="0" aria-controls="example23" href="#"><span>CSV</span></a><a onclick="Util.downloadTable('scan-post-react', 'XLS')" class="dt-button buttons-excel buttons-html5" tabindex="0" aria-controls="example23" href="#"><span>Excel</span></a><a onclick="Util.printTable('reaction-tbl')" class="dt-button buttons-print" tabindex="0" aria-controls="example23" href="#"><span>Print</span></a></div>
 
-													<div id="example23_filter" class="dataTables_filter col-md-6 align-right"><label>Search:<input class="" placeholder="" aria-controls="example23" type="search"></label></div>
+													<div id="example23_filter" class="dataTables_filter col-md-6 align-right"><label>Search:<input onkeyup="Util.searchTable('reaction-search', 'reaction-tbl')" id="reaction-search" placeholder="" aria-controls="example23" type="search"></label></div>
 												</div>
 											</div>
 											<div class="table">										
 												<table id="reaction-tbl" >
 													<thead>
 														<tr>
-															<th class="sorting">ID<i></i></th>
-															<th class="sorting_asc">Name</th>
-															<th class="sorting_desc">Type</th>
+															<th onclick="Util.sortTable('reaction-tbl', 0)" class="sorting_asc">ID<i></i></th>
+															<th onclick="Util.sortTable('reaction-tbl', 1)" class="sorting_asc">Name</th>
+															<th onclick="Util.sortTable('reaction-tbl', 2)" class="sorting_asc">Type</th>
 														</tr>
 													</thead>
 													<tbody>
 														<tr>
-															<td>ID1</td>
+															<td>an 1</td>
 															<td>Name 1</td>
-															<td>Type 2</td>
+															<td>Type 1</td>
 														</tr>
 														<tr>
-															<td>ID1</td>
-															<td>Name 1</td>
-															<td>Type 2</td>
+															<td>an 5</td>
+															<td>Name 2</td>
+															<td>Type 3</td>
 														</tr>
 														<tr>
-															<td>ID1</td>
-															<td>Name 1</td>
-															<td>Type 2</td>
+															<td>bc 2</td>
+															<td>Name 3</td>
+															<td>Type 1</td>
 														</tr>
 														<tr>
-															<td>ID1</td>
-															<td>Name 1</td>
-															<td>Type 2</td>
+															<td>bc 3</td>
+															<td>Name 4</td>
+															<td>Type 5</td>
 														</tr>
 													</tbody>
 												</table>
 											</div>
 											<br /><br />
 											<div id="example23_wrapper" class="dataTables_wrapper">
-												<div class="dt-buttons col-md-6"><a onclick="xport.copyTable('comment-tbl')" class="dt-button buttons-copy buttons-html5" tabindex="0" aria-controls="example23" href="#"><span>Copy</span></a><a onclick="main_vue.downloadFile('scan-post-cmt', 'CSV')" class="dt-button buttons-csv buttons-html5" tabindex="0" aria-controls="example23" href="#"><span>CSV</span></a><a onclick="main_vue.downloadFile('scan-post-cmt', 'XLS')" class="dt-button buttons-excel buttons-html5" tabindex="0" aria-controls="example23" href="#"><span>Excel</span></a><a onclick="xport.printTable('comment-tbl')" class="dt-button buttons-print" tabindex="0" aria-controls="example23" href="#"><span>Print</span></a></div>
+												<div class="dt-buttons col-md-6"><a onclick="Util.copyTable('comment-tbl')" class="dt-button buttons-copy buttons-html5" tabindex="0" aria-controls="example23" href="#"><span>Copy</span></a><a onclick="Util.downloadTable('scan-post-cmt', 'CSV')" class="dt-button buttons-csv buttons-html5" tabindex="0" aria-controls="example23" href="#"><span>CSV</span></a><a onclick="Util.downloadTable('scan-post-cmt', 'XLS')" class="dt-button buttons-excel buttons-html5" tabindex="0" aria-controls="example23" href="#"><span>Excel</span></a><a onclick="Util.printTable('comment-tbl')" class="dt-button buttons-print" tabindex="0" aria-controls="example23" href="#"><span>Print</span></a></div>
 
-												<div id="example23_filter" class="dataTables_filter col-md-6 align-right"><label>Search:<input class="" placeholder="" aria-controls="example23" type="search"></label></div>
+												<div id="example23_filter" class="dataTables_filter col-md-6 align-right"><label>Search:<input onkeyup="Util.searchTable('comment-search', 'comment-tbl')" id="comment-search" placeholder="" aria-controls="example23" type="search"></label></div>
 											</div>
 											<div class="table">
 												<table id="comment-tbl">
 													<thead>
 														<tr>
-															<th class="sorting">ID<i></i></th>
-															<th class="sorting_asc">Name</th>
-															<th class="sorting_desc">Type</th>
+															<th onclick="Util.sortTable('comment-tbl', 0)" class="sorting_asc">ID<i></i></th>
+															<th onclick="Util.sortTable('comment-tbl', 1)" class="sorting_asc">Name</th>
+															<th onclick="Util.sortTable('comment-tbl', 2)" class="sorting_asc">Type</th>
 														</tr>
 													</thead>
 													<tbody>
@@ -265,7 +265,7 @@
 									<div id="scan-friend" class="fn">
 										<h2>Scan Friend List</h2>
 										<div class="input">
-											<input type="button" class="trigger" value="Scan" onclick="main_vue.scanFriend()">
+											<input type="button" class="trigger" value="Scan" onclick="Main_vue.scanFriend()">
 										</div>
 
 										<div class="output">
@@ -273,18 +273,18 @@
 											<h6 class="card-subtitle">Bạn có thể lọc, sắp xếp, tìm kiếm và download file CSV, Excel, PDF & In ấn...</h6>
 											<div class="table-responsive m-t-40 container">
 												<div id="example23_wrapper" class="dataTables_wrapper row">
-													<div class="dt-buttons col-md-6"><a onclick="xport.copyTable('friend-tbl')" class="dt-button buttons-copy buttons-html5" tabindex="0" aria-controls="example23" href="#"><span>Copy</span></a><a onclick="main_vue.downloadFile('scan-friend', 'CSV')" class="dt-button buttons-csv buttons-html5" tabindex="0" aria-controls="example23" href="#"><span>CSV</span></a><a onclick="main_vue.downloadFile('scan-friend', 'XLS')" class="dt-button buttons-excel buttons-html5" tabindex="0" aria-controls="example23" href="#"><span>Excel</span></a><a onclick="xport.printTable('friend-tbl')" class="dt-button buttons-print" tabindex="0" aria-controls="example23" href="#"><span>Print</span></a></div>
+													<div class="dt-buttons col-md-6"><a onclick="Util.copyTable('friend-tbl')" class="dt-button buttons-copy buttons-html5" tabindex="0" aria-controls="example23" href="#"><span>Copy</span></a><a onclick="Util.downloadTable('scan-friend', 'CSV')" class="dt-button buttons-csv buttons-html5" tabindex="0" aria-controls="example23" href="#"><span>CSV</span></a><a onclick="Util.downloadTable('scan-friend', 'XLS')" class="dt-button buttons-excel buttons-html5" tabindex="0" aria-controls="example23" href="#"><span>Excel</span></a><a onclick="Util.printTable('friend-tbl')" class="dt-button buttons-print" tabindex="0" aria-controls="example23" href="#"><span>Print</span></a></div>
 
-													<div id="example23_filter" class="dataTables_filter col-md-6 align-right"><label>Search:<input class="" placeholder="" aria-controls="example23" type="search"></label></div>
+													<div id="example23_filter" class="dataTables_filter col-md-6 align-right"><label>Search:<input onkeyup="Util.searchTable('friend-search', 'friend-tbl')" class="" placeholder="" aria-controls="example23" type="search"></label></div>
 												</div>
 											</div>
 											<div class="table">			
 												<table id="friend-tbl">
 													<thead>
 														<tr>
-															<th class="sorting">ID<i></i></th>
-															<th class="sorting_asc">Name</th>
-															<th class="sorting_desc">Link</th>
+															<th onclick="Util.sortTable('friend-tbl', 0)" class="sorting_asc">ID<i></i></th>
+															<th onclick="Util.sortTable('friend-tbl', 1)" class="sorting_asc">Name</th>
+															<th onclick="Util.sortTable('friend-tbl', 2)" class="sorting_asc">Link</th>
 														</tr>
 													</thead>
 													<tbody>
@@ -322,26 +322,26 @@
 											<input type="text" class="text">
 											<input type="radio" class="radio" name="search-type" value="Page">Page
 											<input type="radio" class="radio" name="search-type" value="Group">Group
-											<input type="button" class="trigger" value="Search" onclick="main_vue.search()">
+											<input type="button" class="trigger" value="Search" onclick="Main_vue.search()">
 										</div>
 										<div class="output">
 											<h4 class="card-title">Kết quả tìm được</h4>
 											<h6 class="card-subtitle">Bạn có thể lọc, sắp xếp, tìm kiếm và download file CSV, Excel, PDF & In ấn...</h6>
 											<div class="table-responsive m-t-40 container">
 												<div id="example23_wrapper" class="dataTables_wrapper row">
-													<div class="dt-buttons col-md-6"><a onclick="xport.copyTable('search-tbl')" class="dt-button buttons-copy buttons-html5" tabindex="0" aria-controls="example23" href="#"><span>Copy</span></a><a onclick="main_vue.downloadFile('search-page', 'CSV')" class="dt-button buttons-csv buttons-html5" tabindex="0" aria-controls="example23" href="#"><span>CSV</span></a><a onclick="main_vue.downloadFile('search-page', 'XLS')" class="dt-button buttons-excel buttons-html5" tabindex="0" aria-controls="example23" href="#"><span>Excel</span></a><a onclick="xport.printTable('search-tbl')" class="dt-button buttons-print" tabindex="0" aria-controls="example23" href="#"><span>Print</span></a></div>
+													<div class="dt-buttons col-md-6"><a onclick="Util.copyTable('search-tbl')" class="dt-button buttons-copy buttons-html5" tabindex="0" aria-controls="example23" href="#"><span>Copy</span></a><a onclick="Util.downloadTable('search-page', 'CSV')" class="dt-button buttons-csv buttons-html5" tabindex="0" aria-controls="example23" href="#"><span>CSV</span></a><a onclick="Util.downloadTable('search-page', 'XLS')" class="dt-button buttons-excel buttons-html5" tabindex="0" aria-controls="example23" href="#"><span>Excel</span></a><a onclick="Util.printTable('search-tbl')" class="dt-button buttons-print" tabindex="0" aria-controls="example23" href="#"><span>Print</span></a></div>
 
-													<div id="example23_filter" class="dataTables_filter col-md-6 align-right"><label>Search:<input class="" placeholder="" aria-controls="example23" type="search"></label></div>
+													<div id="example23_filter" class="dataTables_filter col-md-6 align-right"><label>Search:<input onkeyup="Util.searchTable('search-search', 'search-tbl')" id="search-search" class="" placeholder="" aria-controls="example23" type="search"></label></div>
 												</div>
 											</div>
 											<div class="table">			
 												<table id="search-tbl">
 													<thead>
 														<tr>
-															<th class="sorting">ID<i></i></th>
-															<th class="sorting_asc">Name</th>
-															<th class="sorting_desc">Link</th>
-															<th class="sorting">Link</th>
+															<th onclick="Util.sortTable('search-tbl', 0)" class="sorting_asc">ID<i></i></th>
+															<th onclick="Util.sortTable('search-tbl', 1)" class="sorting_asc">Name</th>
+															<th onclick="Util.sortTable('search-tbl', 2)" class="sorting_asc">Link</th>
+															<th onclick="Util.sortTable('search-tbl', 3)" class="sorting_asc">Like</th>
 														</tr>
 													</thead>
 													<tbody>
@@ -394,7 +394,7 @@
 											<input type="radio" class="radio" name="post-type" value="Group">Group<input type="text" class="text"/>
 											<label>Wait Time (group only)</label>
 											<input type="text" class="text">
-											<input type="button" class="trigger" value="Post" onclick="main_vue.post()">
+											<input type="button" class="trigger" value="Post" onclick="Main_vue.post()">
 										</div>
 
 										<div class="output">
@@ -402,16 +402,16 @@
 											<h6 class="card-subtitle">Bạn có thể lọc, sắp xếp, tìm kiếm và download file CSV, Excel, PDF & In ấn...</h6>
 											<div class="table-responsive m-t-40 container">
 												<div id="example23_wrapper" class="dataTables_wrapper row">
-													<div class="dt-buttons col-md-6"><a onclick="xport.copyTable('post-tbl')" class="dt-button buttons-copy buttons-html5" tabindex="0" aria-controls="example23" href="#"><span>Copy</span></a><a onclick="main_vue.downloadFile('post', 'CSV')" class="dt-button buttons-csv buttons-html5" tabindex="0" aria-controls="example23" href="#"><span>CSV</span></a><a onclick="main_vue.downloadFile('post', 'XLS')" class="dt-button buttons-excel buttons-html5" tabindex="0" aria-controls="example23" href="#"><span>Excel</span></a><a onclick="xport.printTable('post-tbl')" class="dt-button buttons-print" tabindex="0" aria-controls="example23" href="#"><span>Print</span></a></div>
+													<div class="dt-buttons col-md-6"><a onclick="Util.copyTable('post-tbl')" class="dt-button buttons-copy buttons-html5" tabindex="0" aria-controls="example23" href="#"><span>Copy</span></a><a onclick="Util.downloadTable('post', 'CSV')" class="dt-button buttons-csv buttons-html5" tabindex="0" aria-controls="example23" href="#"><span>CSV</span></a><a onclick="Util.downloadTable('post', 'XLS')" class="dt-button buttons-excel buttons-html5" tabindex="0" aria-controls="example23" href="#"><span>Excel</span></a><a onclick="Util.printTable('post-tbl')" class="dt-button buttons-print" tabindex="0" aria-controls="example23" href="#"><span>Print</span></a></div>
 
-													<div id="example23_filter" class="dataTables_filter col-md-6 align-right"><label>Search:<input class="" placeholder="" aria-controls="example23" type="search"></label></div>
+													<div id="example23_filter" class="dataTables_filter col-md-6 align-right"><label>Search:<input onkeyup="Util.searchTable('post-search', 'post-tbl')" id="post-search" placeholder="" aria-controls="example23" type="search"></label></div>
 												</div>
 											</div>
 											<div class="table">			
 												<table id="post-tbl">
 													<thead>
 														<tr>
-															<th class="sorting">ID</th>
+															<th onclick="Util.sortTable('post-tbl', 0)" class="sorting_asc">ID</th>
 														</tr>
 													</thead>
 													<tbody></tbody>
@@ -435,7 +435,7 @@
 											</select>
 											<label>Wait Time </label>
 											<input type="text" class="text">
-											<input type="button" class="trigger" value="Interact" onclick="main_vue.interactFeed()">
+											<input type="button" class="trigger" value="Interact" onclick="Main_vue.interactFeed()">
 										</div>
 
 										<div class="output">
@@ -443,16 +443,16 @@
 											<h6 class="card-subtitle">Bạn có thể lọc, sắp xếp, tìm kiếm và download file CSV, Excel, PDF & In ấn...</h6>
 											<div class="table-responsive m-t-40 container">
 												<div id="example23_wrapper" class="dataTables_wrapper row">
-													<div class="dt-buttons col-md-6"><a onclick="xport.copyTable('newsfeed-tbl')" class="dt-button buttons-copy buttons-html5" tabindex="0" aria-controls="example23" href="#"><span>Copy</span></a><a onclick="main_vue.downloadFile('newsfeed', 'CSV')" class="dt-button buttons-csv buttons-html5" tabindex="0" aria-controls="example23" href="#"><span>CSV</span></a><a onclick="main_vue.downloadFile('newsfeed', 'XLS')" class="dt-button buttons-excel buttons-html5" tabindex="0" aria-controls="example23" href="#"><span>Excel</span></a><a onclick="xport.printTable('newsfeed-tbl')" class="dt-button buttons-print" tabindex="0" aria-controls="example23" href="#"><span>Print</span></a></div>
+													<div class="dt-buttons col-md-6"><a onclick="Util.copyTable('newsfeed-tbl')" class="dt-button buttons-copy buttons-html5" tabindex="0" aria-controls="example23" href="#"><span>Copy</span></a><a onclick="Util.downloadTable('newsfeed', 'CSV')" class="dt-button buttons-csv buttons-html5" tabindex="0" aria-controls="example23" href="#"><span>CSV</span></a><a onclick="Util.downloadTable('newsfeed', 'XLS')" class="dt-button buttons-excel buttons-html5" tabindex="0" aria-controls="example23" href="#"><span>Excel</span></a><a onclick="Util.printTable('newsfeed-tbl')" class="dt-button buttons-print" tabindex="0" aria-controls="example23" href="#"><span>Print</span></a></div>
 
-													<div id="example23_filter" class="dataTables_filter col-md-6 align-right"><label>Search:<input class="" placeholder="" aria-controls="example23" type="search"></label></div>
+													<div id="example23_filter" class="dataTables_filter col-md-6 align-right"><label>Search:<input onkeyup="Util.searchTable('newsfeed-search', 'newsfeed-tbl')" id="newsfeed-search" placeholder="" aria-controls="example23" type="search"></label></div>
 												</div>
 											</div>
 											<table id="newsfeed-tbl">
 												<thead>
 													<tr>
-														<th  class="sorting">ID</th>
-														<th  class="sorting">Link</th>
+														<th onclick="Util.sortTable('newsfeed-tbl', 0)" class="sorting_asc">ID</th>
+														<th onclick="Util.sortTable('newsfeed-tbl', 1)" class="sorting_asc">Link</th>
 													</tr>
 												</thead>
 												<tbody></tbody>
@@ -471,7 +471,7 @@
 											<textarea type="text" class="text" style="width: 200px; height: 300px; overflow: auto"></textarea>
 											<label>Wait Time</label>	
 											<input type="text" class="text">
-											<input type="button" class="trigger" value="Post" onclick="main_vue.postFriend()">
+											<input type="button" class="trigger" value="Post" onclick="Main_vue.postFriend()">
 										</div>
 
 										<div class="output">
@@ -479,17 +479,17 @@
 											<h6 class="card-subtitle">Bạn có thể lọc, sắp xếp, tìm kiếm và download file CSV, Excel, PDF & In ấn...</h6>
 											<div class="table-responsive m-t-40 container">
 												<div id="example23_wrapper" class="dataTables_wrapper row">
-													<div class="dt-buttons col-md-6"><a onclick="xport.copyTable('post-friend-tbl')" class="dt-button buttons-copy buttons-html5" tabindex="0" aria-controls="example23" href="#"><span>Copy</span></a><a onclick="main_vue.downloadFile('post-friend', 'CSV')" class="dt-button buttons-csv buttons-html5" tabindex="0" aria-controls="example23" href="#"><span>CSV</span></a><a onclick="main_vue.downloadFile('post-friend', 'XLS')" class="dt-button buttons-excel buttons-html5" tabindex="0" aria-controls="example23" href="#"><span>Excel</span></a><a onclick="xport.printTable('post-friend-tbl')" class="dt-button buttons-print" tabindex="0" aria-controls="example23" href="#"><span>Print</span></a></div>
+													<div class="dt-buttons col-md-6"><a onclick="Util.copyTable('post-friend-tbl')" class="dt-button buttons-copy buttons-html5" tabindex="0" aria-controls="example23" href="#"><span>Copy</span></a><a onclick="Util.downloadTable('post-friend', 'CSV')" class="dt-button buttons-csv buttons-html5" tabindex="0" aria-controls="example23" href="#"><span>CSV</span></a><a onclick="Util.downloadTable('post-friend', 'XLS')" class="dt-button buttons-excel buttons-html5" tabindex="0" aria-controls="example23" href="#"><span>Excel</span></a><a onclick="Util.printTable('post-friend-tbl')" class="dt-button buttons-print" tabindex="0" aria-controls="example23" href="#"><span>Print</span></a></div>
 
-													<div id="example23_filter" class="dataTables_filter col-md-6 align-right"><label>Search:<input class="" placeholder="" aria-controls="example23" type="search"></label></div>
+													<div id="example23_filter" class="dataTables_filter col-md-6 align-right"><label>Search:<input onkeyup="Util.searchTable('postfriend-search', 'post-friend-tbl')" id="post-friend-search" placeholder="" aria-controls="example23" type="search"></label></div>
 												</div>
 											</div>
 											<div class="table">			
 												<table id="post-friend-tbl">
 													<thead>
 														<tr>
-															<th  class="sorting">ID</th>
-															<th  class="sorting">Link</th>
+															<th onclick="Util.sortTable('post-friend-tbl', 0)" class="sorting_asc">ID</th>
+															<th onclick="Util.sortTable('post-friend-tbl', 0)" class="sorting_asc">Link</th>
 														</tr>
 													</thead>
 													<tbody></tbody>
@@ -508,7 +508,7 @@
 											<textarea type="text" class="text" style="width: 200px; height: 300px; overflow: auto"></textarea>
 											<input class="radio" type="radio" name="edit-type" value="AddFriend">AddFriend
 											<input class="radio" type="radio" name="edit-type" value="Unfriend">Unfriend
-											<input type="button" class="trigger" value="Start" onclick="main_vue.editFriend()">
+											<input type="button" class="trigger" value="Start" onclick="Main_vue.editFriend()">
 										</div>
 
 										<div class="output">
@@ -516,17 +516,17 @@
 											<h6 class="card-subtitle">Bạn có thể lọc, sắp xếp, tìm kiếm và download file CSV, Excel, PDF & In ấn...</h6>
 											<div class="table-responsive m-t-40 container">
 												<div id="example23_wrapper" class="dataTables_wrapper row">
-													<div class="dt-buttons col-md-6"><a onclick="xport.copyTable('edit-friend-tbl')" class="dt-button buttons-copy buttons-html5" tabindex="0" aria-controls="example23" href="#"><span>Copy</span></a><a onclick="main_vue.downloadFile('edit-friend', 'CSV')" class="dt-button buttons-csv buttons-html5" tabindex="0" aria-controls="example23" href="#"><span>CSV</span></a><a onclick="main_vue.downloadFile('edit-friend', 'XLS')" class="dt-button buttons-excel buttons-html5" tabindex="0" aria-controls="example23" href="#"><span>Excel</span></a><a onclick="xport.printTable('edit-friend-tbl')" class="dt-button buttons-print" tabindex="0" aria-controls="example23" href="#"><span>Print</span></a></div>
+													<div class="dt-buttons col-md-6"><a onclick="Util.copyTable('edit-friend-tbl')" class="dt-button buttons-copy buttons-html5" tabindex="0" aria-controls="example23" href="#"><span>Copy</span></a><a onclick="Util.downloadTable('edit-friend', 'CSV')" class="dt-button buttons-csv buttons-html5" tabindex="0" aria-controls="example23" href="#"><span>CSV</span></a><a onclick="Util.downloadTable('edit-friend', 'XLS')" class="dt-button buttons-excel buttons-html5" tabindex="0" aria-controls="example23" href="#"><span>Excel</span></a><a onclick="Util.printTable('edit-friend-tbl')" class="dt-button buttons-print" tabindex="0" aria-controls="example23" href="#"><span>Print</span></a></div>
 
-													<div id="example23_filter" class="dataTables_filter col-md-6 align-right"><label>Search:<input class="" placeholder="" aria-controls="example23" type="search"></label></div>
+													<div id="example23_filter" class="dataTables_filter col-md-6 align-right"><label>Search:<input onkeyup="Util.searchTable('edit-friend-search', 'edit-friend-tbl')" id="edit-friend-search" placeholder="" aria-controls="example23" type="search"></label></div>
 												</div>
 											</div>
 											<div class="table">	
 												<table id="edit-friend-tbl">
 													<thead>
 														<tr>
-															<th class="sorting">ID</th>
-															<th class="sorting">Link</th>
+															<th onclick="Util.sortTable('edit-friend-tbl', 0)" class="sorting_asc">ID</th>
+															<th onclick="Util.sortTable('edit-friend-tbl', 1)" class="sorting_asc">Link</th>
 														</tr>
 													</thead>
 													<tbody></tbody>
@@ -562,7 +562,7 @@
 	</div>
 
 	<script>
-		let main_vue = new Vue({
+		let Main_vue = new Vue({
 
 			el : '#vue-region',
 
@@ -744,50 +744,6 @@
 						});
 					}
 				},
-				downloadFile : function(ngin, type) {
-					switch (ngin) {
-						case 'scan-post-react':
-						if (type == 'CSV') {
-							xport.toCSV('reaction-tbl');
-						} else if (type == 'XLS') {
-							xport.toXLS('reaction-tbl');
-						}
-						break;
-
-						case 'scan-post-cmt':
-						if (type == 'CSV') {
-							xport.toCSV('comment-tbl');
-						} else if (type == 'XLS') {
-							xport.toCSV('comment-tbl');
-						}
-						break;
-
-						case 'scan-friend':
-						if (type == 'CSV') {
-							xport.toCSV('friend-tbl');
-						} else if (type == 'XLS') {
-							xport.toXLS('friend-tbl');
-						}
-						break;
-
-						case 'search-page':
-						if (type == 'CSV') {
-							xport.toCSV('search-tbl');
-						} else if (type == 'XLS') {
-							xport.toXLS('search-tbl');
-						}
-						break;
-
-						case 'post':
-						if (type == 'CSV') {
-							xport.toCSV('post-tbl');
-						} else if (type == 'XLS') {
-							xport.toXLS('post-tbl');
-						}
-						break;
-					}
-				}
-
 			}
 		});
 
@@ -798,9 +754,9 @@ socket.on('connect', function () {
 	socket.emit('init', token, (res) => { console.log(res); });
 });
 
-let xport = {
+let Util = {
 	_fallbacktoCSV: true,  
-	toXLS: function(tableId, filename) {   
+	toXLS: function(tableId, filename) {
 		this._filename = (typeof filename == 'undefined') ? tableId : filename;
 
 		if ((this._getMsieVersion() || this._isFirefox()) && this._fallbacktoCSV) {
@@ -882,8 +838,50 @@ let xport = {
 		})
 		.join("\r\n");
 	},
+	downloadTable : function(ngin, type) {
+		switch (ngin) {
+			case 'scan-post-react':
+			if (type == 'CSV') {
+				toCSV('reaction-tbl');
+			} else if (type == 'XLS') {
+				toXLS('reaction-tbl');
+			}
+			break;
+
+			case 'scan-post-cmt':
+			if (type == 'CSV') {
+				toCSV('comment-tbl');
+			} else if (type == 'XLS') {
+				toCSV('comment-tbl');
+			}
+			break;
+
+			case 'scan-friend':
+			if (type == 'CSV') {
+				toCSV('friend-tbl');
+			} else if (type == 'XLS') {
+				toXLS('friend-tbl');
+			}
+			break;
+
+			case 'search-page':
+			if (type == 'CSV') {
+				toCSV('search-tbl');
+			} else if (type == 'XLS') {
+				toXLS('search-tbl');
+			}
+			break;
+
+			case 'post':
+			if (type == 'CSV') {
+				toCSV('post-tbl');
+			} else if (type == 'XLS') {
+				toXLS('post-tbl');
+			}
+			break;
+		}
+	},
 	printTable: function(tableId) {
-		console.log('working')
 		var divToPrint = document.getElementById(tableId);
 		newWin = window.open("");
 		newWin.document.write(divToPrint.outerHTML);
@@ -902,6 +900,64 @@ let xport = {
 			window.getSelection().removeAllRanges();
 			window.getSelection().addRange(range);
 			document.execCommand("Copy");
+		}
+	},
+	sortTable: function(tableId, column) {
+		var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+		table = document.getElementById(tableId);
+		switching = true;
+		dir = "asc"; 
+		while (switching) {
+			switching = false;
+			rows = table.getElementsByTagName("tr");
+			for (i = 1; i < (rows.length - 1); i++) {
+				shouldSwitch = false;
+				x = rows[i].getElementsByTagName("td")[column];
+				y = rows[i + 1].getElementsByTagName("td")[column];
+				if (dir == "asc") {
+					table.getElementsByTagName("th")[column].className = 'sorting_asc';
+					if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+						shouldSwitch= true;
+						break;
+					}
+				} else if (dir == "desc") {
+					table.getElementsByTagName("th")[column].className = 'sorting_desc';
+					if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+						shouldSwitch= true;
+						break;
+					}
+				}
+			}
+			if (shouldSwitch) {
+				rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+				switching = true;
+				switchcount ++; 
+			} else {
+				if (switchcount == 0 && dir == "asc") {
+					dir = "desc";
+					switching = true;
+				}
+			}
+		}
+	},
+	searchTable: function(inputId, tableId) {
+		var input, filter, table, tr, td, i, j, shouldShow;
+		input = document.getElementById(inputId);
+		filter = input.value.toUpperCase();
+		table = document.getElementById(tableId);
+		tr = table.getElementsByTagName("tr");
+
+		for (i = 1; i < tr.length; i++) {
+			td = tr[i].getElementsByTagName("td");
+			shouldShow = [];
+			for (j = 0; j < td.length; j++) {
+				if (td[j]) {
+					if (td[j].innerHTML.toUpperCase().indexOf(filter) > -1) {
+						shouldShow.push(true);
+					}
+				}
+			}
+			shouldShow.length > 0 ? tr[i].style.display = "" : tr[i].style.display = "none";
 		}
 	}
 };
