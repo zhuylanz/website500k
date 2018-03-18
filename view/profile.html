@@ -842,41 +842,41 @@ let Util = {
 		switch (ngin) {
 			case 'scan-post-react':
 			if (type == 'CSV') {
-				toCSV('reaction-tbl');
+				this.toCSV('reaction-tbl');
 			} else if (type == 'XLS') {
-				toXLS('reaction-tbl');
+				this.toXLS('reaction-tbl');
 			}
 			break;
 
 			case 'scan-post-cmt':
 			if (type == 'CSV') {
-				toCSV('comment-tbl');
+				this.toCSV('comment-tbl');
 			} else if (type == 'XLS') {
-				toCSV('comment-tbl');
+				this.toCSV('comment-tbl');
 			}
 			break;
 
 			case 'scan-friend':
 			if (type == 'CSV') {
-				toCSV('friend-tbl');
+				this.toCSV('friend-tbl');
 			} else if (type == 'XLS') {
-				toXLS('friend-tbl');
+				this.toXLS('friend-tbl');
 			}
 			break;
 
 			case 'search-page':
 			if (type == 'CSV') {
-				toCSV('search-tbl');
+				this.toCSV('search-tbl');
 			} else if (type == 'XLS') {
-				toXLS('search-tbl');
+				this.toXLS('search-tbl');
 			}
 			break;
 
 			case 'post':
 			if (type == 'CSV') {
-				toCSV('post-tbl');
+				this.toCSV('post-tbl');
 			} else if (type == 'XLS') {
-				toXLS('post-tbl');
+				this.toXLS('post-tbl');
 			}
 			break;
 		}
