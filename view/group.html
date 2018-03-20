@@ -136,8 +136,8 @@
 											</select>
 											<label>Member to Kick</label>
 											<textarea type="text" class="text" style="width: 200px; height: 300px; overflow: auto"></textarea>
-											<input type="button" class="trigger" value="List Member" onclick="">
-											<input type="button" class="trigger" value="Kick Member" onclick="">
+											<input type="button" class="trigger" value="List Member" onclick="Main_vue.listMember()">
+											<input type="button" class="trigger" value="Kick Member" onclick="Main_vue.kickMember()">
 										</div>
 
 										<div class="output">
@@ -155,7 +155,8 @@
 													<thead>
 														<tr>
 															<th onclick="Util.sortTable('group-member-tbl', 0)" class="sorting_asc">ID</th>
-															<th onclick="Util.sortTable('group-member-tbl', 1)" class="sorting_asc">Link</th>
+															<th onclick="Util.sortTable('group-member-tbl', 1)" class="sorting_asc">Name</th>
+															<th onclick="Util.sortTable('group-member-tbl', 2)" class="sorting_asc">Link</th>
 														</tr>
 													</thead>
 													<tbody></tbody>

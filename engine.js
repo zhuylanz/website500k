@@ -517,6 +517,73 @@ async function postGroupPup(username, pass, payload) {
 	}
 }
 
+async function kickMemberPup(username, pass, payload) {
+	let Passed = await loginFb(username, pass);
+	let browser = Passed.browser;
+	let page = Passed.page;
+	let jquery = Passed.jquery;
+
+	await page.waitFor(2000);
+	await page.addScriptTag({content : jquery});
+	try {
+		let unning = await page.evaluate(payload => {
+			function kick(gid, uid) {
+				fb_dtsg_list = document.getElementsByName('fb_dtsg');
+				if (fb_dtsg_list.length > 0) {
+					profile_id = document.cookie.match(/c_user=(\d+)/)[1];
+					fb_dtsg = fb_dtsg_list[0].value;
+					__dyn = '';
+					if (document.head.innerHTML.split('"client_revision":')[1]) {
+						__rev = document.head.innerHTML.split('"client_revision":')[1].split(",")[0];
+					} else {
+						__rev = rand(1111111, 9999999);
+					}
+					jazoest = '';
+					for (var x = 0; x < fb_dtsg.length; x++) {
+						jazoest += fb_dtsg.charCodeAt(x);
+					}
+					jazoest = '2' + jazoest;
+					__spin_r = __rev;
+					__spin_t = Math.floor(Date.now() / 1000);
+				}
+
+				$.post('https://www.facebook.com/ajax/groups/members/remove.php?group_id='+gid+'&uid='+uid+'&is_undo=0&source=profile_browser&dpr=1', {
+					fb_dtsg: 'AQHzdIantBAf:AQH_zyWCcFSo',
+					confirm: 'true',
+					__user: profile_id,
+					__a: '1',
+					__dyn: '',
+					__req: '1l',
+					__be: '1',
+					__pc: 'PHASED:DEFAULT',
+					__rev: __rev,
+					jazoest: jazoest,
+					__spin_r: __spin_r,
+					__spin_b: 'trunk',
+					__spin_t: __spin_t,
+				});
+
+				console.log('done ' + uid);
+				console.log('https://www.facebook.com/'+uid);
+			}
+			
+			for (var i in payload.uid) {
+				kick(payload.gid, payload.uid[i]);
+			}
+
+			return;
+		}, payload);
+
+		await page.waitFor(30000);
+		browser.close();
+		return 'OK';
+	} catch(e) {
+		browser.close();
+		console.log(e);
+		throw new Error(e);
+	}
+}
+
 
 let Profile = {
 	scanPost : function(pid, token) {
@@ -572,10 +639,12 @@ let Group = {
 	postSchedule: function(username, pass, payload) {
 		return postGroupPup(username, pass, payload);
 	},
-
-	//not finished:
-	banUser : function() {
-
+	listMember: function(gid, token) {
+		let path = '/' + gid + '/members?limit=5000';
+		return fbReq(path, token);
+	},
+	kickMember : function(username, pass, payload) {
+		return kickMemberPup(username, pass, payload);
 	},
 }
 

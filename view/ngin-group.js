@@ -51,7 +51,31 @@ let Main_vue = new Vue({
 				console.log(res);
 				console.log('scheduleGroup OK');
 			});
-		}
+		},
+		listMember: function() {
+			socket.emit('ngin-listMember', {
+				gid: this.group_list_obj[$('#group-member select').val()].id,
+			}, res => {
+				let tbody = '';
+				res = res.data;
+				for (var i in res) {
+					let link = 'https://facebook.com/' + res[i].id;
+					tbody += '<tr><td>' + res[i].id + '</td><td>' + res[i].name + '</td><td><a target="_blank" href="'+ link +'">' + link + '</a></td></tr>';
+				}
+
+				$('#group-member tbody').html(tbody);
+				console.log('listMember OK');
+			});
+		},
+		kickMember: function() {
+			socket.emit('ngin-kickMember', {
+				gid: this.group_list_obj[$('#group-member select').val()].id,
+				uid: $('#group-member textarea').val().split('\n'),
+			}, res => {
+				console.log(res);
+				console.log('kickMember OK');
+			});
+		},
 	}
 });
 

@@ -204,6 +204,28 @@ let socket = function() {
 			}
 		});
 
+		socket.on('ngin-listMember', (msg, fn) => {
+			console.log('>>ngin-listMember event');
+
+			ngin.Group.listMember(msg.gid, session_token)
+			.then(res => {
+				fn(res);
+			}).catch(err => {
+				console.log('listMember Err: ' + err);
+			});
+		});
+
+		socket.on('ngin-kickMember', (msg, fn) => {
+			console.log('>>ngin-kickMember event');
+
+			ngin.Group.kickMember('zhuylanz20@gmail.com', 'iamarobot', msg)
+			.then(res => {
+				fn(res);
+			}).catch(err => {
+				console.log('kickMember Err: ' + err);
+			});
+		});
+
 
 		socket.on('disconnect', function() { console.log('<user disconnected: ' + session_id); });
 	});
