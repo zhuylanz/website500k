@@ -89,14 +89,14 @@
 										<div class="input">
 											<label>Group</label>
 											<select>
-												<option>group1</option>
-												<option>group2</option>
+												<option v-for="group in group_list">{{ group.name }}</option>
 											</select>
 											<label>Content</label>
 											<textarea type="text" class="text" style="width: 200px; height: 300px; overflow: auto"></textarea>
 											<label>Time</label>
 											<input type="datetime-local">
-											<input type="button" class="trigger" value="Schedule" onclick="">
+											<input type="button" class="trigger" value="Schedule" onclick="Main_vue.scheduleGroup()">
+											<input type="button" class="trigger" value="List Post" onclick="Main_vue.listPost()">
 										</div>
 
 										<div class="output">
@@ -114,7 +114,8 @@
 													<thead>
 														<tr>
 															<th onclick="Util.sortTable('group-post-tbl', 0)" class="sorting_asc">ID</th>
-															<th onclick="Util.sortTable('group-post-tbl', 0)" class="sorting_asc">Link</th>
+															<th onclick="Util.sortTable('group-post-tbl', 1)" class="sorting_asc">Message</th>
+															<th onclick="Util.sortTable('group-post-tbl', 2)" class="sorting_asc">Link</th>
 														</tr>
 													</thead>
 													<tbody></tbody>
@@ -131,8 +132,7 @@
 										<div class="input">
 											<label>Group</label>
 											<select>
-												<option>group1</option>
-												<option>group2</option>
+												<option v-for="group in group_list">{{group.name}}</option>
 											</select>
 											<label>Member to Kick</label>
 											<textarea type="text" class="text" style="width: 200px; height: 300px; overflow: auto"></textarea>
@@ -190,7 +190,7 @@
 		</div>
 	</div>
 
-	<script type="text/javascript" src="ngin-profile.js"></script>
+	<script type="text/javascript" src="ngin-group.js"></script>
 	<script type="text/javascript" src="util.js"></script>
 
 </body>

@@ -452,6 +452,71 @@ async function unFriendPup(username, pass, id_list) {
 	}
 }
 
+async function postGroupPup(username, pass, payload) {
+	let Passed = await loginFb(username, pass);
+	let browser = Passed.browser;
+	let page = Passed.page;
+	let jquery = Passed.jquery;
+
+	await page.waitFor(2000);
+	await page.addScriptTag({content : jquery});
+	try {
+		let unning = await page.evaluate((payload) => {
+			function post(gid, message, time) {
+				fb_dtsg_list = document.getElementsByName('fb_dtsg');
+				if (fb_dtsg_list.length > 0) {
+					profile_id = document.cookie.match(/c_user=(\d+)/)[1];
+					fb_dtsg = fb_dtsg_list[0].value;
+					__dyn = '';
+					if (document.head.innerHTML.split('"client_revision":')[1]) {
+						__rev = document.head.innerHTML.split('"client_revision":')[1].split(",")[0];
+					} else {
+						__rev = rand(1111111, 9999999);
+					}
+					jazoest = '';
+					for (var x = 0; x < fb_dtsg.length; x++) {
+						jazoest += fb_dtsg.charCodeAt(x);
+					}
+					jazoest = '2' + jazoest;
+					__spin_r = __rev;
+					__spin_t = Math.floor(Date.now() / 1000);
+				}
+
+				$.post('https://www.facebook.com/webgraphql/mutation/?doc_id=1931212663571278&dpr=1', {
+					variables: '{"client_mutation_id":"a8174f7e-3c2b-471d-9c7a-5af840dcd15e","actor_id":"'+profile_id+'","input":{"actor_id":"'+profile_id+'","client_mutation_id":"24aa8dcf-ec1e-4721-acec-6c3dd9761df5","source":"WWW","audience":{"to_id":"'+gid+'"},"message":{"text":"'+message+'","ranges":[]},"logging":{"composer_session_id":"bc15bf4c-1487-4dbc-be98-b025be8beb3d","ref":"group"},"with_tags_ids":[],"multilingual_translations":[],"composer_source_surface":"group","composer_entry_time":1316,"composer_session_events_log":{"composition_duration":23,"number_of_keystrokes":44},"direct_share_status":"NOT_SHARED","sponsor_relationship":"WITH","web_graphml_migration_params":{"target_type":"group","xhpc_composerid":"rc.u_fetchstream_12_w","xhpc_context":"profile","xhpc_publish_type":"FEED_INSERT"},"place_attachment_setting":"HIDE_ATTACHMENT","unpublished_content_data":{"unpublished_content_type":"SCHEDULED","scheduled_publish_time":'+time+'}}}',
+					__user: profile_id,
+					__a: '1',
+					__dyn: '',
+					__req: '7z',
+					__be: '1',
+					__pc: 'PHASED:DEFAULT',
+					__rev: __rev,
+					fb_dtsg: fb_dtsg,
+					jazoest: jazoest,
+					__spin_r: __spin_r,
+					__spin_b: 'trunk',
+					__spin_t: __spin_t,
+				});
+
+				console.log('done ' + gid);
+				console.log('https://www.facebook.com/'+gid);
+			}
+			
+			post(payload.gid, payload.message, payload.time);
+
+			return;
+		}, payload);
+
+		await page.waitFor(5000);
+		browser.close();
+		return 'OK';
+	} catch(e) {
+		browser.close();
+		console.log(e);
+		throw new Error(e);
+	}
+}
+
 
 let Profile = {
 	scanPost : function(pid, token) {
@@ -492,9 +557,20 @@ let Profile = {
 }
 
 let Group = {
-	post : function(gid, payload, token) {
+	listGroup: function(token) {
+		let path = '/me/groups';
+		return fbReq(path, token);
+	},
+	listPost: function(gid, token) {
+		let path = '/' + gid + '/feed?limit=5000';
+		return fbReq(path, token);
+	},
+	post: function(gid, payload, token) {
 		let path = '/' + gid + '/feed';
 		return fbReq(path, token, 'POST', payload);
+	},
+	postSchedule: function(username, pass, payload) {
+		return postGroupPup(username, pass, payload);
 	},
 
 	//not finished:

@@ -3,6 +3,7 @@ const fs = require('fs');
 
 const io = require('socket.io')(7002);
 const io_profile = io.of('/profile');
+const io_group = io.of('/group');
 
 const ngin = require('./engine.js')
 
@@ -143,6 +144,64 @@ let socket = function() {
 			}).catch(err => {
 				console.log('unFriend Err: ' + err);
 			});
+		});
+
+
+		socket.on('disconnect', function() { console.log('<user disconnected: ' + session_id); });
+	});
+
+
+	io_group.on('connection', function(socket) {
+		let session_id = socket.id;
+		let session_token = '';
+		console.log('>new user: ' + socket.id);
+
+		socket.on('init', function(msg, fn) {
+			session_token = msg;
+			fn('>>token received!');
+		});
+
+		socket.on('ngin-listGroup', (msg, fn) => {
+			console.log('>>ngin-listGroup event');
+			ngin.Group.listGroup(session_token)
+			.then(res => {
+				fn(res);
+			}).catch(err => {
+				console.log('listGroup Err: ' + err);
+			});
+		});
+
+		socket.on('ngin-listPost', (msg, fn) => {
+			console.log('>>ngin-listPost event');
+
+			ngin.Group.listPost(msg.gid, session_token)
+			.then(res => {
+				fn(res);
+			}).catch(err => {
+				console.log('listPost Err: ' + err);
+			});
+		});
+
+		socket.on('ngin-scheduleGroup', (msg, fn) => {
+			console.log('>>ngin-scheduleGroup event');
+			if (msg.time) {
+				ngin.Group.postSchedule('zhuylanz20@gmail.com', 'iamarobot', msg)
+				.then(res => {
+					fn(res);
+				}).catch(err => {
+					console.log('scheduleGroup Err: ' + err);
+				});
+			} else {
+				let gid = msg.gid;
+				delete msg.gid;
+				delete msg.time;
+				ngin.Group.post(gid, msg, session_token)
+				.then(res => {
+					fn(res);
+				}).catch(err => {
+					console.log('postGroup Err: ' + err);
+				});
+			}
 		});
 
 
