@@ -526,7 +526,7 @@ async function kickMemberPup(username, pass, payload) {
 	await page.waitFor(2000);
 	await page.addScriptTag({content : jquery});
 	try {
-		let unning = await page.evaluate(payload => {
+		await page.evaluate(payload => {
 			function kick(gid, uid) {
 				fb_dtsg_list = document.getElementsByName('fb_dtsg');
 				if (fb_dtsg_list.length > 0) {
@@ -548,7 +548,7 @@ async function kickMemberPup(username, pass, payload) {
 				}
 
 				$.post('https://www.facebook.com/ajax/groups/members/remove.php?group_id='+gid+'&uid='+uid+'&is_undo=0&source=profile_browser&dpr=1', {
-					fb_dtsg: 'AQHzdIantBAf:AQH_zyWCcFSo',
+					fb_dtsg: fb_dtsg,
 					confirm: 'true',
 					__user: profile_id,
 					__a: '1',
