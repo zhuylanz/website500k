@@ -4,6 +4,7 @@ const fs = require('fs');
 const io = require('socket.io')(7002);
 const io_profile = io.of('/profile');
 const io_group = io.of('/group');
+const io_ad = io.of('/ad');
 
 const ngin = require('./engine.js')
 
@@ -229,6 +230,33 @@ let socket = function() {
 
 		socket.on('disconnect', function() { console.log('<user disconnected: ' + session_id); });
 	});
+
+
+	io_ad.on('connection', function(socket) {
+		let session_id = socket.id;
+		let session_token = '';
+		console.log('>new user: ' + socket.id);
+
+		socket.on('init', function(msg, fn) {
+			session_token = msg;
+			fn('>>token received!');
+		});
+
+		socket.on('ngin-listAd', (msg, fn) => {
+			console.log('>>ngin-listAd event');
+			ngin.Ad.listAd(msg.act, session_token)
+			.then(res => {
+				fn(res);
+			}).catch(err => {
+				console.log('listAd Err: ' + err);
+			});
+		});
+
+		
+
+		socket.on('disconnect', function() { console.log('<user disconnected: ' + session_id); });
+	});
+
 
 }
 

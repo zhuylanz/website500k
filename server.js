@@ -12,5 +12,9 @@ app.get('/group', (req, res) => {
 	res.sendFile(__dirname + '/view/group.html');
 });
 
+app.get('/ad', (req, res) => {
+	res.sendFile(__dirname + '/view/ad.html');
+});
+
 app.listen(8002, () => console.log('Web Server Running on 8002'));
 socket();

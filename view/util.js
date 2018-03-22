@@ -82,48 +82,13 @@ let Util = {
 		})
 		.join("\r\n");
 	},
-	downloadTable: function(ngin, type) {
-		switch (ngin) {
-			case 'scan-post-react':
-			if (type == 'CSV') {
-				this.toCSV('reaction-tbl');
-			} else if (type == 'XLS') {
-				this.toXLS('reaction-tbl');
-			}
-			break;
-
-			case 'scan-post-cmt':
-			if (type == 'CSV') {
-				this.toCSV('comment-tbl');
-			} else if (type == 'XLS') {
-				this.toCSV('comment-tbl');
-			}
-			break;
-
-			case 'scan-friend':
-			if (type == 'CSV') {
-				this.toCSV('friend-tbl');
-			} else if (type == 'XLS') {
-				this.toXLS('friend-tbl');
-			}
-			break;
-
-			case 'search-page':
-			if (type == 'CSV') {
-				this.toCSV('search-tbl');
-			} else if (type == 'XLS') {
-				this.toXLS('search-tbl');
-			}
-			break;
-
-			case 'post':
-			if (type == 'CSV') {
-				this.toCSV('post-tbl');
-			} else if (type == 'XLS') {
-				this.toXLS('post-tbl');
-			}
-			break;
+	downloadTable: function(tableId, type) {
+		if (type == 'CSV') {
+			this.toCSV(tableId);
+		} else if (type == 'XLS') {
+			this.toXLS(tableId);
 		}
+
 	},
 	printTable: function(tableId) {
 		var divToPrint = document.getElementById(tableId);

@@ -35,14 +35,17 @@
 						<li class="menu-page ">
 							<a href="#"><span>Page Module</span></a>
 						</li>
-						<li class="menu-group submenu">
-							<a href="#"><span>Group Module</span><i class="has-submenu" href="#"></i></a>
-							<ul>
-								<li><a class="group-post" href="#" v-on:click="fnSelect">Group Post</a></li>
-								<li><a class="group-member" href="#" v-on:click="fnSelect">Group Member</a></li>
-							</ul>
+						<li class="menu-group">
+							<a href="#"><span>Group Module</span></a>
 						</li>
-						<li class="menu-ads"><a href="#"><span>Ad Module</span></a></li>
+						<li class="menu-ads submenu">
+							<a href="#"><span>Ad Module</span><i class="has-submenu" href="#"></i></a>
+							<ul>
+								<li><a class="ad-create" href="#" v-on:click="fnSelect">Ad Creating</a></li>
+								<li><a class="ad-monitor" href="#" v-on:click="fnSelect">Ad Monitor</a></li>
+							</ul>
+
+						</li>
 					</ul>	
 				</div>	
 			</div>	
@@ -83,13 +86,14 @@
 							<div class="main-content" >	
 								<div class="content-bar">
 									
-									<div id="group-post" class="fn">
+									<div id="ad-create" class="fn">
 										<h2>Group Post</h2>
 
 										<div class="input">
 											<label>Group</label>
 											<select>
-												<option v-for="group in group_list">{{ group.name }}</option>
+												<option>abc</option>
+												<option>def</option>
 											</select>
 											<label>Content</label>
 											<textarea type="text" class="text" style="width: 200px; height: 300px; overflow: auto"></textarea>
@@ -104,18 +108,18 @@
 											<h6 class="card-subtitle">Bạn có thể lọc, sắp xếp, tìm kiếm và download file CSV, Excel, PDF & In ấn...</h6>
 											<div class="table-responsive m-t-40 container">
 												<div id="example23_wrapper" class="dataTables_wrapper row">
-													<div class="dt-buttons col-md-6"><a onclick="Util.copyTable('group-post-tbl')" class="dt-button buttons-copy buttons-html5" tabindex="0" aria-controls="example23" href="#"><span>Copy</span></a><a onclick="Util.downloadTable('group-post-tbl', 'CSV')" class="dt-button buttons-csv buttons-html5" tabindex="0" aria-controls="example23" href="#"><span>CSV</span></a><a onclick="Util.downloadTable('group-post-tbl', 'XLS')" class="dt-button buttons-excel buttons-html5" tabindex="0" aria-controls="example23" href="#"><span>Excel</span></a><a onclick="Util.printTable('group-post-tbl')" class="dt-button buttons-print" tabindex="0" aria-controls="example23" href="#"><span>Print</span></a></div>
+													<div class="dt-buttons col-md-6"><a onclick="Util.copyTable('ad-create-tbl')" class="dt-button buttons-copy buttons-html5" tabindex="0" aria-controls="example23" href="#"><span>Copy</span></a><a onclick="Util.downloadTable('ad-create', 'CSV')" class="dt-button buttons-csv buttons-html5" tabindex="0" aria-controls="example23" href="#"><span>CSV</span></a><a onclick="Util.downloadTable('ad-create', 'XLS')" class="dt-button buttons-excel buttons-html5" tabindex="0" aria-controls="example23" href="#"><span>Excel</span></a><a onclick="Util.printTable('ad-create-tbl')" class="dt-button buttons-print" tabindex="0" aria-controls="example23" href="#"><span>Print</span></a></div>
 
-													<div id="example23_filter" class="dataTables_filter col-md-6 align-right"><label>Search:<input onkeyup="Util.searchTable('group-post-search', 'group-post-tbl')" id="group-post-search" placeholder="" aria-controls="example23" type="search"></label></div>
+													<div id="example23_filter" class="dataTables_filter col-md-6 align-right"><label>Search:<input onkeyup="Util.searchTable('ad-create-search', 'ad-create-tbl')" id="ad-create-search" placeholder="" aria-controls="example23" type="search"></label></div>
 												</div>
 											</div>
 											<div class="table">			
-												<table id="group-post-tbl">
+												<table id="ad-create-tbl">
 													<thead>
 														<tr>
-															<th onclick="Util.sortTable('group-post-tbl', 0)" class="sorting_asc">ID</th>
-															<th onclick="Util.sortTable('group-post-tbl', 1)" class="sorting_asc">Message</th>
-															<th onclick="Util.sortTable('group-post-tbl', 2)" class="sorting_asc">Link</th>
+															<th onclick="Util.sortTable('ad-create-tbl', 0)" class="sorting_asc">ID</th>
+															<th onclick="Util.sortTable('ad-create-tbl', 1)" class="sorting_asc">Message</th>
+															<th onclick="Util.sortTable('ad-create-tbl', 2)" class="sorting_asc">Link</th>
 														</tr>
 													</thead>
 													<tbody></tbody>
@@ -126,18 +130,13 @@
 									</div>
 
 
-									<div id="group-member" class="fn">
-										<h2>Group Member</h2>
+									<div id="ad-monitor" class="fn">
+										<h2>Ad Monitor</h2>
 
 										<div class="input">
-											<label>Group</label>
-											<select>
-												<option v-for="group in group_list">{{group.name}}</option>
-											</select>
-											<label>Member to Kick</label>
-											<textarea type="text" class="text" style="width: 200px; height: 300px; overflow: auto"></textarea>
-											<input type="button" class="trigger" value="List Member" onclick="Main_vue.listMember()">
-											<input type="button" class="trigger" value="Kick Member" onclick="Main_vue.kickMember()">
+											<label>Account ID</label>
+											<input type="text" class="text">
+											<input type="button" class="trigger" value="List Ad" onclick="Main_vue.listAd()">
 										</div>
 
 										<div class="output">
@@ -145,18 +144,24 @@
 											<h6 class="card-subtitle">Bạn có thể lọc, sắp xếp, tìm kiếm và download file CSV, Excel, PDF & In ấn...</h6>
 											<div class="table-responsive m-t-40 container">
 												<div id="example23_wrapper" class="dataTables_wrapper row">
-													<div class="dt-buttons col-md-6"><a onclick="Util.copyTable('group-member-tbl')" class="dt-button buttons-copy buttons-html5" tabindex="0" aria-controls="example23" href="#"><span>Copy</span></a><a onclick="Util.downloadTable('group-member-tbl', 'CSV')" class="dt-button buttons-csv buttons-html5" tabindex="0" aria-controls="example23" href="#"><span>CSV</span></a><a onclick="Util.downloadTable('group-member-tbl', 'XLS')" class="dt-button buttons-excel buttons-html5" tabindex="0" aria-controls="example23" href="#"><span>Excel</span></a><a onclick="Util.printTable('group-member-tbl')" class="dt-button buttons-print" tabindex="0" aria-controls="example23" href="#"><span>Print</span></a></div>
+													<div class="dt-buttons col-md-6"><a onclick="Util.copyTable('ad-monitor-tbl')" class="dt-button buttons-copy buttons-html5" tabindex="0" aria-controls="example23" href="#"><span>Copy</span></a><a onclick="Util.downloadTable('ad-monitor-tbl', 'CSV')" class="dt-button buttons-csv buttons-html5" tabindex="0" aria-controls="example23" href="#"><span>CSV</span></a><a onclick="Util.downloadTable('ad-monitor-tbl', 'XLS')" class="dt-button buttons-excel buttons-html5" tabindex="0" aria-controls="example23" href="#"><span>Excel</span></a><a onclick="Util.printTable('ad-monitor-tbl')" class="dt-button buttons-print" tabindex="0" aria-controls="example23" href="#"><span>Print</span></a></div>
 
-													<div id="example23_filter" class="dataTables_filter col-md-6 align-right"><label>Search:<input onkeyup="Util.searchTable('group-member-search', 'group-member-tbl')" id="group-member-search" placeholder="" aria-controls="example23" type="search"></label></div>
+													<div id="example23_filter" class="dataTables_filter col-md-6 align-right"><label>Search:<input onkeyup="Util.searchTable('ad-monitor-search', 'ad-monitor-tbl')" id="ad-monitor-search" placeholder="" aria-controls="example23" type="search"></label></div>
 												</div>
 											</div>
 											<div class="table">	
-												<table id="group-member-tbl">
+												<table id="ad-monitor-tbl">
 													<thead>
 														<tr>
-															<th onclick="Util.sortTable('group-member-tbl', 0)" class="sorting_asc">ID</th>
-															<th onclick="Util.sortTable('group-member-tbl', 1)" class="sorting_asc">Name</th>
-															<th onclick="Util.sortTable('group-member-tbl', 2)" class="sorting_asc">Link</th>
+															<th onclick="Util.sortTable('ad-monitor-tbl', 0)" class="sorting_asc">#</th>
+															<th onclick="Util.sortTable('ad-monitor-tbl', 1)" class="sorting_asc">ID</th>
+															<th onclick="Util.sortTable('ad-monitor-tbl', 2)" class="sorting_asc">Name</th>
+															<th onclick="Util.sortTable('ad-monitor-tbl', 3)" class="sorting_asc">Status</th>
+															<th onclick="Util.sortTable('ad-monitor-tbl', 4)" class="sorting_asc">Start</th>
+															<th onclick="Util.sortTable('ad-monitor-tbl', 5)" class="sorting_asc">Stop</th>
+															<th onclick="Util.sortTable('ad-monitor-tbl', 6)" class="sorting_asc">Impression</th>
+															<th onclick="Util.sortTable('ad-monitor-tbl', 7)" class="sorting_asc">Click</th>
+															<th onclick="Util.sortTable('ad-monitor-tbl', 8)" class="sorting_asc">Cost</th>
 														</tr>
 													</thead>
 													<tbody></tbody>
@@ -191,7 +196,7 @@
 		</div>
 	</div>
 
-	<script type="text/javascript" src="ngin-group.js"></script>
+	<script type="text/javascript" src="ngin-ad.js"></script>
 	<script type="text/javascript" src="util.js"></script>
 
 </body>
