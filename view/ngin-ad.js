@@ -21,25 +21,58 @@ let Main_vue = new Vue({
 				let tbody = '';
 				res = res.data;
 				for (var i in res) {
-					let id, name, status, start, stop, impression, click, cost;
-					id = res[i].id;
-					name = res[i].name;
-					status = res[i].effective_status;
-					if (res[i].insights) {
-						start = res[i].insights.data[0].date_start;
-						stop = res[i].insights.data[0].date_stop;
-						impression = res[i].insights.data[0].impressions;
-						click = res[i].insights.data[0].unique_clicks;
-						cost = res[i].insights.data[0].spend;
+					let daily_budget, camp_id, adset_id, ad_id, name, status, start, stop, impression, click, cost;
+					daily_budget = res[i].daily_budget;
+					status = res[i].status;
+
+					if (res[i].ads) {
+						for (var j in res[i].ads.data) {
+							camp_id = res[i].ads.data[j].campaign_id;
+							adset_id = res[i].ads.data[j].adset_id;
+							ad_id = res[i].ads.data[j].id;
+							name = res[i].ads.data[j].name;
+							if (res[i].ads.data[j].insights) {
+								start = res[i].ads.data[j].insights.data[0].date_start;
+								stop = res[i].ads.data[j].insights.data[0].date_stop;
+								impression = res[i].ads.data[j].insights.data[0].impressions;
+								click = res[i].ads.data[j].insights.data[0].unique_clicks;
+								cost = res[i].ads.data[j].insights.data[0].spend;
+							}
+							if (daily_budget == 0) {
+								tbody += '<tr><td><input type="checkbox" value="'+camp_id+'-'+adset_id+'-'+ad_id+'"></td><td>'+ad_id+'</td><td>'+name+'</td><td><select><option>'+status+'</option><option>PAUSED</option><option>ACTIVE</option></select></td><td>'+start+'</td><td>'+stop+'</td><td>'+impression+'</td><td>'+click+'</td><td>'+cost+'</td><td>'+daily_budget+'</td></tr>';
+							} else {					
+								tbody += '<tr><td><input type="checkbox" value="'+camp_id+'-'+adset_id+'-'+ad_id+'"></td><td>'+ad_id+'</td><td>'+name+'</td><td><select><option>'+status+'</option><option>PAUSED</option><option>ACTIVE</option></select></td><td>'+start+'</td><td>'+stop+'</td><td>'+impression+'</td><td>'+click+'</td><td>'+cost+'</td><td><input type="text" value="'+daily_budget+'"></td></tr>';
+							}
+						}
 					}
 
-					tbody += '<tr><td><input type="checkbox" value="'+id+'"></td><td>'+id+'</td><td>'+name+'</td><td>'+status+'</td><td>'+start+'</td><td>'+stop+'</td><td>'+impression+'</td><td>'+click+'</td><td>'+cost+'</td></tr>';
+
 				}
 
 				$('#ad-monitor tbody').html(tbody);
 				console.log('listAd OK');
 			});
 		},
+		updateAd: function() {
+			let data = [];
+			$('#ad-monitor input:checked').each((i, ele) => {
+				var row = $(ele).closest('tr').index();
+				var adset_id = $(ele).val().split('-')[1];
+				var status = $(`#ad-monitor tr:nth-child(${row+1}) td:nth-child(4) select`).val();
+				var daily_budget = $(`#ad-monitor tr:nth-child(${row+1}) td:nth-child(10) input`).val();
+				if (daily_budget) {
+					data.push({ adset_id: adset_id, payload: { status: status, daily_budget: daily_budget } });
+				} else {
+					data.push({ adset_id: adset_id, payload: { status: status } });
+				}
+			});
+			if (data.length > 0) {
+				socket.emit('ngin-updateAd', data, res => {
+					console.log(res);
+					this.listAd();
+				});
+			}
+		}
 	}
 });
 

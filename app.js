@@ -252,6 +252,17 @@ let socket = function() {
 			});
 		});
 
+		socket.on('ngin-updateAd', (msg, fn) => {
+			console.log('>>ngin-updateAd event');
+			for (var i in msg) {
+				ngin.Ad.updateAd(msg[i].adset_id, msg[i].payload, session_token)
+				.then(res => {
+					fn(res);
+				}).catch(err => {
+					console.log('updateAd Err: ' + err);
+				});
+			}
+		});
 		
 
 		socket.on('disconnect', function() { console.log('<user disconnected: ' + session_id); });

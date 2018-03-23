@@ -653,7 +653,7 @@ let Ad = {
 
 	},
 	listAd: function(act, token) {
-		let path = '/v2.12/act_'+act+'/ads?limit=5000&fields=name,effective_status,insights.date_preset(lifetime){spend,impressions,unique_clicks}';
+		let path = '/v2.12/act_'+act+'/adsets?limit=5000&fields=status,daily_budget,ads{name,campaign_id,adset_id,effective_status,insights.date_preset(lifetime){spend,impressions,unique_clicks}}';
 		return fbReq(path, token);
 	},
 	updateAd: function(ad, payload, token) {
@@ -702,9 +702,3 @@ module.exports = {
 // Profile.scanFriend('zhuylanz20@gmail.com', 'taolarobot');
 
 // interactFeed('zhuylanz20@gmail.com', 'iamarobot', 'love', 6000);
-
-Ad.updateAd('6088816236806', {
-	status: 'ACTIVE'
-}, 'EAACZC6awggg0BADZBzOM3Y1duuZBwrf9QREZCEMibUd5ZCJZCsVjNyxQTTx2bdwmvRHjqi9fq6ZAqEA28rfMP82GyvSvquItcP84xn8CDXbZAvqpo5I4WXrcL7Df6yk2MYV4lGZBO518pKBViZCULwQTZAmMc0uM29kYk5wZB2HjGgdTCEYZBbV9TIptn')
-.then(res => console.log(res))
-.catch(err => console.log(err))
