@@ -48,7 +48,7 @@ let Main_vue = new Vue({
 			res => {
 				let tbody = '';
 				for (var i in res) {
-					tbody += '<tr><td>' + res[i][0] + '</td><td>' + res[i][1] + '</td><td>' + res[i][2] + '</td></tr>';
+					tbody += '<tr><td>' + res[i][0] + '</td><td>' + res[i][1] + '</td><td><a target="_blank" href="'+res[i][2]+'">' + res[i][2] + '</a></td></tr>';
 				}
 				$('#scan-friend tbody').html(tbody);
 				console.log('scan friend OK');
