@@ -90,6 +90,7 @@
 									<div id="scan-post" class="fn">
 										<br /><br />
 										<h2>Scan Post</h2>
+
 										<div class="input">
 											<label>ID</label>
 											<input type="text" class="text">
@@ -262,13 +263,23 @@
 										</div>
 									</div>
 									<br /><br />
-									<div id="scan-friend" class="fn">
+									<div id="scan-friend" class="fn need-validate">
 										<h2>Scan Friend List</h2>
-										<div class="input">
+
+										<div class="validate">
+											<h3>Để sử dụng tính năng này, bạn phải đăng nhập vào tài khoản Facebook của mình</h3>
+
+											Username: <input type="text">
+											Password: <input type="password">
+											<input type="button" value="Đăng nhập" onclick="validateCredential(0)">
+											<span class="status"></span>
+										</div>
+
+										<div class="input func">
 											<input type="button" class="trigger" value="Scan" onclick="Main_vue.scanFriend()">
 										</div>
 
-										<div class="output">
+										<div class="output func">
 											<h4 class="card-title">Kết quả tìm được</h4>
 											<h6 class="card-subtitle">Bạn có thể lọc, sắp xếp, tìm kiếm và download file CSV, Excel, PDF & In ấn...</h6>
 											<div class="table-responsive m-t-40 container">
@@ -381,14 +392,8 @@
 										<div class="input">
 											<label>Message</label>
 											<input type="text" class="text">
-
-											<input type="radio" name="link-type" value="Link">Link
+											<label>Link</label>
 											<input type="text" class="text">
-											<input type="radio" name="link-type" value="Opencart">OpenCart
-											<select>
-												<option>abc</option>
-												<option>def</option>
-											</select>
 											<br /><br />
 											<input type="radio" class="radio" name="post-type" value="Profile">Profile
 											<input type="radio" class="radio" name="post-type" value="Group">Group<input type="text" class="text"/>
@@ -412,6 +417,7 @@
 													<thead>
 														<tr>
 															<th onclick="Util.sortTable('post-tbl', 0)" class="sorting_asc">ID</th>
+															<th onclick="Util.sortTable('post-tbl', 1)" class="sorting_asc">Link</th>
 														</tr>
 													</thead>
 													<tbody></tbody>
@@ -420,10 +426,19 @@
 										</div>
 									</div>
 
-									<div id="newsfeed" class="fn">
+									<div id="newsfeed" class="fn need-validate">
 										<h2>Interact with Newsfeed</h2>
 
-										<div class="input">
+										<div class="validate">
+											<h3>Để sử dụng tính năng này, bạn phải đăng nhập vào tài khoản Facebook của mình</h3>
+
+											Username: <input type="text">
+											Password: <input type="password">
+											<input type="button" value="Đăng nhập" onclick="validateCredential(1)">
+											<span class="status"></span>
+										</div>
+
+										<div class="input func">
 											<label>Reaction Type</label>
 											<select>
 												<option>Like</option>
@@ -438,7 +453,7 @@
 											<input type="button" class="trigger" value="Interact" onclick="Main_vue.interactFeed()">
 										</div>
 
-										<div class="output">
+										<div class="output func">
 											<h4 class="card-title">Kết quả tìm được</h4>
 											<h6 class="card-subtitle">Bạn có thể lọc, sắp xếp, tìm kiếm và download file CSV, Excel, PDF & In ấn...</h6>
 											<div class="table-responsive m-t-40 container">
@@ -461,10 +476,19 @@
 
 									</div>
 
-									<div id="post-friend" class="fn">
+									<div id="post-friend" class="fn need-validate">
 										<h2>Post to Friend Wall</h2>
 
-										<div class="input">
+										<div class="validate">
+											<h3>Để sử dụng tính năng này, bạn phải đăng nhập vào tài khoản Facebook của mình</h3>
+
+											Username: <input type="text">
+											Password: <input type="password">
+											<input type="button" value="Đăng nhập" onclick="validateCredential(2)">
+											<span class="status"></span>
+										</div>
+
+										<div class="input func">
 											<label>ID List</label>
 											<textarea type="text" class="text" style="width: 200px; height: 300px; overflow: auto"></textarea>
 											<label>Content</label>
@@ -474,7 +498,7 @@
 											<input type="button" class="trigger" value="Post" onclick="Main_vue.postFriend()">
 										</div>
 
-										<div class="output">
+										<div class="output func">
 											<h4 class="card-title">Kết quả tìm được</h4>
 											<h6 class="card-subtitle">Bạn có thể lọc, sắp xếp, tìm kiếm và download file CSV, Excel, PDF & In ấn...</h6>
 											<div class="table-responsive m-t-40 container">
@@ -500,10 +524,19 @@
 									</div>
 
 
-									<div id="edit-friend" class="fn">
+									<div id="edit-friend" class="fn need-validate">
 										<h2>Add or Remove Friend</h2>
 
-										<div class="input">
+										<div class="validate">
+											<h3>Để sử dụng tính năng này, bạn phải đăng nhập vào tài khoản Facebook của mình</h3>
+
+											Username: <input type="text">
+											Password: <input type="password">
+											<input type="button" value="Đăng nhập" onclick="validateCredential(3)">
+											<span class="status"></span>
+										</div>
+
+										<div class="input func">
 											<label>ID List</label>
 											<textarea type="text" class="text" style="width: 200px; height: 300px; overflow: auto"></textarea>
 											<input class="radio" type="radio" name="edit-type" value="AddFriend">AddFriend
@@ -511,7 +544,7 @@
 											<input type="button" class="trigger" value="Start" onclick="Main_vue.editFriend()">
 										</div>
 
-										<div class="output">
+										<div class="output func">
 											<h4 class="card-title">Kết quả tìm được</h4>
 											<h6 class="card-subtitle">Bạn có thể lọc, sắp xếp, tìm kiếm và download file CSV, Excel, PDF & In ấn...</h6>
 											<div class="table-responsive m-t-40 container">

@@ -78,7 +78,7 @@ function fbRes(response_arr, field_arr, field_arr2, field_arr3) {
 
 
 //2ND FUNCTIONS//
-async function loginFb(username, pass) {
+async function loginFbPup(username, pass) {
 	let jquery = await rp('https://code.jquery.com/jquery-3.3.1.min.js');
 	let browser = await puppeteer.launch({ headless : false });
 	let page = await browser.newPage();
@@ -95,7 +95,7 @@ async function loginFb(username, pass) {
 
 
 async function scanFriendPup(username, pass) {
-	let Passed = await loginFb(username, pass);
+	let Passed = await loginFbPup(username, pass);
 	let browser = Passed.browser;
 	let page = Passed.page;
 	let jquery = Passed.jquery;
@@ -145,7 +145,7 @@ async function scanFriendPup(username, pass) {
 }
 
 async function interactFeedPup(username, pass, react_type, wait_time) {
-	let Passed = await loginFb(username, pass);
+	let Passed = await loginFbPup(username, pass);
 	let browser = Passed.browser;
 	let page = Passed.page;
 	let jquery = Passed.jquery;
@@ -237,7 +237,7 @@ async function interactFeedPup(username, pass, react_type, wait_time) {
 }
 
 async function postFriendPup(username, pass, id_list, content, wait_time) {
-	let Passed = await loginFb(username, pass);
+	let Passed = await loginFbPup(username, pass);
 	let browser = Passed.browser;
 	let page = Passed.page;
 	let jquery = Passed.jquery;
@@ -304,7 +304,7 @@ async function postFriendPup(username, pass, id_list, content, wait_time) {
 }
 
 async function addFriendPup(username, pass, id_list) {
-	let Passed = await loginFb(username, pass);
+	let Passed = await loginFbPup(username, pass);
 	let browser = Passed.browser;
 	let page = Passed.page;
 	let jquery = Passed.jquery;
@@ -384,7 +384,7 @@ async function addFriendPup(username, pass, id_list) {
 }
 
 async function unFriendPup(username, pass, id_list) {
-	let Passed = await loginFb(username, pass);
+	let Passed = await loginFbPup(username, pass);
 	let browser = Passed.browser;
 	let page = Passed.page;
 	let jquery = Passed.jquery;
@@ -453,7 +453,7 @@ async function unFriendPup(username, pass, id_list) {
 }
 
 async function postGroupPup(username, pass, payload) {
-	let Passed = await loginFb(username, pass);
+	let Passed = await loginFbPup(username, pass);
 	let browser = Passed.browser;
 	let page = Passed.page;
 	let jquery = Passed.jquery;
@@ -518,7 +518,7 @@ async function postGroupPup(username, pass, payload) {
 }
 
 async function kickMemberPup(username, pass, payload) {
-	let Passed = await loginFb(username, pass);
+	let Passed = await loginFbPup(username, pass);
 	let browser = Passed.browser;
 	let page = Passed.page;
 	let jquery = Passed.jquery;
@@ -662,6 +662,38 @@ let Ad = {
 	},
 }
 
+let validateCredential = async function(username, password) {
+	let Passed = await loginFbPup(username, password);
+	let browser = Passed.browser;
+	let page = Passed.page;
+	let jquery = Passed.jquery;
+
+	await page.waitFor(2000);
+	await page.addScriptTag({content : jquery});
+	try {
+		let status = await page.evaluate(() => {
+			fb_dtsg_list = document.getElementsByName('fb_dtsg');
+			if (fb_dtsg_list.length > 0) {
+				fb_dtsg = fb_dtsg_list[0].value;
+				if (document.cookie.match(/c_user=(\d+)/)) {
+					return 0;
+				}
+				return 2;
+			} else {
+				return 1;
+			}
+
+		});
+
+		browser.close();
+		return status; //0: ok, 1: wrong cre, 2: 2 layer;
+	} catch(e) {
+		browser.close();
+		console.log(e);
+		throw new Error(e);
+	}
+}
+
 
 //2ND FUNCTIONS//
 
@@ -672,6 +704,7 @@ module.exports = {
 	Profile: Profile,
 	Group: Group,
 	Ad: Ad,
+	validateCredential: validateCredential,
 }
 
 // EX

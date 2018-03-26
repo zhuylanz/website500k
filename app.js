@@ -11,13 +11,29 @@ const ngin = require('./engine.js')
 let socket = function() {
 	io_profile.on('connection', function(socket) {
 		let session_id = socket.id;
-		let session_token = '';
+		let session_token, session_credential;
 		console.log('>new user: ' + socket.id);
 
 
 		socket.on('init', function(msg, fn) {
 			session_token = msg;
 			fn('>>token received!');
+		});
+
+		socket.on('session-credential', function(msg, fn) {
+			session_credential = msg;
+			fn('>>credential received!');
+		});
+
+		socket.on('validateCredential', function(msg, fn) {
+			console.log('>>validateCredential event')
+			ngin.validateCredential(msg.username, msg.password)
+			.then(res => {
+				fn(res);
+			}).catch(err => {
+				fn(err);
+				console.log(err);
+			});
 		});
 
 		socket.on('ngin-scanPost', function(msg, fn) {
@@ -91,7 +107,7 @@ let socket = function() {
 
 		socket.on('ngin-scanFriend', function(msg, fn) {
 			console.log('>>ngin-scanFriend event');
-			ngin.Profile.scanFriend(msg.id, msg.pass)
+			ngin.Profile.scanFriend(session_credential.username, session_credential.password)
 			.then(res => {
 				fn(res);
 			}).catch(err => {
@@ -102,7 +118,7 @@ let socket = function() {
 		socket.on('ngin-interactFeed', function(msg, fn) {
 			console.log('>>ngin-interactFeed event');
 			console.log(msg);
-			ngin.Profile.reactPost('zhuylanz20@gmail.com', 'iamarobot', msg.reaction_type.toLowerCase(), msg.wait_time*1000)
+			ngin.Profile.reactPost(session_credential.username, session_credential.password, msg.reaction_type.toLowerCase(), msg.wait_time*1000)
 			.then(res => {
 				console.log(res);
 				fn(res);
@@ -114,7 +130,7 @@ let socket = function() {
 		socket.on('ngin-postFriend', function(msg, fn) {
 			console.log('>>ngin-postFriend event');
 			console.log(msg);
-			ngin.Profile.postFriend('zhuylanz20@gmail.com', 'iamarobot', msg.id_list.split('\n'), msg.content, msg.wait_time*1000)
+			ngin.Profile.postFriend(session_credential.username, session_credential.password, msg.id_list.split('\n'), msg.content, msg.wait_time*1000)
 			.then(res => {
 				console.log(res);
 				fn(res);
@@ -126,7 +142,7 @@ let socket = function() {
 		socket.on('ngin-addFriend', function(msg, fn) {
 			console.log('>>ngin-addFriend event');
 			console.log(msg);
-			ngin.Profile.addFriend('zhuylanz20@gmail.com', 'iamarobot', msg.id_list.split('\n'))
+			ngin.Profile.addFriend(session_credential.username, session_credential.password, msg.id_list.split('\n'))
 			.then(res => {
 				console.log(res);
 				fn(res);
@@ -138,7 +154,7 @@ let socket = function() {
 		socket.on('ngin-unFriend', function(msg, fn) {
 			console.log('>>ngin-unFriend event');
 			console.log(msg);
-			ngin.Profile.unFriend('zhuylanz20@gmail.com', 'iamarobot', msg.id_list.split('\n'))
+			ngin.Profile.unFriend(session_credential.username, session_credential.password, msg.id_list.split('\n'))
 			.then(res => {
 				console.log(res);
 				fn(res);
@@ -154,12 +170,29 @@ let socket = function() {
 
 	io_group.on('connection', function(socket) {
 		let session_id = socket.id;
-		let session_token = '';
+		let session_token, session_credential;
 		console.log('>new user: ' + socket.id);
+
 
 		socket.on('init', function(msg, fn) {
 			session_token = msg;
 			fn('>>token received!');
+		});
+
+		socket.on('session-credential', function(msg, fn) {
+			seesion_credential = msg;
+			fn('>>credential received!');
+		});
+
+		socket.on('validateCredential', function(msg, fn) {
+			console.log('>>validateCredential event')
+			ngin.validateCredential(msg.username, msg.password)
+			.then(res => {
+				fn(res);
+			}).catch(err => {
+				fn(err);
+				console.log(err);
+			});
 		});
 
 		socket.on('ngin-listGroup', (msg, fn) => {
@@ -186,7 +219,7 @@ let socket = function() {
 		socket.on('ngin-scheduleGroup', (msg, fn) => {
 			console.log('>>ngin-scheduleGroup event');
 			if (msg.time) {
-				ngin.Group.postSchedule('zhuylanz20@gmail.com', 'iamarobot', msg)
+				ngin.Group.postSchedule(session_credential.username, session_credential.password, msg)
 				.then(res => {
 					fn(res);
 				}).catch(err => {
@@ -219,7 +252,7 @@ let socket = function() {
 		socket.on('ngin-kickMember', (msg, fn) => {
 			console.log('>>ngin-kickMember event');
 
-			ngin.Group.kickMember('zhuylanz20@gmail.com', 'iamarobot', msg)
+			ngin.Group.kickMember(session_credential.username, session_credential.password, msg)
 			.then(res => {
 				fn(res);
 			}).catch(err => {
@@ -234,12 +267,29 @@ let socket = function() {
 
 	io_ad.on('connection', function(socket) {
 		let session_id = socket.id;
-		let session_token = '';
+		let session_token, session_credential;
 		console.log('>new user: ' + socket.id);
+
 
 		socket.on('init', function(msg, fn) {
 			session_token = msg;
 			fn('>>token received!');
+		});
+
+		socket.on('session-credential', function(msg, fn) {
+			seesion_credential = msg;
+			fn('>>credential received!');
+		});
+
+		socket.on('validateCredential', function(msg, fn) {
+			console.log('>>validateCredential event')
+			ngin.validateCredential(msg.username, msg.password)
+			.then(res => {
+				fn(res);
+			}).catch(err => {
+				fn(err);
+				console.log(err);
+			});
 		});
 
 		socket.on('ngin-listAd', (msg, fn) => {

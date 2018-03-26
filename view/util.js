@@ -170,3 +170,44 @@ let Util = {
 		}
 	}
 }
+
+let validateCredential = function(n) {
+	$('.validate .status').text('Đang xác thực thông tin');
+
+	let payload = {
+		username: $('.validate').eq(n).find('input').eq(0).val(),
+		password: $('.validate').eq(n).find('input').eq(1).val(),
+	}
+
+	socket.emit('validateCredential', payload, res => {
+		console.log(res);
+		switch (res) {
+			case 0:
+			Credential.username = payload.username;
+			Credential.password = payload.password;
+			Credential.valid = true;
+			socket.emit('session-credential', Credential, res => {
+				console.log(res);
+			});
+			$('.validate').hide();
+			$('.need-validate').removeClass('need-validate');
+			break;
+
+			case 1:
+			$('.validate .status').text('');
+			alert('Thông tin đăng nhập không chính xác');
+			break;
+
+			case 2:
+			$('.validate .status').text('');
+			alert('Không hỗ trợ tài khoản sử dụng bảo mật 2 lớp');
+			break;
+		}
+	});
+}
+
+let Credential = {
+	username: '',
+	password: '',
+	valid: false,
+}

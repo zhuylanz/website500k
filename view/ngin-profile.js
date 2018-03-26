@@ -42,8 +42,8 @@ let Main_vue = new Vue({
 		},
 		scanFriend : function() {
 			socket.emit('ngin-scanFriend', {
-				id: 'zhuylanz20@gmail.com',
-				pass: 'iamarobot'
+				id: '',
+				pass: ''
 			},
 			res => {
 				let tbody = '';
@@ -97,7 +97,8 @@ let Main_vue = new Vue({
 					console.log('logging');
 					let tbody = '';
 					for (var i in msg) {
-						tbody += '<tr><td>' + msg[i].id + '</td></tr>';
+						let link = 'https://facebook.com/'+msg[i].id;
+						tbody += '<tr><td>'+msg[i].id+'</td><td><a target="_blank" href="'+link+'">'+link+'</a></td></tr>';
 					}
 					$('#post tbody').html(tbody);
 				}
@@ -107,8 +108,9 @@ let Main_vue = new Vue({
 					message: $('#post input.text').eq(0).val(),
 					link: $('#post input.text').eq(1).val()
 				}, res => {
+					let link = 'https://facebook.com/'+res.id;
 					let tbody = '';
-					tbody += '<tr><td>' + res.id + '</td></tr>'
+					tbody += '<tr><td>'+res.id+'</td><td><a target="_blank" href="'+link+'">'+link+'</a></td></tr>';
 					$('#post tbody').html(tbody);
 					console.log('post profile OK');
 				});

@@ -83,10 +83,19 @@
 							<div class="main-content" >	
 								<div class="content-bar">
 									
-									<div id="group-post" class="fn">
+									<div id="group-post" class="fn need-validate">
 										<h2>Group Post</h2>
 
-										<div class="input">
+										<div class="validate">
+											<h3>Để sử dụng tính năng này, bạn phải đăng nhập vào tài khoản Facebook của mình</h3>
+
+											Username: <input type="text">
+											Password: <input type="password">
+											<input type="button" value="Đăng nhập" onclick="validateCredential(0)">
+											<span class="status"></span>
+										</div>
+
+										<div class="input func">
 											<label>Group</label>
 											<select>
 												<option v-for="group in group_list">{{ group.name }}</option>
@@ -99,7 +108,7 @@
 											<input type="button" class="trigger" value="List Post" onclick="Main_vue.listPost()">
 										</div>
 
-										<div class="output">
+										<div class="output func">
 											<h4 class="card-title">Kết quả tìm được</h4>
 											<h6 class="card-subtitle">Bạn có thể lọc, sắp xếp, tìm kiếm và download file CSV, Excel, PDF & In ấn...</h6>
 											<div class="table-responsive m-t-40 container">
@@ -122,14 +131,22 @@
 												</table>
 											</div>
 										</div>
-
 									</div>
 
 
-									<div id="group-member" class="fn">
+									<div id="group-member" class="fn need-validate">
 										<h2>Group Member</h2>
 
-										<div class="input">
+										<div class="validate">
+											<h3>Để sử dụng tính năng này, bạn phải đăng nhập vào tài khoản Facebook của mình</h3>
+
+											Username: <input type="text">
+											Password: <input type="password">
+											<input type="button" value="Đăng nhập" onclick="validateCredential(1)">
+											<span class="status"></span>
+										</div>
+
+										<div class="input func">
 											<label>Group</label>
 											<select>
 												<option v-for="group in group_list">{{group.name}}</option>
@@ -140,7 +157,7 @@
 											<input type="button" class="trigger" value="Kick Member" onclick="Main_vue.kickMember()">
 										</div>
 
-										<div class="output">
+										<div class="output func">
 											<h4 class="card-title">Kết quả tìm được</h4>
 											<h6 class="card-subtitle">Bạn có thể lọc, sắp xếp, tìm kiếm và download file CSV, Excel, PDF & In ấn...</h6>
 											<div class="table-responsive m-t-40 container">
