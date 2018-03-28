@@ -214,6 +214,10 @@ let Credential = {
 
 
 //FACEBOOK PLUGIN
+socket.on('connect', function () {
+	socket.emit('init', token, (res) => { console.log(res); });
+});
+
 let app_id = '211010336096781';
 let app_scope = 'pages_messaging,public_profile,email,user_likes,user_posts,publish_actions,user_photos,manage_pages,publish_pages,read_page_mailboxes,pages_show_list,pages_manage_cta,pages_manage_instant_articles,ads_management,ads_read,read_custom_friendlists,user_friends';
 let app_uri = 'http://craft.nuhula.website/profile';
@@ -240,16 +244,13 @@ window.fbAsyncInit = function() {
 		fbInited = true;
 		console.log(res);
 		if (res.status === 'connected') {
-			socket.on('connect', function () {
-				socket.emit('init', token, (res) => { console.log(res); });
-				socket.emit('init', res.authResponse.accessToken, (res) => { console.log(res); });
-			});
-			alert('logined');
+			socket.emit('init', res.authResponse.accessToken, (res) => { console.log(res); });
 		} else if (res.status === 'not_authorized') {
-			alert('not logined');
-			window.location = 'http://graph.facebook.com/oauth/authorize?client_id=' + app_id + '&scope=' + app_scope + '&redirect_uri=' + app_uri;
+			alert('Bạn chưa đăng nhập');
+			// window.location = 'http://graph.facebook.com/oauth/authorize?client_id=' + app_id + '&scope=' + app_scope + '&redirect_uri=' + app_uri;
 		} else {
-			alert('not notnotnot');
+			// alert('Bạn chưa đăng nhập');
+			// window.location = 'http://graph.facebook.com/oauth/authorize?client_id=' + app_id + '&scope=' + app_scope + '&redirect_uri=' + app_uri;
 		}
 
 	});
