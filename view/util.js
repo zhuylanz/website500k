@@ -179,14 +179,14 @@ let validateCredential = function(n) {
 		password: $('.validate').eq(n).find('input').eq(1).val(),
 	}
 
-	socket.emit('validateCredential', payload, res => {
+	_socket.emit('validateCredential', payload, res => {
 		console.log(res);
 		switch (res) {
 			case 0:
 			Credential.username = payload.username;
 			Credential.password = payload.password;
 			Credential.valid = true;
-			socket.emit('session-credential', Credential, res => {
+			_socket.emit('session-credential', Credential, res => {
 				console.log(res);
 			});
 			$('.validate').hide();
@@ -234,7 +234,7 @@ window.fbAsyncInit = function() {
 
 	FB.getLoginStatus(function(res) {
 		fbInited = true;
-		socket.emit('fb-login', res, fn => {console.log(fn)});
+		_socket.emit('fb-login', res, fn => {console.log(fn)});
 
 		if (res.status === 'connected') {
 			alert('logined');
@@ -262,9 +262,9 @@ function fbEnsureInit(callback) {
 //Graph API//
 
 
-//Socket IO//
-let socket = io('/graph');
-//Socket IO//
+//_socket IO//
+let _socket = io('/graph');
+//_socket IO//
 
 $(document).ready(function() {
 
