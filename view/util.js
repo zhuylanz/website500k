@@ -179,14 +179,14 @@ let validateCredential = function(n) {
 		password: $('.validate').eq(n).find('input').eq(1).val(),
 	}
 
-	_socket.emit('validateCredential', payload, res => {
+	socket.emit('validateCredential', payload, res => {
 		console.log(res);
 		switch (res) {
 			case 0:
 			Credential.username = payload.username;
 			Credential.password = payload.password;
 			Credential.valid = true;
-			_socket.emit('session-credential', Credential, res => {
+			socket.emit('session-credential', Credential, res => {
 				console.log(res);
 			});
 			$('.validate').hide();
@@ -234,7 +234,7 @@ window.fbAsyncInit = function() {
 
 	FB.getLoginStatus(function(res) {
 		fbInited = true;
-		_socket.emit('fb-login', res, fn => {console.log(fn)});
+		socket.emit('fb-login', res, fn => {console.log(fn)});
 
 		if (res.status === 'connected') {
 			alert('logined');
@@ -242,7 +242,7 @@ window.fbAsyncInit = function() {
 			alert('not logined');
 
 		} else {
-alert('not notnotnot');
+			alert('not notnotnot');
 		}
 
 	});
@@ -259,35 +259,6 @@ function fbEnsureInit(callback) {
 	}
 }
 
-//Graph API//
-
-
-//_socket IO//
-let _socket = io('/graph');
-//_socket IO//
-
 $(document).ready(function() {
-
-
-	let app_id = '151517752267977';
-	let app_scope = 'pages_messaging,public_profile,email,user_likes,user_posts,publish_actions,user_photos,manage_pages,publish_pages,read_page_mailboxes,pages_show_list,pages_manage_cta,pages_manage_instant_articles,ads_management,ads_read';
-	let app_uri = 'http://localhost:3214/graph'
-
-	function RequestLogin() {
-		window.location = 'https://graph.facebook.com/oauth/authorize?client_id=' + app_id + '&scope=' + app_scope + '&redirect_uri=' + app_uri
-	}
-
-	function test() {
-		// window.location = 'https://www.facebook.com/dialog/feed?app_id=151517752267977&display=page&caption=An%20example%20caption&link=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2F&redirect_uri=http://localhost:3214/graph&to=100001350407726'
-		FB.ui({
-			method: 'share',
-			link: 'https://developers.facebook.com/docs/',
-			caption: 'An example caption',
-			to: '100001350407726',
-		}, function(response){});
-	}
-
-	// $('#btn-login').on('click', RequestLogin);
-	$('#btn-login').on('click', test);
-
+	
 });
