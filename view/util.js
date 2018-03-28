@@ -216,7 +216,7 @@ let Credential = {
 //FACEBOOK PLUGIN
 let app_id = '211010336096781';
 let app_scope = 'pages_messaging,public_profile,email,user_likes,user_posts,publish_actions,user_photos,manage_pages,publish_pages,read_page_mailboxes,pages_show_list,pages_manage_cta,pages_manage_instant_articles,ads_management,ads_read,read_custom_friendlists,user_friends';
-let app_uri = 'http:craft.nuhula.website/profile';
+let app_uri = 'http://craft.nuhula.website/profile';
 let fbInited = false;
 (function(d, s, id){
 	var js, fjs = d.getElementsByTagName(s)[0];
