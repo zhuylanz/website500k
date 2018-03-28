@@ -214,6 +214,7 @@ let Credential = {
 
 
 //FACEBOOK PLUGIN
+let fbInited = false;
 (function(d, s, id){
 	var js, fjs = d.getElementsByTagName(s)[0];
 	if (d.getElementById(id)) {return;}
@@ -234,8 +235,7 @@ window.fbAsyncInit = function() {
 
 	FB.getLoginStatus(function(res) {
 		fbInited = true;
-		socket.emit('fb-login', res, fn => {console.log(fn)});
-
+		console.log(res);
 		if (res.status === 'connected') {
 			alert('logined');
 		} else if (res.status === 'not_authorized') {
