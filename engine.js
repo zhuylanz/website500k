@@ -649,8 +649,9 @@ let Group = {
 }
 
 let Ad = {
-	createAd : function() {
-
+	createAdCreative : function(act, payload, token) {
+		let path = '/v2.11/act_'+act+'/adcreatives';
+		return fbReq(path, token, 'POST', payload);
 	},
 	listAd: function(act, token) {
 		let path = '/v2.12/act_'+act+'/adsets?limit=5000&fields=status,daily_budget,ads{name,campaign_id,adset_id,effective_status,insights.date_preset(lifetime){spend,impressions,unique_clicks}}';
@@ -735,3 +736,23 @@ module.exports = {
 // Profile.scanFriend('zhuylanz20@gmail.com', 'taolarobot');
 
 // interactFeed('zhuylanz20@gmail.com', 'iamarobot', 'love', 6000);
+// var payload = {
+// 	name: 'Sample Creative',
+// 	object_story_spec: { 
+// 		link_data: { 
+// 			call_to_action: {
+// 				type: "SIGN_UP",
+// 				value: {
+// 					link: "https://google.com"
+// 				}
+// 			}, 
+// 			link: "https://google.com",
+// 			message: "try it out"
+// 		},
+// 		page_id: "687964241219801" 
+// 	},
+// }
+
+// Ad.createAdCreative('980065528732218', payload, 'EAACZC6awggg0BAJU3mcgu0ceZAvm6AGjpVWijnK1mZBtpkkuwNAqUZAWHlGZAdkMPsUUBYzxJnsCKy3G2xSXZBg0opRcLt8xwpVNmyyj4IivbWkECBBlsbU6HWEIr6zciiSzTLT4INRsnIgc96baJPcZAArtzKvtvjhl2K8dZABJ2wZDZD')
+// .then(res => console.log(res))
+// .catch(err => console.log(err))
