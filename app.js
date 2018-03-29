@@ -43,8 +43,16 @@ let socket = function() {
 			.then(res => {
 				fn(res);
 			}).catch(err => {
-				fn(err);
 				console.log('scanPost Err: ' + err);
+				console.log('scanPost -> use fallback');
+
+				ngin.Profile.scanPostPup(session_credential.username, session_credential.password, msg)
+				.then(res => {
+					fn(res);
+				}).catch(err => {
+					console.log(err);
+				});
+
 			});
 
 		});
@@ -168,155 +176,155 @@ let socket = function() {
 	});
 
 
-	io_group.on('connection', function(socket) {
-		let session_id = socket.id;
-		let session_token, session_credential;
-		console.log('>new user: ' + socket.id);
+io_group.on('connection', function(socket) {
+	let session_id = socket.id;
+	let session_token, session_credential;
+	console.log('>new user: ' + socket.id);
 
 
-		socket.on('init', function(msg, fn) {
-			session_token = msg;
-			fn('>>token received!');
+	socket.on('init', function(msg, fn) {
+		session_token = msg;
+		fn('>>token received!');
+	});
+
+	socket.on('session-credential', function(msg, fn) {
+		seesion_credential = msg;
+		fn('>>credential received!');
+	});
+
+	socket.on('validateCredential', function(msg, fn) {
+		console.log('>>validateCredential event')
+		ngin.validateCredential(msg.username, msg.password)
+		.then(res => {
+			fn(res);
+		}).catch(err => {
+			fn(err);
+			console.log(err);
 		});
+	});
 
-		socket.on('session-credential', function(msg, fn) {
-			seesion_credential = msg;
-			fn('>>credential received!');
+	socket.on('ngin-listGroup', (msg, fn) => {
+		console.log('>>ngin-listGroup event');
+		ngin.Group.listGroup(session_token)
+		.then(res => {
+			fn(res);
+		}).catch(err => {
+			console.log('listGroup Err: ' + err);
 		});
+	});
 
-		socket.on('validateCredential', function(msg, fn) {
-			console.log('>>validateCredential event')
-			ngin.validateCredential(msg.username, msg.password)
+	socket.on('ngin-listPost', (msg, fn) => {
+		console.log('>>ngin-listPost event');
+
+		ngin.Group.listPost(msg.gid, session_token)
+		.then(res => {
+			fn(res);
+		}).catch(err => {
+			console.log('listPost Err: ' + err);
+		});
+	});
+
+	socket.on('ngin-scheduleGroup', (msg, fn) => {
+		console.log('>>ngin-scheduleGroup event');
+		if (msg.time) {
+			ngin.Group.postSchedule(session_credential.username, session_credential.password, msg)
 			.then(res => {
 				fn(res);
 			}).catch(err => {
-				fn(err);
-				console.log(err);
+				console.log('scheduleGroup Err: ' + err);
 			});
-		});
-
-		socket.on('ngin-listGroup', (msg, fn) => {
-			console.log('>>ngin-listGroup event');
-			ngin.Group.listGroup(session_token)
+		} else {
+			let gid = msg.gid;
+			delete msg.gid;
+			delete msg.time;
+			ngin.Group.post(gid, msg, session_token)
 			.then(res => {
 				fn(res);
 			}).catch(err => {
-				console.log('listGroup Err: ' + err);
+				console.log('postGroup Err: ' + err);
 			});
+		}
+	});
+
+	socket.on('ngin-listMember', (msg, fn) => {
+		console.log('>>ngin-listMember event');
+
+		ngin.Group.listMember(msg.gid, session_token)
+		.then(res => {
+			fn(res);
+		}).catch(err => {
+			console.log('listMember Err: ' + err);
 		});
+	});
 
-		socket.on('ngin-listPost', (msg, fn) => {
-			console.log('>>ngin-listPost event');
+	socket.on('ngin-kickMember', (msg, fn) => {
+		console.log('>>ngin-kickMember event');
 
-			ngin.Group.listPost(msg.gid, session_token)
-			.then(res => {
-				fn(res);
-			}).catch(err => {
-				console.log('listPost Err: ' + err);
-			});
+		ngin.Group.kickMember(session_credential.username, session_credential.password, msg)
+		.then(res => {
+			fn(res);
+		}).catch(err => {
+			console.log('kickMember Err: ' + err);
 		});
-
-		socket.on('ngin-scheduleGroup', (msg, fn) => {
-			console.log('>>ngin-scheduleGroup event');
-			if (msg.time) {
-				ngin.Group.postSchedule(session_credential.username, session_credential.password, msg)
-				.then(res => {
-					fn(res);
-				}).catch(err => {
-					console.log('scheduleGroup Err: ' + err);
-				});
-			} else {
-				let gid = msg.gid;
-				delete msg.gid;
-				delete msg.time;
-				ngin.Group.post(gid, msg, session_token)
-				.then(res => {
-					fn(res);
-				}).catch(err => {
-					console.log('postGroup Err: ' + err);
-				});
-			}
-		});
-
-		socket.on('ngin-listMember', (msg, fn) => {
-			console.log('>>ngin-listMember event');
-
-			ngin.Group.listMember(msg.gid, session_token)
-			.then(res => {
-				fn(res);
-			}).catch(err => {
-				console.log('listMember Err: ' + err);
-			});
-		});
-
-		socket.on('ngin-kickMember', (msg, fn) => {
-			console.log('>>ngin-kickMember event');
-
-			ngin.Group.kickMember(session_credential.username, session_credential.password, msg)
-			.then(res => {
-				fn(res);
-			}).catch(err => {
-				console.log('kickMember Err: ' + err);
-			});
-		});
-
-
-		socket.on('disconnect', function() { console.log('<user disconnected: ' + session_id); });
 	});
 
 
-	io_ad.on('connection', function(socket) {
-		let session_id = socket.id;
-		let session_token, session_credential;
-		console.log('>new user: ' + socket.id);
+	socket.on('disconnect', function() { console.log('<user disconnected: ' + session_id); });
+});
 
 
-		socket.on('init', function(msg, fn) {
-			session_token = msg;
-			fn('>>token received!');
-		});
+io_ad.on('connection', function(socket) {
+	let session_id = socket.id;
+	let session_token, session_credential;
+	console.log('>new user: ' + socket.id);
 
-		socket.on('session-credential', function(msg, fn) {
-			seesion_credential = msg;
-			fn('>>credential received!');
-		});
 
-		socket.on('validateCredential', function(msg, fn) {
-			console.log('>>validateCredential event')
-			ngin.validateCredential(msg.username, msg.password)
-			.then(res => {
-				fn(res);
-			}).catch(err => {
-				fn(err);
-				console.log(err);
-			});
-		});
-
-		socket.on('ngin-listAd', (msg, fn) => {
-			console.log('>>ngin-listAd event');
-			ngin.Ad.listAd(msg.act, session_token)
-			.then(res => {
-				fn(res);
-			}).catch(err => {
-				console.log('listAd Err: ' + err);
-			});
-		});
-
-		socket.on('ngin-updateAd', (msg, fn) => {
-			console.log('>>ngin-updateAd event');
-			for (var i in msg) {
-				ngin.Ad.updateAd(msg[i].adset_id, msg[i].payload, session_token)
-				.then(res => {
-					fn(res);
-				}).catch(err => {
-					console.log('updateAd Err: ' + err);
-				});
-			}
-		});
-		
-
-		socket.on('disconnect', function() { console.log('<user disconnected: ' + session_id); });
+	socket.on('init', function(msg, fn) {
+		session_token = msg;
+		fn('>>token received!');
 	});
+
+	socket.on('session-credential', function(msg, fn) {
+		seesion_credential = msg;
+		fn('>>credential received!');
+	});
+
+	socket.on('validateCredential', function(msg, fn) {
+		console.log('>>validateCredential event')
+		ngin.validateCredential(msg.username, msg.password)
+		.then(res => {
+			fn(res);
+		}).catch(err => {
+			fn(err);
+			console.log(err);
+		});
+	});
+
+	socket.on('ngin-listAd', (msg, fn) => {
+		console.log('>>ngin-listAd event');
+		ngin.Ad.listAd(msg.act, session_token)
+		.then(res => {
+			fn(res);
+		}).catch(err => {
+			console.log('listAd Err: ' + err);
+		});
+	});
+
+	socket.on('ngin-updateAd', (msg, fn) => {
+		console.log('>>ngin-updateAd event');
+		for (var i in msg) {
+			ngin.Ad.updateAd(msg[i].adset_id, msg[i].payload, session_token)
+			.then(res => {
+				fn(res);
+			}).catch(err => {
+				console.log('updateAd Err: ' + err);
+			});
+		}
+	});
+	
+
+	socket.on('disconnect', function() { console.log('<user disconnected: ' + session_id); });
+});
 
 
 }

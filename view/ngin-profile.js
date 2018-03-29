@@ -16,6 +16,9 @@ let Main_vue = new Vue({
 			if (e.originalTarget) $('#'+e.originalTarget.className).show();
 		},
 		scanPost : function() {
+			$('#scan-post .status').text('Đang tải thông tin. Vui lòng đợi!');
+			$('#scan-post .status').css('visibility', 'visible');
+
 			socket.emit('ngin-scanPost', $('#scan-post input.text').val(), res => {
 				if (res.error) {
 					console.log(res.error);
@@ -23,6 +26,7 @@ let Main_vue = new Vue({
 					setTimeout(() => { $('.status-bar').css('visibility', 'hidden'); }, 5000);
 
 				} else {
+					$('#scan-post .status').css('visibility', 'hidden');
 					let reaction = res.reactions.data;
 					let comment = res.comments.data;
 					let tbody_reaction = '';

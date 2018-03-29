@@ -94,6 +94,103 @@ async function loginFbPup(username, pass) {
 }
 
 
+async function scanPostPup(username, pass, post_id){
+	let Passed = await loginFbPup(username, pass);
+	let browser = Passed.browser;
+	let page = Passed.page;
+	let jquery = Passed.jquery;
+
+	try {
+		await page.waitFor(2000);
+		await page.goto('https://facebook.com/'+post_id, { waitUntil : 'domcontentloaded', timeout : 20000 });
+		await page.addScriptTag({content : jquery});
+		await page.waitFor(10000);
+		await page.keyboard.press('Escape');
+		await page.keyboard.press('Escape');
+		await page.evaluate(() => {
+			$('._4arz span').click();
+		});
+		await page.waitFor(5000);
+		while (true) {
+			try {
+				await page.click('#reaction_profile_pager a');
+				await page.waitFor(3000);
+			} catch (e) {
+				break;
+			}
+		}
+		
+		let react_profile_link_list = await page.evaluate(() => {
+			links = [];
+			$('.fsl.fwb.fcb a').each((i, ele) => {
+				links.push($(ele).attr('href'));
+			});
+
+			return links;
+		});
+		await page.keyboard.press('Escape');
+		await page.waitFor(3000);
+		let comment_profile_link_list = await page.evaluate(() => {
+			links = [];
+			$('.UFICommentActorName').each((i, ele)=>{
+				links.push($(ele).attr('href'));
+			})
+
+			return links;
+		});
+
+		let react_id_list = {
+			data: []
+		};
+		if (react_profile_link_list.length > 0) {
+			for (var i in react_profile_link_list) {
+				let page_temp = await browser.newPage();
+				await page_temp.goto(react_profile_link_list[i], { waitUntil : 'domcontentloaded', timeout : 20000 });
+				await page_temp.addScriptTag({content : jquery});
+				await page_temp.waitFor(2000);
+				let chunk = await page_temp.evaluate(() => {
+					return {
+						id: $('meta').eq(4).attr('content').match(/\d{7,}/g)[0],
+						name: $('._1frb').val(),
+						type: 'unknown'
+					};
+				});
+				await page_temp.close();
+				react_id_list.data.push(chunk);
+			}
+		}
+
+		let comment_id_list = {
+			data: []
+		};
+		if (comment_profile_link_list.length > 0) {
+			for (var i in comment_profile_link_list) {
+				let page_temp = await browser.newPage();
+				await page_temp.goto(comment_profile_link_list[i], { waitUntil : 'domcontentloaded', timeout : 20000 });
+				await page_temp.addScriptTag({content : jquery});
+				await page_temp.waitFor(2000);
+				let chunk = await page_temp.evaluate(() => {
+					return {
+						id: $('meta').eq(4).attr('content').match(/\d{7,}/g)[0],
+						name: $('._1frb').val(),
+						message: 'unknown'
+					};
+				});
+				await page_temp.close();
+				comment_id_list.data.push(chunk);
+			}
+		}
+		
+		browser.close();
+		return { reactions: react_id_list, comments: comment_id_list }
+
+	} catch (err) {
+		browser.close();
+		console.log(e);
+		throw new Error(e);
+	}
+}
+
 async function scanFriendPup(username, pass) {
 	let Passed = await loginFbPup(username, pass);
 	let browser = Passed.browser;
@@ -590,6 +687,7 @@ let Profile = {
 		let path = '/' + pid + '?fields=reactions.limit(5000),comments.limit(5000),sharedposts.limit(5000)';
 		return fbReq(path, token);
 	},
+	scanPostPup: scanPostPup,
 	searchPage : function(keyword, token) {
 		let path = '/search?type=page&limit=5000&q=' + keyword + '&fields=id,username,name,link,category,fan_count,location';
 		return fbReq(path, token);

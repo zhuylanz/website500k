@@ -87,17 +87,28 @@
 						<div class="col-sm-12">
 							<div class="main-content" >	
 								<div class="content-bar">
-									<div id="scan-post" class="fn">
+									<div id="scan-post" class="fn need-validate">
 										<br /><br />
 										<h2>Scan Post</h2>
 
-										<div class="input">
+										<div class="validate">
+											<h3>Để sử dụng tính năng này, bạn phải đăng nhập vào tài khoản Facebook của mình</h3>
+
+											Username: <input type="text">
+											Password: <input type="password">
+											<input type="button" value="Đăng nhập" onclick="validateCredential(0)">
+											<span class="status"></span>
+										</div>
+
+										<div class="input func">
 											<label>ID</label>
 											<input type="text" class="text">
 											<input type="button" class="trigger" value="Scan Post" onclick="Main_vue.scanPost()">
 										</div>
 
-										<div class="output">
+										<span class="status" style="visibility: hidden;">status bar</span>
+
+										<div class="output func">
 											<h4 class="card-title">Kết quả tìm được</h4>
 											<h6 class="card-subtitle">Bạn có thể lọc, sắp xếp, tìm kiếm và download file CSV, Excel, PDF & In ấn...</h6>
 											<div class="table-responsive m-t-40">
@@ -271,7 +282,7 @@
 
 											Username: <input type="text">
 											Password: <input type="password">
-											<input type="button" value="Đăng nhập" onclick="validateCredential(0)">
+											<input type="button" value="Đăng nhập" onclick="validateCredential(1)">
 											<span class="status"></span>
 										</div>
 
@@ -434,7 +445,7 @@
 
 											Username: <input type="text">
 											Password: <input type="password">
-											<input type="button" value="Đăng nhập" onclick="validateCredential(1)">
+											<input type="button" value="Đăng nhập" onclick="validateCredential(2)">
 											<span class="status"></span>
 										</div>
 
@@ -484,7 +495,7 @@
 
 											Username: <input type="text">
 											Password: <input type="password">
-											<input type="button" value="Đăng nhập" onclick="validateCredential(2)">
+											<input type="button" value="Đăng nhập" onclick="validateCredential(3)">
 											<span class="status"></span>
 										</div>
 
@@ -532,7 +543,7 @@
 
 											Username: <input type="text">
 											Password: <input type="password">
-											<input type="button" value="Đăng nhập" onclick="validateCredential(3)">
+											<input type="button" value="Đăng nhập" onclick="validateCredential(4)">
 											<span class="status"></span>
 										</div>
 
