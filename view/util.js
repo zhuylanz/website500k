@@ -247,7 +247,7 @@ window.fbAsyncInit = function() {
 			socket.emit('init', res.authResponse.accessToken, (res) => { console.log(res); });
 		} else if (res.status === 'not_authorized') {
 			alert('Bạn chưa đăng nhập');
-			window.location = 'http://graph.facebook.com/oauth/authorize?client_id=' + app_id + '&scope=' + app_scope + '&redirect_uri=' + app_uri;
+			// window.location = 'http://graph.facebook.com/oauth/authorize?client_id=' + app_id + '&scope=' + app_scope + '&redirect_uri=' + app_uri;
 		} else {
 			// alert('Bạn chưa đăng nhập');
 			// window.location = 'http://graph.facebook.com/oauth/authorize?client_id=' + app_id + '&scope=' + app_scope + '&redirect_uri=' + app_uri;
