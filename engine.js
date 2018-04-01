@@ -784,6 +784,7 @@ let validateCredential = async function(username, password) {
 
 		});
 
+		page.waitFor(2000);
 		browser.close();
 		return status; //0: ok, 1: wrong cre, 2: 2 layer;
 	} catch(e) {
