@@ -150,7 +150,7 @@ async function scanPostPup(username, pass, post_id){
 				await page_temp.waitFor(2000);
 				let chunk = await page_temp.evaluate(() => {
 					return {
-						id: $('meta').eq(4).attr('content').match(/\d{7,}/g)[0],
+						id: $('meta').eq(4).attr('content').match(/\d{10,}/g)[0],
 						name: $('._1frb').val(),
 						type: 'unknown'
 					};
@@ -171,8 +171,10 @@ async function scanPostPup(username, pass, post_id){
 				await page_temp.waitFor(2000);
 				let chunk = await page_temp.evaluate(() => {
 					return {
-						id: $('meta').eq(4).attr('content').match(/\d{7,}/g)[0],
-						name: $('._1frb').val(),
+						from: {
+							id: $('meta').eq(4).attr('content').match(/\d{10,}/g)[0],
+							name: $('._1frb').val()
+						},
 						message: 'unknown'
 					};
 				});
@@ -203,11 +205,13 @@ async function scanFriendPup(username, pass) {
 		await page.addScriptTag({content : jquery});
 		while (true) {
 			console.log('--scrolling--');
+			await page.keyboard.press('Escape');
 			let height = await page.evaluate(() => {
 				window.scrollBy(0, document.documentElement.scrollHeight);
 				return document.documentElement.scrollHeight;
 			});
 			await page.waitFor(2000);
+			await page.keyboard.press('Escape');
 			let newHeight = await page.evaluate(() => {
 				window.scrollBy(0, document.documentElement.scrollHeight);
 				return document.documentElement.scrollHeight;

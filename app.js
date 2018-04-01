@@ -18,15 +18,17 @@ let socket = function() {
 		socket.on('init', function(msg, fn) {
 			session_token = msg;
 			fn('>>token received!');
+			console.log(msg);
 		});
 
 		socket.on('session-credential', function(msg, fn) {
-			session_credential = msg;
 			fn('>>credential received!');
+			session_credential = msg;
 		});
 
 		socket.on('validateCredential', function(msg, fn) {
 			console.log('>>validateCredential event')
+			console.log(msg);
 			ngin.validateCredential(msg.username, msg.password)
 			.then(res => {
 				fn(res);
@@ -38,7 +40,7 @@ let socket = function() {
 
 		socket.on('ngin-scanPost', function(msg, fn) {
 			console.log('>>ngin-scanPost event');
-
+			console.log(msg);
 			ngin.Profile.scanPost(msg, session_token)
 			.then(res => {
 				fn(res);
@@ -59,6 +61,7 @@ let socket = function() {
 
 		socket.on('ngin-searchPage', function(msg, fn) {
 			console.log('>>ngin-searchPage event');
+			console.log(msg);
 			ngin.Profile.searchPage(msg, session_token)
 			.then(res => {
 				fn(res);
@@ -70,6 +73,7 @@ let socket = function() {
 
 		socket.on('ngin-searchGroup', function(msg, fn) {
 			console.log('>>ngin-searchGroup event');
+			console.log(msg);
 			ngin.Profile.searchGroup(msg, session_token)
 			.then(res => {
 				fn(res);
@@ -81,6 +85,7 @@ let socket = function() {
 
 		socket.on('ngin-postProfile', function(msg, fn) {
 			console.log('>>ngin-postProfile event');
+			console.log(msg);
 			ngin.Profile.postProfile(msg, session_token)
 			.then(res => {
 				fn(res);
@@ -92,6 +97,7 @@ let socket = function() {
 
 		socket.on('ngin-postGroup', async function(msg, fn) {
 			console.log('>>ngin-postGroup event');
+			console.log(msg);
 			let response = [];
 			let gid_list = msg.gid.split(';');
 			let wait_time = parseInt(msg.wait_time) * 1000;
@@ -115,6 +121,7 @@ let socket = function() {
 
 		socket.on('ngin-scanFriend', function(msg, fn) {
 			console.log('>>ngin-scanFriend event');
+			console.log(msg);
 			ngin.Profile.scanFriend(session_credential.username, session_credential.password)
 			.then(res => {
 				fn(res);
@@ -126,7 +133,7 @@ let socket = function() {
 		socket.on('ngin-interactFeed', function(msg, fn) {
 			console.log('>>ngin-interactFeed event');
 			console.log(msg);
-			ngin.Profile.reactPost(session_credential.username, session_credential.password, msg.reaction_type.toLowerCase(), msg.wait_time*1000)
+			ngin.Profile.interactFeed(session_credential.username, session_credential.password, msg.reaction_type.toLowerCase(), msg.wait_time*1000)
 			.then(res => {
 				console.log(res);
 				fn(res);
@@ -190,10 +197,12 @@ io_group.on('connection', function(socket) {
 	socket.on('session-credential', function(msg, fn) {
 		seesion_credential = msg;
 		fn('>>credential received!');
+		console.log(msg);
 	});
 
 	socket.on('validateCredential', function(msg, fn) {
 		console.log('>>validateCredential event')
+		console.log(msg);
 		ngin.validateCredential(msg.username, msg.password)
 		.then(res => {
 			fn(res);
@@ -205,6 +214,7 @@ io_group.on('connection', function(socket) {
 
 	socket.on('ngin-listGroup', (msg, fn) => {
 		console.log('>>ngin-listGroup event');
+		console.log(msg);
 		ngin.Group.listGroup(session_token)
 		.then(res => {
 			fn(res);
@@ -215,7 +225,7 @@ io_group.on('connection', function(socket) {
 
 	socket.on('ngin-listPost', (msg, fn) => {
 		console.log('>>ngin-listPost event');
-
+		console.log(msg);
 		ngin.Group.listPost(msg.gid, session_token)
 		.then(res => {
 			fn(res);
@@ -226,6 +236,7 @@ io_group.on('connection', function(socket) {
 
 	socket.on('ngin-scheduleGroup', (msg, fn) => {
 		console.log('>>ngin-scheduleGroup event');
+		console.log(msg);
 		if (msg.time) {
 			ngin.Group.postSchedule(session_credential.username, session_credential.password, msg)
 			.then(res => {
@@ -248,7 +259,7 @@ io_group.on('connection', function(socket) {
 
 	socket.on('ngin-listMember', (msg, fn) => {
 		console.log('>>ngin-listMember event');
-
+		console.log(msg);
 		ngin.Group.listMember(msg.gid, session_token)
 		.then(res => {
 			fn(res);
@@ -259,7 +270,7 @@ io_group.on('connection', function(socket) {
 
 	socket.on('ngin-kickMember', (msg, fn) => {
 		console.log('>>ngin-kickMember event');
-
+		console.log(msg);
 		ngin.Group.kickMember(session_credential.username, session_credential.password, msg)
 		.then(res => {
 			fn(res);
@@ -282,15 +293,18 @@ io_ad.on('connection', function(socket) {
 	socket.on('init', function(msg, fn) {
 		session_token = msg;
 		fn('>>token received!');
+		console.log(msg);
 	});
 
 	socket.on('session-credential', function(msg, fn) {
 		seesion_credential = msg;
 		fn('>>credential received!');
+		console.log(msg);
 	});
 
 	socket.on('validateCredential', function(msg, fn) {
 		console.log('>>validateCredential event')
+		console.log(msg);
 		ngin.validateCredential(msg.username, msg.password)
 		.then(res => {
 			fn(res);
@@ -302,6 +316,7 @@ io_ad.on('connection', function(socket) {
 
 	socket.on('ngin-listAd', (msg, fn) => {
 		console.log('>>ngin-listAd event');
+		console.log(msg);
 		ngin.Ad.listAd(msg.act, session_token)
 		.then(res => {
 			fn(res);
@@ -312,6 +327,7 @@ io_ad.on('connection', function(socket) {
 
 	socket.on('ngin-updateAd', (msg, fn) => {
 		console.log('>>ngin-updateAd event');
+		console.log(msg);
 		for (var i in msg) {
 			ngin.Ad.updateAd(msg[i].adset_id, msg[i].payload, session_token)
 			.then(res => {
