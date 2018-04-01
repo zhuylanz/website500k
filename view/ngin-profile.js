@@ -51,9 +51,12 @@ let Main_vue = new Vue({
 			},
 			res => {
 				let tbody = '';
+				let count = 0;
 				for (var i in res) {
 					tbody += '<tr><td>' + res[i][0] + '</td><td>' + res[i][1] + '</td><td><a target="_blank" href="https://'+res[i][2]+'">https://'+res[i][2]+'</a></td></tr>';
+					count++
 				}
+				tbody += '<tr><td><b>Tổng cộng:</b></td><td><b>' + count + '</b></td><td><b>Bạn bè</b></td></tr>';
 				$('#scan-friend tbody').html(tbody);
 				console.log('scan friend OK');
 			});
@@ -122,7 +125,6 @@ let Main_vue = new Vue({
 		},
 		interactFeed : function() {
 			socket.emit('ngin-interactFeed', {
-				uid: 'xxxxx',
 				reaction_type: $('#newsfeed select').val(),
 				wait_time: $('#newsfeed input.text').val()
 			}, res => {
@@ -138,7 +140,6 @@ let Main_vue = new Vue({
 		},
 		postFriend : function() {
 			socket.emit('ngin-postFriend', {
-				uid: 'xxxxx',
 				id_list: $('#post-friend textarea').eq(0).val(),
 				content: $('#post-friend textarea').eq(1).val(),
 				wait_time: $('#post-friend input.text').val()
@@ -191,4 +192,5 @@ let Main_vue = new Vue({
 
 let token = 'EAACZC6awggg0BAAfqMGoQddEerEm1RILFVDfrgBJIQHsWS9QgcOnWleRcxLXeZB7XWs5nBnrrf2YhMvZBBQjmK0iAZBUDec7xce7XBoxZB3kPiAjvn8bQKEJ82DYgyXPM42ZCeK27uhtbJA3je7naW1wrCxSx9JXWLrh9F8QnNrwZDZD';
 
-let socket = io('http://nuhula.website:7002/profile');
+let socket = io('http://service.nuhula.website/profile');
+// let socket = io('localhost:7002/profile');
