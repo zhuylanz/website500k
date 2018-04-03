@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Facebook Profile Tools</title>
+	<link rel="stylesheet" href="view/profile.css">
+
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
+	<script src="http://code.jquery.com/jquery-3.3.1.min.js"
+	integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+	crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"
+	integrity="sha256-WPeFPWD3PZQUDrpFnDM1N2KadNVwCfNS4cCZ78b76T8="
+	crossorigin="anonymous"></script>
+</head>
+<body>
+	<div id="vue-region">
+		<div class="nav-bar">
+			<ul>
+				<li><a class="active" href="#">Profile Module</a></li>
+				<li><a href="#">Page Module</a></li>
+				<li><a href="#">Group Module</a></li>
+				<li><a href="#">Ad Module</a></li>
+			</ul>
+		</div>
+
+		<div class="fn-bar">
+			<ul>
+				<li><a class="scan-post" href="#" v-on:click="fnSelect">Scan Post</a></li>
+				<li><a class="scan-friend" href="#" v-on:click="fnSelect">Scan Friend</a></li>
+				<li><a class="search" href="#" v-on:click="fnSelect">Find Page/Group</a></li>
+				<li><a class="post" href="#" v-on:click="fnSelect">Post to Newsfeed/Group</a></li>
+				<li><a class="newsfeed" href="#" v-on:click="fnSelect">Interact Newsfeed</a></li>
+				<li><a class="post-friend" href="#" v-on:click="fnSelect">Post to Friend Wall</a></li>
+				<li><a class="friend-edit" href="#" v-on:click="fnSelect">Add/Remove Friend</a></li>
+			</ul>
+		</div>
+
+		<div class="content-bar">
+			<h1>Facebook Profile Tools</h1>
+			<div class="status-bar" style="visibility: hidden">placeholder</div>
+			<hr>
+			<div id="scan-post" class="fn">
+				<h2>Scan Post</h2>
+
+				<div class="input">
+					<label>ID</label>
+					<input type="text" class="text">
+					<input type="button" class="trigger" value="Scan Post" onclick="main_vue.scanPost()">
+
+					<div class="download">
+						<select class="list-type">
+							<option>Reaction</option>
+							<option>Comment</option>
+						</select>
+						<select class="file-type">
+							<option>CSV</option>
+							<option>XLS</option>
+						</select>
+						<input type="button" class="download" value="Download" onclick="main_vue.downloadFile('scan-post')">
+					</div>
+				</div>
+
+				<div class="output">
+					<table id="reaction-tbl">
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th>Name</th>
+								<th>Type</th>
+							</tr>
+						</thead>
+						<tbody></tbody>
+					</table>
+					<table id="comment-tbl">
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th>Name</th>
+								<th>Comment</th>
+							</tr>
+						</thead>
+						<tbody></tbody>
+					</table>
+				</div>
+			</div>
+
+			<div id="scan-friend" class="fn">
+				<h2>Scan Friend List</h2>
+
+				<div class="input">
+					<input type="button" class="trigger" value="Scan" onclick="main_vue.scanFriend()">
+
+					<div class="download">
+						<select class="file-type">
+							<option>CSV</option>
+							<option>XLS</option>
+						</select>
+						<input type="button" class="download" value="Download" onclick="main_vue.downloadFile('scan-friend')">
+					</div>
+				</div>
+
+				<div class="output">
+					<table id="friend-tbl">
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th>Name</th>
+								<th>Link</th>
+							</tr>
+						</thead>
+						<tbody></tbody>
+					</table>
+				</div>
+			</div>
+
+			<div id="search" class="fn">
+				<h2>Search by ID</h2>
+				<label>Keyword</label>
+
+				<div class="input">
+					<input type="text" class="text">
+					<input type="radio" class="radio" name="search-type" value="Page">Page
+					<input type="radio" class="radio" name="search-type" value="Group">Group
+					<input type="button" class="trigger" value="Search" onclick="main_vue.search()">
+
+					<div class="download">
+						<select class="file-type">
+							<option>CSV</option>
+							<option>XLS</option>
+						</select>
+						<input type="button" class="download" value="Download" onclick="main_vue.downloadFile('search')">
+					</div>
+				</div>
+
+				<div class="output">
+					<table id="search-tbl">
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th>Name</th>
+								<th>Link</th>
+								<th>Like</th>
+							</tr>
+						</thead>
+						<tbody></tbody>
+					</table>
+				</div>
+			</div>
+
+			<div id="post" class="fn">
+				<h2>Post to Profile/Group</h2>
+
+				<div class="input">
+					<label>Message</label>
+					<input type="text" class="text">
+
+					<input type="radio" name="link-type" value="Link">Link
+					<input type="text" class="text">
+					<input type="radio" name="link-type" value="Opencart">OpenCart
+					<select>
+						<option>abc</option>
+						<option>def</option>
+					</select>
+					<input type="radio" class="radio" name="post-type" value="Profile">Profile
+					<input type="radio" class="radio" name="post-type" value="Group">Group<input type="text" class="text"/>
+					<label>Wait Time (group only)</label>
+					<input type="text" class="text">
+					<input type="button" class="trigger" value="Post" onclick="main_vue.post()">
+
+					<div class="download">
+						<select class="file-type">
+							<option>CSV</option>
+							<option>XLS</option>
+						</select>
+						<input type="button" class="download" value="Download" onclick="main_vue.downloadFile('post')">
+					</div>
+				</div>
+
+				<div class="output">
+					<table id="post-tbl">
+						<thead>
+							<tr>
+								<th>ID</th>
+							</tr>
+						</thead>
+						<tbody></tbody>
+					</table>
+				</div>
+			</div>
+
+
+			<div id="newsfeed" class="fn">
+				<h2>Interact with Newsfeed</h2>
+			</div>
+
+			<div id="post-friend" class="fn">
+				<h2>Post to Friend Wall</h2>
+			</div>
+
+			<div id="friend-edit" class="fn">
+				<h2>Add or Remove Friend</h2>
+			</div>
+
+		</div>
+	</div>
+
+	<script>
+		let main_vue = new Vue({
+			el : '#vue-region',
+
+			data : {
+				log_scanPost : [],
+				log_search : [],
+				log_post : [],
+				log_scanFriend : [],
+			},
+
+			methods : {
+				fnSelect : function(e) {
+					$('.fn').hide();
+					$('#'+e.srcElement.className).show();
+				},
+				scanPost : function() {
+					socket.emit('ngin-scanPost', $('#scan-post input.text').val(), res => {
+						this.log_scanPost = res;
+						if(res.error) {
+							console.log(res.error);
+							$('.status-bar').text('Có lỗi xảy ra vì request không hợp lệ').css('visibility', 'visible');
+							setTimeout(() => { $('.status-bar').css('visibility', 'hidden'); }, 5000);
+
+						} else {
+							let reaction = res.reactions.data;
+							let comment = res.comments.data;
+							let tbody_reaction = '';
+							let tbody_comment = '';
+							for (var i in reaction) {
+								tbody_reaction += '<tr><td>' + reaction[i].id + '</td><td>' + reaction[i].name + '</td><td>' + reaction[i].type + '</td></tr>';
+							}
+							for (var j in comment) {
+								tbody_comment += '<tr><td>' + comment[j].from.id + '</td><td>' + comment[j].from.name + '</td><td>' + comment[j].message + '</td></tr>';
+							}
+
+							$('#scan-post #reaction-tbl tbody').html(tbody_reaction);
+							$('#scan-post #comment-tbl tbody').html(tbody_comment);
+						}
+						console.log('scan post OK');
+					});
+					// $('#scan-post input.trigger').prop('onclick', null).off('click');
+				},
+				scanFriend : function() {
+					socket.emit('ngin-scanFriend', {
+						id: 'zhuylanz20@gmail.com',
+						pass: 'iamarobot'
+					},
+					res => {
+						let tbody = '';
+						for (var i in res) {
+							tbody += '<tr><td>' + res[i][0] + '</td><td>' + res[i][1] + '</td><td>' + res[i][2] + '</td></tr>';
+						}
+						$('#scan-friend tbody').html(tbody);
+						console.log('scan friend OK');
+					});
+				},
+				search : function() {
+					if ($('#search input.radio').eq(1).is(':checked')) {
+						socket.emit('ngin-searchGroup', $('#search input.text').val(), res => {
+							let tbody = '';
+							res = res.data;
+							for (var i in res) {
+								tbody += '<tr><td>' + res[i].id + '</td><td>' + res[i].name + '</td><td>' + 'facebook.com/' + res[i].id + '</td></tr>';
+							}
+							$('#search th').eq(3).hide();
+							$('#search tbody').html(tbody);
+							console.log('search group OK');
+						});
+					} else {
+						socket.emit('ngin-searchPage', $('#search input.text').val(), res => {
+							let tbody = '';
+							res = res.data;
+							for (var i in res) {
+								tbody += '<tr><td>' + res[i].id + '</td><td>' + res[i].name + '</td><td>' + res[i].link + '</td><td>' + res[i].fan_count + '</td></tr>';
+							}
+							$('#search th').eq(3).show();
+							$('#search tbody').html(tbody);
+
+							console.log('search page OK');
+						});
+					}
+					// $('#search input.trigger').prop('onclick', null).off('click');
+				},
+				post : function() {
+					if ($('#post input.radio').eq(1).is(':checked')) {
+						socket.emit('ngin-postGroup', {
+							message: $('#post input.text').eq(0).val(),
+							link: $('#post input.text').eq(1).val(),
+							gid: $('#post input.text').eq(2).val(),
+							wait_time: $('#post input.text').eq(3).val()
+						}, res => {
+							console.log('post group OK');
+							socket.removeListener('logging', logging);
+						});
+						function logging(msg) {
+							console.log('logging');
+							let tbody = '';
+							for (var i in msg) {
+								tbody += '<tr><td>' + msg[i].id + '</td></tr>';
+							}
+							$('#post tbody').html(tbody);
+						}
+						socket.on('logging', logging);
+					} else {
+						socket.emit('ngin-postProfile', {
+							message: $('#post input.text').eq(0).val(),
+							link: $('#post input.text').eq(1).val()
+						}, res => {
+							let tbody = '';
+							tbody += '<tr><td>' + res.id + '</td></tr>'
+							$('#post tbody').html(tbody);
+							console.log('post profile OK');
+						});
+					}
+					// $('#search input.trigger').prop('onclick', null).off('click');
+				},
+				//functional:
+				downloadFile : function(ngin) {
+					switch (ngin) {
+						case 'scan-post':
+						var list_type = $('#scan-post select.list-type').val();
+						var file_type = $('#scan-post select.file-type').val();
+						if (list_type == 'Reaction') {
+							file_type == 'CSV' ? xport.toCSV('reaction-tbl') : xport.toXLS('reaction-tbl');
+						} else {
+							file_type == 'CSV' ? xport.toCSV('comment-tbl') : xport.toXLS('comment-tbl');							
+						}
+						break;
+
+						case 'scan-friend':
+						var file_type = $('#scan-post select.file-type').val();
+						file_type == 'CSV' ? xport.toCSV('friend-tbl') : xport.toXLS('friend-tbl');
+						break;
+
+						case 'search':
+						var file_type = $('#search select.file-type').val();
+						file_type == 'CSV' ? xport.toCSV('search-tbl') : xport.toXLS('search-tbl');
+						break;
+
+						case 'post':
+						var file_type = $('#post select.file-type').val();
+						file_type == 'CSV' ? xport.toCSV('post-tbl') : xport.toXLS('post-tbl');
+						break;
+					}
+				}
+
+			}
+
+		});
+
+
+
+let token = 'EAACZC6awggg0BANL7PWsxn7wOZClI7MPZCTOhvZArCPRsiV5WSMgYt4nZCZAsODJc7SKWVZBCgA3lEuMW6un1naBGj9hB1mRx5PlBIpAG14pbAb8ZBarmhBoH1REx5Ww7nFvFLk1RnbG1H4kOZALpc5lRlMjnZB2coWCutrI4cEGBNhqCGckq9QpVyjgiJifZBbR13zXcMG4Jf6eAZDZD';
+
+let socket = io('http://nuhula.website:1234/profile');
+socket.on('connect', function () {
+	socket.emit('init', token, (res) => { console.log(res); });
+});
+
+let xport = {
+	_fallbacktoCSV: true,  
+	toXLS: function(tableId, filename) {   
+		this._filename = (typeof filename == 'undefined') ? tableId : filename;
+
+		if ((this._getMsieVersion() || this._isFirefox()) && this._fallbacktoCSV) {
+			return this.toCSV(tableId);
+		} else if (this._getMsieVersion() || this._isFirefox()) {
+			alert("Not supported browser");
+		}
+
+		var htmltable = document.getElementById(tableId);
+		var html = htmltable.outerHTML;
+
+		this._downloadAnchor("data:application/vnd.ms-excel" + encodeURIComponent(html), 'xls'); 
+	},
+	toCSV: function(tableId, filename) {
+		this._filename = (typeof filename === 'undefined') ? tableId : filename;
+		var csv = this._tableToCSV(document.getElementById(tableId));
+		var blob = new Blob([csv], { type: "text/csv" });
+
+		if (navigator.msSaveOrOpenBlob) {
+			navigator.msSaveOrOpenBlob(blob, this._filename + ".csv");
+		} else {      
+			this._downloadAnchor(URL.createObjectURL(blob), 'csv');      
+		}
+	},
+	_getMsieVersion: function() {
+		var ua = window.navigator.userAgent;
+
+		var msie = ua.indexOf("MSIE ");
+		if (msie > 0) {
+			return parseInt(ua.substring(msie + 5, ua.indexOf(".", msie)), 10);
+		}
+
+		var trident = ua.indexOf("Trident/");
+		if (trident > 0) {
+			var rv = ua.indexOf("rv:");
+			return parseInt(ua.substring(rv + 3, ua.indexOf(".", rv)), 10);
+		}
+
+		var edge = ua.indexOf("Edge/");
+		if (edge > 0) {
+			return parseInt(ua.substring(edge + 5, ua.indexOf(".", edge)), 10);
+		}
+
+		return false;
+	},
+	_isFirefox: function(){
+		if (navigator.userAgent.indexOf("Firefox") > 0) {
+			return 1;
+		}
+
+		return 0;
+	},
+	_downloadAnchor: function(content, ext) {
+		var anchor = document.createElement("a");
+		anchor.style = "display:none !important";
+		anchor.id = "downloadanchor";
+		document.body.appendChild(anchor);
+
+
+		if ("download" in anchor) {
+			anchor.download = this._filename + "." + ext;
+		}
+		anchor.href = content;
+		anchor.click();
+		anchor.remove();
+	},
+	_tableToCSV: function(table) {
+		var slice = Array.prototype.slice;
+
+		return slice
+		.call(table.rows)
+		.map(function(row) {
+			return slice
+			.call(row.cells)
+			.map(function(cell) {
+				return '"t"'.replace("t", cell.textContent);
+			})
+			.join(",");
+		})
+		.join("\r\n");
+	}
+};
+
+</script>
+</body>
+</html>

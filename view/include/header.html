@@ -1,0 +1,47 @@
+	
+	<meta charset="utf-8">
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i,800,800i" rel="stylesheet">
+	 <meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+	 <link id="stylesheet-bootstrap.min" href="css/bootstrap.min.css" rel="stylesheet">
+	 <link id="stylesheet-style" href="css/style.css" rel="stylesheet">
+	 <script src="js/jquery.min.js"></script>
+	<script src="js/custom.js"></script>
+	  <script>
+		if (screen && screen.width > 820) {
+		  
+			$(document).ready(function (){
+				$(".section-chat-left-body ul li").click(function (){
+					$('html, body').animate({
+						scrollTop: $(".chat-center-bottom").offset().top
+					}, 300);
+				});
+
+			});
+
+			function openNav() {
+				document.getElementById("mySidenav").style.width = "4.5%";
+				document.getElementById("main").style.width = "95.5%";
+				$("body").removeClass('openmenu', {duration:500});
+			}
+
+			function closeNav() {
+				document.getElementById("mySidenav").style.width = "19%";
+				 document.getElementById("main").style.width = "81%";
+				$("body").addClass('openmenu', {duration:500});
+			}
+		}	
+		if (screen && screen.width < 820) {
+			 $(document).ready(function(){
+				 $("body").addClass('openmenu', {duration:500});
+				 $(".openbtn").click(function(){
+					$(".left-sidebar-content").toggle("slow");
+				});
+			});
+		}
+	</script>
+	 <script src="js/bootstrap.min.js"></script>							
+	 
+	<meta name="keywords" content="">
+	<meta name="description" content="">
+	
