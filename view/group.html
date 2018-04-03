@@ -1,0 +1,215 @@
+<!DOCTYPE html><html>
+<head>	
+	<script src="http://www.w3schools.com/lib/w3data.js"></script>
+	<meta charset="utf-8">
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i,800,800i" rel="stylesheet">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link id="stylesheet-bootstrap.min" href="css/bootstrap.min.css" rel="stylesheet">
+	<link id="stylesheet-style" href="css/style.css" rel="stylesheet">
+	<script src="js/jquery.min.js"></script>
+	<script src="js/custom.js"></script>
+	<script src="js/js.js"></script>
+	<script src="js/bootstrap.min.js"></script>	
+
+
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"
+	integrity="sha256-WPeFPWD3PZQUDrpFnDM1N2KadNVwCfNS4cCZ78b76T8="
+	crossorigin="anonymous"></script>	
+	<meta name="keywords" content="">
+	<meta name="description" content="">
+</head>
+<body class="page-group" > 
+
+	<div id="vue-region">
+		<div id="mySidenav" class="left-sidebar">
+
+			<span style="font-size:30px; cursor:pointer" class="openbtn" onclick="openNav()">&#9776; open</span>
+			<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+			<div class="left-sidebar-content">
+				<div class="dashboard-full">	
+					<ul class="">
+						<li class="menu-profile"><a href="#"><span>Profile Module</span></a></li>
+						<li class="menu-page ">
+							<a href="#"><span>Page Module</span></a>
+						</li>
+						<li class="menu-group submenu">
+							<a href="#"><span>Group Module</span><i class="has-submenu" href="#"></i></a>
+							<ul>
+								<li><a class="group-post" href="#" v-on:click="fnSelect">Group Post</a></li>
+								<li><a class="group-member" href="#" v-on:click="fnSelect">Group Member</a></li>
+							</ul>
+						</li>
+						<li class="menu-ads"><a href="#"><span>Ad Module</span></a></li>
+					</ul>	
+				</div>	
+			</div>	
+		</div>
+
+		<div id="main" class="facebook-wrap"> 
+			<section class="section-header"> 
+				<div class="container"> 
+					<div class="row"> 
+						<div class="col-md-9 col-sm-12 "> 
+							<div class=" title center"> 
+								<span><img alt="" src="images/title-facebook.png" />FACEBOOK STORE MANAGER</span>
+							</div> 
+						</div> 
+						<div class="col-md-3 col-sm-12  align-right"> 
+							<div class="select-system"> 		
+								<span class="click-submenu1">Apple</span>
+								<div class="list-system">
+									<ul class="">
+										<li class="item1"><a href=""><img alt="" src="images/icon29.png" />Tài khoản của bạn</a></li>
+										<li class="item2"><a href=""><img alt="" src="images/icon30.png" />Hướng dẫn</a></li>
+										<li class="item3"><a href=""><img alt="" src="images/icon31.png" />Điều khoản dịch vụ</a></li>
+										<li class="item4"><a href=""><img alt="" src="images/icon32.png" />Chính sách bảo mật</a></li>
+										<li class="item5"><a href=""><img alt="" src="images/icon33.png" />Thoát tài khoản</a></li>
+									</ul>	
+								</div>	
+								<img alt="" src="images/icon-apple.png" />	
+							</div>	 
+
+						</div> 
+					</div> 
+				</div> 
+			</section> 
+			<section class="section section-group" >
+				<div class="container">
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="main-content" >	
+								<div class="content-bar">
+									
+									<div id="group-post" class="fn need-validate">
+										<h2>Group Post</h2>
+
+										<div class="validate">
+											<h3>Để sử dụng tính năng này, bạn phải đăng nhập vào tài khoản Facebook của mình</h3>
+
+											Username: <input type="text">
+											Password: <input type="password">
+											<input type="button" value="Đăng nhập" onclick="validateCredential(0)">
+											<span class="status"></span>
+										</div>
+
+										<div class="input func">
+											<label>Group</label>
+											<select>
+												<option v-for="group in group_list">{{ group.name }}</option>
+											</select>
+											<label>Content</label>
+											<textarea type="text" class="text" style="width: 200px; height: 300px; overflow: auto"></textarea>
+											<label>Time</label>
+											<input type="datetime-local">
+											<input type="button" class="trigger" value="Schedule" onclick="Main_vue.scheduleGroup()">
+											<input type="button" class="trigger" value="List Post" onclick="Main_vue.listPost()">
+										</div>
+
+										<div class="output func">
+											<h4 class="card-title">Kết quả tìm được</h4>
+											<h6 class="card-subtitle">Bạn có thể lọc, sắp xếp, tìm kiếm và download file CSV, Excel, PDF & In ấn...</h6>
+											<div class="table-responsive m-t-40 container">
+												<div id="example23_wrapper" class="dataTables_wrapper row">
+													<div class="dt-buttons col-md-6"><a onclick="Util.copyTable('group-post-tbl')" class="dt-button buttons-copy buttons-html5" tabindex="0" aria-controls="example23" href="#"><span>Copy</span></a><a onclick="Util.downloadTable('group-post-tbl', 'CSV')" class="dt-button buttons-csv buttons-html5" tabindex="0" aria-controls="example23" href="#"><span>CSV</span></a><a onclick="Util.downloadTable('group-post-tbl', 'XLS')" class="dt-button buttons-excel buttons-html5" tabindex="0" aria-controls="example23" href="#"><span>Excel</span></a><a onclick="Util.printTable('group-post-tbl')" class="dt-button buttons-print" tabindex="0" aria-controls="example23" href="#"><span>Print</span></a></div>
+
+													<div id="example23_filter" class="dataTables_filter col-md-6 align-right"><label>Search:<input onkeyup="Util.searchTable('group-post-search', 'group-post-tbl')" id="group-post-search" placeholder="" aria-controls="example23" type="search"></label></div>
+												</div>
+											</div>
+											<div class="table">			
+												<table id="group-post-tbl">
+													<thead>
+														<tr>
+															<th onclick="Util.sortTable('group-post-tbl', 0)" class="sorting_asc">ID</th>
+															<th onclick="Util.sortTable('group-post-tbl', 1)" class="sorting_asc">Message</th>
+															<th onclick="Util.sortTable('group-post-tbl', 2)" class="sorting_asc">Link</th>
+														</tr>
+													</thead>
+													<tbody></tbody>
+												</table>
+											</div>
+										</div>
+									</div>
+
+
+									<div id="group-member" class="fn need-validate">
+										<h2>Group Member</h2>
+
+										<div class="validate">
+											<h3>Để sử dụng tính năng này, bạn phải đăng nhập vào tài khoản Facebook của mình</h3>
+
+											Username: <input type="text">
+											Password: <input type="password">
+											<input type="button" value="Đăng nhập" onclick="validateCredential(1)">
+											<span class="status"></span>
+										</div>
+
+										<div class="input func">
+											<label>Group</label>
+											<select>
+												<option v-for="group in group_list">{{group.name}}</option>
+											</select>
+											<label>Member to Kick</label>
+											<textarea type="text" class="text" style="width: 200px; height: 300px; overflow: auto"></textarea>
+											<input type="button" class="trigger" value="List Member" onclick="Main_vue.listMember()">
+											<input type="button" class="trigger" value="Kick Member" onclick="Main_vue.kickMember()">
+										</div>
+
+										<div class="output func">
+											<h4 class="card-title">Kết quả tìm được</h4>
+											<h6 class="card-subtitle">Bạn có thể lọc, sắp xếp, tìm kiếm và download file CSV, Excel, PDF & In ấn...</h6>
+											<div class="table-responsive m-t-40 container">
+												<div id="example23_wrapper" class="dataTables_wrapper row">
+													<div class="dt-buttons col-md-6"><a onclick="Util.copyTable('group-member-tbl')" class="dt-button buttons-copy buttons-html5" tabindex="0" aria-controls="example23" href="#"><span>Copy</span></a><a onclick="Util.downloadTable('group-member-tbl', 'CSV')" class="dt-button buttons-csv buttons-html5" tabindex="0" aria-controls="example23" href="#"><span>CSV</span></a><a onclick="Util.downloadTable('group-member-tbl', 'XLS')" class="dt-button buttons-excel buttons-html5" tabindex="0" aria-controls="example23" href="#"><span>Excel</span></a><a onclick="Util.printTable('group-member-tbl')" class="dt-button buttons-print" tabindex="0" aria-controls="example23" href="#"><span>Print</span></a></div>
+
+													<div id="example23_filter" class="dataTables_filter col-md-6 align-right"><label>Search:<input onkeyup="Util.searchTable('group-member-search', 'group-member-tbl')" id="group-member-search" placeholder="" aria-controls="example23" type="search"></label></div>
+												</div>
+											</div>
+											<div class="table">	
+												<table id="group-member-tbl">
+													<thead>
+														<tr>
+															<th onclick="Util.sortTable('group-member-tbl', 0)" class="sorting_asc">ID</th>
+															<th onclick="Util.sortTable('group-member-tbl', 1)" class="sorting_asc">Name</th>
+															<th onclick="Util.sortTable('group-member-tbl', 2)" class="sorting_asc">Link</th>
+														</tr>
+													</thead>
+													<tbody></tbody>
+												</table>
+											</div>
+										</div>
+
+									</div>
+
+								</div>
+
+
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</section>
+			<section class="section section-footer">
+				<div class="container">
+					<div class="row">
+						<div class="col-sm-6">
+							Copyright  Website500k 2017. All rights reserved.
+						</div> 
+						<div class="col-sm-6 align-right">
+
+							<a class="atachment popover-tooltip" href="#" data-toggle="tooltip" data-placement="bottom" title="Góp ý với ban quản trị">Góp ý &nbsp; &nbsp;<img alt="" src="images/icon28.png" /></a>
+						</div> 
+					</div>
+				</div>
+			</section>		
+		</div>
+	</div>
+
+	<script type="text/javascript" src="ngin-group.js"></script>
+	<script type="text/javascript" src="util.js"></script>
+
+</body>
+</html>

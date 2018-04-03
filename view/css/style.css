@@ -913,14 +913,10 @@ table thead .sorting_asc::after {
   
 }
 @media screen and (max-width: 320px){
- 
+
 }
 
-
-
-
-
-
-
-
-
+/*Style the validation*/
+.need-validate .func {
+  visibility: hidden;
+}
