@@ -194,4 +194,4 @@ let token = 'EAACZC6awggg0BAAfqMGoQddEerEm1RILFVDfrgBJIQHsWS9QgcOnWleRcxLXeZB7XW
 
 // let socket = io('http://service.nuhula.website/profile');
 // let socket = io('localhost:7002/profile');
-let socket = io('https://tool.website500k.com:7002/profile');
+let socket = io('tool.website500k.com:7002/profile');
