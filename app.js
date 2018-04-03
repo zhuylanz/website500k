@@ -3,7 +3,8 @@ const fs = require('fs');
 const ngin = require('./engine.js')
 
 const https = require('https');
-const app = require('express');
+const express = require('express');
+const app = express();
 const key = fs.readFileSync(__dirname + '/ssl.key', 'utf8');
 const cert = fs.readFileSync(__dirname + '/ssl.crt', 'utf8');
 
@@ -14,6 +15,20 @@ const io = require('socket.io').listen(server);
 const io_profile = io.of('/profile');
 const io_group = io.of('/group');
 const io_ad = io.of('/ad');
+
+app.use(express.static(__dirname + '/view'));
+
+app.get('/profile', (req, res) => {
+	res.sendFile(__dirname + '/view/profile.html');
+});
+
+app.get('/group', (req, res) => {
+	res.sendFile(__dirname + '/view/group.html');
+});
+
+app.get('/ad', (req, res) => {
+	res.sendFile(__dirname + '/view/ad.html');
+});
 
 io_profile.on('connection', function(socket) {
 	let session_id = socket.id;
