@@ -84,11 +84,13 @@ async function loginFbPup(username, pass) {
 	let page = await browser.newPage();
 	await page.goto('https://facebook.com', { waitUntil : 'domcontentloaded', timeout : 20000 });
 	await page.addScriptTag({content : jquery});
+	page.waitFor(2000);
 	await page.evaluate(({username: username, pass: pass}) => {
 		$('#email').val(username);
 		$('#pass').val(pass);
 		$("input[data-testid='royal_login_button']").click();
 	}, {username: username, pass: pass});
+	page.waitFor(2000);
 
 	return { browser: browser, page: page, jquery: jquery };
 }
