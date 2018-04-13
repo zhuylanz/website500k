@@ -9,8 +9,8 @@ const app = express();
 const key = fs.readFileSync(__dirname + '/ssl.key', 'utf8');
 const cert = fs.readFileSync(__dirname + '/ssl.crt', 'utf8');
 
-// const server = https.createServer({key: key, cert: cert}, app);
-const server = http.createServer(express);
+const server = https.createServer({key: key, cert: cert}, express);
+// const server = http.createServer(express);
 server.listen(7002, () => console.log('server running or port 7002'));
 
 const io = require('socket.io').listen(server);

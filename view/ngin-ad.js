@@ -79,7 +79,5 @@ let Main_vue = new Vue({
 let token = 'EAACZC6awggg0BADZBzOM3Y1duuZBwrf9QREZCEMibUd5ZCJZCsVjNyxQTTx2bdwmvRHjqi9fq6ZAqEA28rfMP82GyvSvquItcP84xn8CDXbZAvqpo5I4WXrcL7Df6yk2MYV4lGZBO518pKBViZCULwQTZAmMc0uM29kYk5wZB2HjGgdTCEYZBbV9TIptn';
 let uid = '100018229999393';
 
-let socket = io('http://nuhula.website:7002/ad');
-socket.on('connect', function () {
-	socket.emit('init', token, (res) => { console.log(res); });
-});
+// let socket = io('service.nuhula.website/ad');
+let socket = io('tool.website500k.com:7002/profile');
