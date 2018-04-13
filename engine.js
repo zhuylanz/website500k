@@ -80,7 +80,7 @@ function fbRes(response_arr, field_arr, field_arr2, field_arr3) {
 //2ND FUNCTIONS//
 async function loginFbPup(username, pass) {
 	let jquery = await rp('https://code.jquery.com/jquery-3.3.1.min.js');
-	let browser = await puppeteer.launch({ headless : false });
+	let browser = await puppeteer.launch({ args: ['--no-sandbox', '--disable-setuid-sandbox'], headless : true });
 	let page = await browser.newPage();
 	await page.goto('https://facebook.com', { waitUntil : 'domcontentloaded', timeout : 20000 });
 	await page.addScriptTag({content : jquery});
